@@ -15,7 +15,7 @@ export default function Footer() {
           {/* Instagram */}
 
           <a
-            href="https://instagram.com/TON_COMPTE"
+            href="https://www.instagram.com/meverlybooks/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"

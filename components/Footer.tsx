@@ -102,7 +102,7 @@ export default function Footer() {
           <div className="mt-1 flex items-center gap-6">
 
             <a
-              href="https://instagram.com/TON_COMPTE"
+              href="https://www.instagram.com/meverlybooks/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

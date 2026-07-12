@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+/* ==================================================
+   DESIGN TOKENS
+================================================== */
+
+@theme {
+
+  /* Couleurs */
+
+  --color-background: #090909;
+  --color-surface: #11100F;
+
+  --color-text: #F4EEE7;
+  --color-text-secondary: #CFC4B8;
+
+  --color-accent: #C99A63;
+
+  /* Typographies */
+
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-cormorant);
+
+  /* Rayons */
+
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+
+}
+
+/* ==================================================
+   BASE
+================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
+/* ==================================================
+   HERO
+================================================== */
+
+@keyframes heroReveal {
+
+  from {
+    transform: scale(1.08);
+    filter: blur(10px);
+  }
+
+  to {
+    transform: scale(1);
+    filter: blur(0);
+  }
+
+}
+
+.hero-image {
+
+  animation: heroReveal 2s ease forwards;
+
+}
+
+/* ==================================================
+   FADE
+================================================== */
+
+@keyframes fadeUp {
+
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+.fade-title {
+
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+
+}
+
+.fade-text {
+
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: .35s;
+
+}
+
+.fade-arrow {
+
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: .7s;
+
+}
+
+/* ==================================================
+   FLOATING ARROW
+================================================== */
+
+@keyframes floatArrow {
+
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(8px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+
+}
+
+.arrow-float {
+
+  animation: floatArrow 2.8s ease-in-out infinite;
+
+}

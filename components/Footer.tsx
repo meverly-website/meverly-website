@@ -21,7 +21,7 @@ export default function Footer() {
                 text-5xl
                 tracking-[0.35em]
                 text-[#F5F1EB]
-                transition
+                transition-colors
                 duration-300
                 hover:text-[#C99A63]
               "
@@ -56,7 +56,7 @@ export default function Footer() {
 
           </div>
 
-          {/* Icônes */}
+          {/* Réseaux */}
 
           <div className="flex items-center gap-6">
 
@@ -73,8 +73,8 @@ export default function Footer() {
                   text-[#F5F1EB]
                   transition-all
                   duration-300
-                  group-hover:text-[#C99A63]
                   group-hover:scale-110
+                  group-hover:text-[#C99A63]
                 "
               />
             </a>
@@ -90,8 +90,8 @@ export default function Footer() {
                   text-[#F5F1EB]
                   transition-all
                   duration-300
-                  group-hover:text-[#C99A63]
                   group-hover:scale-110
+                  group-hover:text-[#C99A63]
                 "
               />
             </Link>
@@ -111,7 +111,7 @@ export default function Footer() {
                 text-4xl
                 tracking-[0.35em]
                 text-[#F5F1EB]
-                transition
+                transition-colors
                 duration-300
                 hover:text-[#C99A63]
               "
@@ -135,8 +135,8 @@ export default function Footer() {
                   text-[#F5F1EB]
                   transition-all
                   duration-300
-                  group-hover:text-[#C99A63]
                   group-hover:scale-110
+                  group-hover:text-[#C99A63]
                 "
               />
             </a>
@@ -152,8 +152,8 @@ export default function Footer() {
                   text-[#F5F1EB]
                   transition-all
                   duration-300
-                  group-hover:text-[#C99A63]
                   group-hover:scale-110
+                  group-hover:text-[#C99A63]
                 "
               />
             </Link>
@@ -165,6 +165,7 @@ export default function Footer() {
           <p
             className="
               mt-6
+
               max-w-xs
 
               text-center
@@ -180,6 +181,24 @@ export default function Footer() {
           >
             Some stories find us when we need them most.
           </p>
+
+        </div>
+
+        {/* Copyright */}
+
+        <div className="mt-14 border-t border-white/5 pt-8">
+
+          <p
+            className="
+              text-center
+
+              text-sm
+              tracking-[0.15em]
+
+              text-[#8B8178]
+            "
+          >
+© {new Date().getFullYear()} Meverly — Tous droits réservés.          </p>
 
         </div>
 

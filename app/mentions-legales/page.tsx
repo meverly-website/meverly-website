@@ -54,7 +54,7 @@ export default function MentionsLegales() {
 
         <div className="mt-20 space-y-16">
 
-          {/* Éditeur du site */}
+          {/* ================= ÉDITEUR ================= */}
 
           <section>
             <h2 className="font-[family-name:var(--font-cormorant)] text-4xl text-[#F5F1EB]">
@@ -84,29 +84,22 @@ export default function MentionsLegales() {
                 </strong>
               </p>
 
-              {/* À compléter dès attribution */}
-
               <p>
                 SIREN / SIRET :
               </p>
 
-              {/* À compléter avec l'adresse professionnelle / établissement
-                  figurant dans les informations officielles de l'entreprise */}
-
               <p>
                 Adresse :{" "}
-                <span className="text-[#AFA49A]">
-                  [à compléter]
-                </span>
+                <strong className="text-[#F5F1EB]">
+                  62 cours Jean Jaurès, 38000 GRENOBLE
+                </strong>
               </p>
-
-              {/* À remplacer par ton numéro de téléphone */}
 
               <p>
                 Téléphone :{" "}
-                <span className="text-[#AFA49A]">
-                  [à compléter]
-                </span>
+                <strong className="text-[#F5F1EB]">
+                  06 50 50 52 70
+                </strong>
               </p>
 
               <p>
@@ -124,16 +117,10 @@ export default function MentionsLegales() {
                 </a>
               </p>
 
-              <p className="pt-3 text-base italic leading-7 text-[#9E948B]">
-                Une demande de non-diffusion des données personnelles a été
-                effectuée lors de l'immatriculation de l'entreprise
-                individuelle.
-              </p>
-
             </div>
           </section>
 
-          {/* Directeur de la publication */}
+          {/* ================= DIRECTEUR DE PUBLICATION ================= */}
 
           <section>
             <h2 className="font-[family-name:var(--font-cormorant)] text-4xl text-[#F5F1EB]">
@@ -145,7 +132,7 @@ export default function MentionsLegales() {
             </p>
           </section>
 
-          {/* Hébergement */}
+          {/* ================= HÉBERGEMENT ================= */}
 
           <section>
             <h2 className="font-[family-name:var(--font-cormorant)] text-4xl text-[#F5F1EB]">
@@ -177,20 +164,6 @@ export default function MentionsLegales() {
               </p>
 
               <p>
-                E-mail :{" "}
-                <a
-                  href="mailto:privacy@vercel.com"
-                  className="
-                    text-[#C99A63]
-                    transition
-                    hover:text-[#F5F1EB]
-                  "
-                >
-                  privacy@vercel.com
-                </a>
-              </p>
-
-              <p>
                 Site :{" "}
                 <a
                   href="https://vercel.com"
@@ -209,7 +182,7 @@ export default function MentionsLegales() {
             </div>
           </section>
 
-          {/* Nom de domaine */}
+          {/* ================= NOM DE DOMAINE ================= */}
 
           <section>
             <h2 className="font-[family-name:var(--font-cormorant)] text-4xl text-[#F5F1EB]">
@@ -242,7 +215,7 @@ export default function MentionsLegales() {
             </div>
           </section>
 
-          {/* Propriété intellectuelle */}
+          {/* ================= PROPRIÉTÉ INTELLECTUELLE ================= */}
 
           <section>
             <h2 className="font-[family-name:var(--font-cormorant)] text-4xl text-[#F5F1EB]">
@@ -275,7 +248,7 @@ export default function MentionsLegales() {
             </div>
           </section>
 
-          {/* Responsabilité et liens externes */}
+          {/* ================= RESPONSABILITÉ ================= */}
 
           <section>
             <h2 className="font-[family-name:var(--font-cormorant)] text-4xl text-[#F5F1EB]">
@@ -305,7 +278,7 @@ export default function MentionsLegales() {
             </div>
           </section>
 
-          {/* Données personnelles */}
+          {/* ================= DONNÉES PERSONNELLES ================= */}
 
           <section>
             <h2 className="font-[family-name:var(--font-cormorant)] text-4xl text-[#F5F1EB]">
@@ -352,10 +325,9 @@ export default function MentionsLegales() {
               </p>
 
               <p>
-                Les champs du formulaire sont obligatoires afin de permettre
-                le traitement de la demande. L'absence de renseignement des
-                informations demandées peut empêcher MEVERLY de répondre
-                au message.
+                Les champs du formulaire sont nécessaires au traitement de
+                la demande. L'absence de renseignement des informations
+                demandées peut empêcher MEVERLY de répondre au message.
               </p>
 
               <p>
@@ -368,26 +340,24 @@ export default function MentionsLegales() {
               </p>
 
               <p>
-                Les données traitées via Resend peuvent notamment comprendre
-                l'adresse e-mail, les métadonnées et le contenu des messages.
-                Resend indique que ses opérations principales de traitement
-                sont situées aux États-Unis.
+                Les données transmises via le formulaire peuvent notamment
+                comprendre le nom, l'adresse e-mail, le sujet et le contenu
+                du message.
+              </p>
+
+              <p>
+                Les données transmises via le formulaire de contact sont
+                conservées pendant la durée nécessaire au traitement et au
+                suivi de la demande, et au maximum pendant un mois à compter
+                du dernier échange, sauf obligation légale imposant une durée
+                de conservation plus longue.
               </p>
 
               <p>
                 Lorsque des données personnelles sont transférées hors de
-                l'Espace économique européen, Resend indique mettre en œuvre
-                les garanties prévues par la réglementation applicable,
-                notamment les clauses contractuelles types de l'Union
-                européenne et le cadre EU-U.S. Data Privacy Framework,
-                selon les conditions applicables.
-              </p>
-
-              <p>
-                Les données sont conservées pendant la durée nécessaire au
-                traitement et au suivi de la demande, puis supprimées
-                lorsqu'elles ne sont plus nécessaires, sous réserve des
-                obligations légales éventuellement applicables.
+                l'Espace économique européen, les garanties prévues par la
+                réglementation applicable sont mises en œuvre par les
+                prestataires concernés.
               </p>
 
               <p>
@@ -425,7 +395,7 @@ export default function MentionsLegales() {
             </div>
           </section>
 
-          {/* Cookies et traceurs */}
+          {/* ================= COOKIES ================= */}
 
           <section>
             <h2 className="font-[family-name:var(--font-cormorant)] text-4xl text-[#F5F1EB]">
@@ -441,6 +411,14 @@ export default function MentionsLegales() {
               </p>
 
               <p>
+                Le site ne contient pas de lecteur Spotify intégré ni de
+                contenu tiers nécessitant l'installation de traceurs :
+                les liens vers les services externes, notamment Spotify,
+                Instagram et Amazon, redirigent simplement l'utilisateur
+                vers les sites concernés.
+              </p>
+
+              <p>
                 Si de nouveaux services utilisant des cookies ou des traceurs
                 soumis à consentement sont ajoutés ultérieurement, une
                 information et, lorsque nécessaire, un mécanisme de
@@ -451,7 +429,7 @@ export default function MentionsLegales() {
             </div>
           </section>
 
-          {/* Services tiers */}
+          {/* ================= SERVICES TIERS ================= */}
 
           <section>
             <h2 className="font-[family-name:var(--font-cormorant)] text-4xl text-[#F5F1EB]">
@@ -478,7 +456,7 @@ export default function MentionsLegales() {
 
         </div>
 
-        {/* Bas de page */}
+        {/* ================= BAS DE PAGE ================= */}
 
         <div
           className="
@@ -521,4 +499,3 @@ export default function MentionsLegales() {
     </main>
   );
 }
-

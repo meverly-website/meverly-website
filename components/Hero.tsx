@@ -6,49 +6,79 @@ export default function Hero() {
     <>
       <Navbar />
 
-      <section className="relative flex h-[75vh] sm:h-[80vh] lg:h-[85vh] items-center justify-center overflow-hidden">
+      <section
+        className="
+          relative
+          flex
+          h-[60vh]
+          min-h-[520px]
+          items-center
+          justify-center
+          overflow-hidden
+          sm:h-[62vh]
+          lg:h-[65vh]
+        "
+      >
+
+        {/* Image */}
 
         <Image
           src="/hero.jpg"
           alt="Meverly"
           fill
           priority
+          sizes="100vw"
           className="object-cover"
         />
 
+        {/* Overlay */}
+
         <div className="absolute inset-0 bg-black/55" />
 
-        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+        {/* Contenu */}
+
+        <div
+          className="
+            relative
+            z-10
+            mx-auto
+            max-w-4xl
+            px-6
+            pt-10
+            text-center
+          "
+        >
+
+          {/* Nom */}
 
           <h1
             className="
               font-[family-name:var(--font-cormorant)]
               text-5xl
+              tracking-[0.15em]
+              text-[#F5F1EB]
               sm:text-6xl
               md:text-7xl
               lg:text-8xl
-
-              tracking-[0.15em]
-              sm:tracking-[0.20em]
-              md:tracking-[0.25em]
-
-              text-[#F5F1EB]
+              lg:tracking-[0.22em]
             "
           >
             MEVERLY
           </h1>
 
-          <div className="mt-10 sm:mt-14 lg:mt-16">
+          {/* Citation */}
+
+          <div className="mt-7 sm:mt-9 lg:mt-10">
 
             <p
               className="
                 font-[family-name:var(--font-cormorant)]
-                text-2xl
-                sm:text-3xl
-                lg:text-4xl
+                text-xl
                 italic
                 leading-relaxed
                 text-[#F5F1EB]
+                sm:text-2xl
+                lg:text-3xl
               "
             >
               L'amour ne guérit pas tout.
@@ -56,22 +86,25 @@ export default function Hero() {
 
             <p
               className="
-                mt-4
-                sm:mt-6
-
+                mt-2
                 font-[family-name:var(--font-cormorant)]
-                text-2xl
-                sm:text-3xl
-                lg:text-4xl
+                text-xl
                 italic
                 leading-relaxed
                 text-[#F5F1EB]
+                sm:mt-3
+                sm:text-2xl
+                lg:text-3xl
               "
             >
               Mais parfois, il offre une raison de recommencer.
             </p>
 
           </div>
+
+          {/* Petit repère visuel */}
+
+          <div className="mx-auto mt-9 h-px w-12 bg-[#C99A63]/60 sm:mt-11" />
 
         </div>
 

@@ -4,8 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
-const AMAZON_LINK = "#AMAZON-LINK";
-
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
@@ -35,7 +33,6 @@ export default function Navbar() {
             tracking-[0.25em]
             text-[#F5F1EB]
             transition
-            duration-300
             hover:text-[#C99A63]
             md:text-3xl
           "
@@ -43,9 +40,9 @@ export default function Navbar() {
           MEVERLY
         </Link>
 
-        {/* Desktop */}
+        {/* ================= DESKTOP ================= */}
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-10 lg:flex">
 
           <Link
             href="/before-i-knew-you"
@@ -54,7 +51,6 @@ export default function Navbar() {
               text-3xl
               text-[#F5F1EB]
               transition
-              duration-300
               hover:text-[#C99A63]
             "
           >
@@ -69,7 +65,6 @@ export default function Navbar() {
               tracking-[0.30em]
               text-[#E5DDD3]
               transition
-              duration-300
               hover:text-[#C99A63]
             "
           >
@@ -84,7 +79,6 @@ export default function Navbar() {
               tracking-[0.30em]
               text-[#E5DDD3]
               transition
-              duration-300
               hover:text-[#C99A63]
             "
           >
@@ -99,51 +93,67 @@ export default function Navbar() {
               tracking-[0.30em]
               text-[#E5DDD3]
               transition
-              duration-300
               hover:text-[#C99A63]
             "
           >
             Contact
           </Link>
 
-          {/* Acheter */}
+          {/* Instagram */}
 
           <a
-            href={AMAZON_LINK}
+            href="https://www.instagram.com/meverlybooks/"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Instagram de Meverly"
             className="
-              inline-flex
-              items-center
-              gap-2
-              rounded-full
-              border
-              border-[#C99A63]/70
-              bg-[#C99A63]/10
-              px-6
-              py-3
-              text-xs
-              uppercase
-              tracking-[0.20em]
-              text-[#F5F1EB]
+              text-[#E5DDD3]
               transition-all
               duration-300
-              hover:bg-[#C99A63]
-              hover:text-[#0E0B0B]
+              hover:scale-110
+              hover:text-[#C99A63]
             "
           >
-            Acheter le roman
-            <span className="transition-transform duration-300 hover:translate-x-1">
-              →
-            </span>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <rect
+                x="3"
+                y="3"
+                width="18"
+                height="18"
+                rx="5"
+                stroke="currentColor"
+                strokeWidth="1.6"
+              />
+
+              <circle
+                cx="12"
+                cy="12"
+                r="4"
+                stroke="currentColor"
+                strokeWidth="1.6"
+              />
+
+              <circle
+                cx="17.5"
+                cy="6.5"
+                r="1"
+                fill="currentColor"
+              />
+            </svg>
           </a>
 
         </nav>
 
-        {/* Mobile */}
+        {/* ================= MOBILE ================= */}
 
         <button
-          type="button"
           onClick={() => setOpen(!open)}
           aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
           aria-expanded={open}
@@ -159,7 +169,7 @@ export default function Navbar() {
 
       </div>
 
-      {/* Menu mobile */}
+      {/* ================= MENU MOBILE ================= */}
 
       <div
         className={`
@@ -168,7 +178,11 @@ export default function Navbar() {
           backdrop-blur-xl
           transition-all
           duration-300
-          ${open ? "max-h-[520px] border-t border-white/10" : "max-h-0"}
+          ${
+            open
+              ? "max-h-[500px] border-t border-white/10"
+              : "max-h-0"
+          }
         `}
       >
 
@@ -234,37 +248,69 @@ export default function Navbar() {
             Contact
           </Link>
 
-          {/* Acheter */}
+          {/* Instagram */}
 
           <a
-            href={AMAZON_LINK}
+            href="https://www.instagram.com/meverlybooks/"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}
+            aria-label="Instagram de Meverly"
             className="
-              mt-4
-              inline-flex
+              flex
               items-center
-              justify-center
               gap-3
-              rounded-full
-              border
-              border-[#C99A63]
-              bg-[#C99A63]/10
-              px-6
               py-4
-              text-xs
-              uppercase
-              tracking-[0.25em]
-              text-[#F5F1EB]
-              transition-all
-              duration-300
-              hover:bg-[#C99A63]
-              hover:text-[#0E0B0B]
+              text-[#E5DDD3]
+              transition
+              hover:text-[#C99A63]
             "
           >
-            Acheter le roman
-            <span>→</span>
+
+            <svg
+              width="21"
+              height="21"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <rect
+                x="3"
+                y="3"
+                width="18"
+                height="18"
+                rx="5"
+                stroke="currentColor"
+                strokeWidth="1.6"
+              />
+
+              <circle
+                cx="12"
+                cy="12"
+                r="4"
+                stroke="currentColor"
+                strokeWidth="1.6"
+              />
+
+              <circle
+                cx="17.5"
+                cy="6.5"
+                r="1"
+                fill="currentColor"
+              />
+            </svg>
+
+            <span
+              className="
+                text-sm
+                uppercase
+                tracking-[0.25em]
+              "
+            >
+              Instagram
+            </span>
+
           </a>
 
         </nav>

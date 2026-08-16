@@ -8,7 +8,7 @@ export default function Footer() {
 
       <div className="mx-auto max-w-7xl">
 
-        {/* Desktop */}
+        {/* ================= DESKTOP ================= */}
 
         <div className="hidden items-center justify-between md:flex">
 
@@ -39,15 +39,11 @@ export default function Footer() {
             <p
               className="
                 max-w-sm
-
                 text-center
-
                 font-[family-name:var(--font-cormorant)]
-
                 text-xl
                 italic
                 leading-relaxed
-
                 text-[#CFC4B8]
               "
             >
@@ -56,7 +52,7 @@ export default function Footer() {
 
           </div>
 
-          {/* Réseaux */}
+          {/* Icônes */}
 
           <div className="flex items-center gap-6">
 
@@ -100,9 +96,11 @@ export default function Footer() {
 
         </div>
 
-        {/* Mobile */}
+        {/* ================= MOBILE ================= */}
 
         <div className="flex flex-col items-center md:hidden">
+
+          {/* Logo */}
 
           <Link href="/">
             <h2
@@ -119,6 +117,8 @@ export default function Footer() {
               MEVERLY
             </h2>
           </Link>
+
+          {/* Icônes */}
 
           <div className="mt-6 flex items-center gap-5">
 
@@ -160,45 +160,77 @@ export default function Footer() {
 
           </div>
 
-          <div className="mt-8 h-px w-20 bg-[#C99A63]/25" />
+          {/* Citation */}
 
-          <p
-            className="
-              mt-6
+          <div className="mt-8 flex flex-col items-center">
 
-              max-w-xs
+            <div className="mb-6 h-px w-20 bg-[#C99A63]/25" />
 
-              text-center
+            <p
+              className="
+                max-w-xs
+                text-center
+                font-[family-name:var(--font-cormorant)]
+                text-lg
+                italic
+                leading-relaxed
+                text-[#CFC4B8]
+              "
+            >
+              Some stories find us when we need them most.
+            </p>
 
-              font-[family-name:var(--font-cormorant)]
-
-              text-lg
-              italic
-              leading-relaxed
-
-              text-[#CFC4B8]
-            "
-          >
-            Some stories find us when we need them most.
-          </p>
+          </div>
 
         </div>
 
-        {/* Copyright */}
+        {/* ================= BOTTOM ================= */}
 
-        <div className="mt-14 border-t border-white/5 pt-8">
+        <div
+          className="
+            mt-14
+            flex
+            flex-col
+            items-center
+            gap-4
+            border-t
+            border-white/5
+            pt-8
+
+            md:flex-row
+            md:justify-between
+          "
+        >
+
+          {/* Copyright */}
 
           <p
             className="
               text-center
-
               text-sm
               tracking-[0.15em]
-
               text-[#8B8178]
             "
           >
-© {new Date().getFullYear()} Meverly — Tous droits réservés.          </p>
+            © {new Date().getFullYear()} Meverly — Tous droits réservés.
+          </p>
+
+          {/* Mentions légales */}
+
+          <Link
+            href="/mentions-legales"
+            className="
+              text-xs
+              uppercase
+              tracking-[0.25em]
+              text-[#8B8178]
+              transition-colors
+              duration-300
+              hover:text-[#C99A63]
+            "
+          >
+            Mentions légales
+          </Link>
 
         </div>
 

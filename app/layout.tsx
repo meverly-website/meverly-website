@@ -14,8 +14,68 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Meverly",
-  description: "Official website of author Meverly",
+  metadataBase: new URL("https://meverly.fr"),
+
+  title: {
+    default: "Meverly — Autrice de Before I Knew You",
+    template: "%s — Meverly",
+  },
+
+  description:
+    "Découvrez l'univers de Meverly, autrice de Before I Knew You, une romance M/M contemporaine autour de l'amour, de la musique et de la reconstruction.",
+
+  authors: [
+    {
+      name: "Meverly",
+    },
+  ],
+
+  creator: "Meverly",
+  publisher: "Meverly",
+
+  alternates: {
+    canonical: "https://meverly.fr",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: "https://meverly.fr",
+    siteName: "Meverly",
+    title: "Meverly — Autrice de Before I Knew You",
+    description:
+      "Découvrez l'univers de Meverly et Before I Knew You, une romance M/M contemporaine autour de l'amour, de la musique et de la reconstruction.",
+
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Meverly — Before I Knew You",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Meverly — Autrice de Before I Knew You",
+    description:
+      "Découvrez l'univers de Meverly et Before I Knew You, une romance M/M contemporaine autour de l'amour, de la musique et de la reconstruction.",
+    images: ["/og-image.png"],
+  },
+
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

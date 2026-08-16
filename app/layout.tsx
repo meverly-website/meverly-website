@@ -58,8 +58,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        width: 1734,
+        height: 907,
         alt: "Meverly — Before I Knew You",
       },
     ],
@@ -71,10 +71,6 @@ export const metadata: Metadata = {
     description:
       "Découvrez l'univers de Meverly et Before I Knew You, une romance M/M contemporaine autour de l'amour, de la musique et de la reconstruction.",
     images: ["/og-image.png"],
-  },
-
-  icons: {
-    icon: "/favicon.ico",
   },
 };
 

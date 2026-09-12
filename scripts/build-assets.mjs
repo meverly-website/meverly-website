@@ -52,7 +52,7 @@ const OG_HEIGHT = 907;
  * les deux dans les mêmes proportions ; l'atténuation est donc appliquée ici,
  * pixel par pixel, en fonction de la dominante rouge.
  */
-const ATMOSPHERE_HAND = 0.34;
+const ATMOSPHERE_HAND = 0.52;
 const ATMOSPHERE_THREAD = 0.95;
 
 /** Un pixel n'est « du fil » qu'au-delà de cet écart entre le rouge et le reste. */

@@ -22,14 +22,13 @@ export const INSTAGRAM_URL = "https://www.instagram.com/meverlybooks/";
 /**
  * Couverture du roman, régénérée par scripts/build-assets.mjs.
  *
- * La source fait 625 × 1000 : la mise en scène est bornée à 300 px de large,
- * ce qui couvre exactement un écran retina. Avec un export plus grand, on
- * pourra remonter cette borne.
+ * La source fait 1250 × 2000, ce qui couvre un écran 3× jusqu’à 360 px
+ * de large — la borne de la mise en scène.
  */
 export const COVER_SRC = "/cover.png";
 
-export const COVER_WIDTH = 625;
-export const COVER_HEIGHT = 1000;
+export const COVER_WIDTH = 1250;
+export const COVER_HEIGHT = 2000;
 
 /** Illustration détourée de la couverture : les deux mains et le fil. */
 export const HERO_ILLUSTRATION_SRC = "/hero-illustration.png";

@@ -34,7 +34,7 @@ export default function CoverShowcase({
 
       <Link
         href={href}
-        className="group relative block w-[220px] sm:w-[265px] lg:w-[300px]"
+        className="group relative block w-[240px] sm:w-[300px] lg:w-[360px]"
         aria-label="Découvrir Before I Knew You"
       >
 
@@ -64,7 +64,7 @@ export default function CoverShowcase({
           alt="Couverture du roman Before I Knew You, de Meverly"
           width={COVER_WIDTH}
           height={COVER_HEIGHT}
-          sizes="(max-width: 640px) 220px, (max-width: 1024px) 265px, 300px"
+          sizes="(max-width: 640px) 240px, (max-width: 1024px) 300px, 360px"
           className="
             relative
             h-auto

@@ -1,3 +1,4 @@
+import StarDivider from "@/components/StarDivider";
 export default function Themes() {
   const themes = [
     "Reconstruction",
@@ -15,7 +16,7 @@ export default function Themes() {
 
         {/* Séparateur */}
 
-        <div className="mx-auto mb-16 h-px w-20 bg-[#C99A63]/40" />
+        <StarDivider className="mb-16" />
 
         {/* Grille */}
 
@@ -53,7 +54,7 @@ export default function Themes() {
                   transition
                   duration-300
 
-                  hover:text-[#C99A63]
+                  hover:text-[#EFC17E]
                 "
               >
                 {theme}

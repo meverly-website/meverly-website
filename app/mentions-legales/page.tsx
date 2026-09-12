@@ -1,8 +1,14 @@
+import StarDivider from "@/components/StarDivider";
 import Link from "next/link";
+import Footer from "@/components/Footer";
+import StickyNav from "@/components/StickyNav";
 
 export default function MentionsLegales() {
   return (
-    <main className="min-h-screen bg-[#0E0B0B] px-6 py-24 text-[#F5F1EB]">
+    <>
+      <StickyNav />
+
+      <main className="min-h-screen px-6 pb-32 pt-40 text-[#F5F1EB]">
       <div className="mx-auto max-w-4xl">
 
         {/* Retour à l'accueil */}
@@ -16,17 +22,17 @@ export default function MentionsLegales() {
             text-sm
             uppercase
             tracking-[0.25em]
-            text-[#C99A63]
+            text-[#EFC17E]
             transition
-            hover:text-white
+            hover:text-[#F5F1EB]
           "
         >
-          ← Retour à l'accueil
+          ← Retour à l&apos;accueil
         </Link>
 
         {/* Titre */}
         <div className="mb-16">
-          <div className="mb-8 h-px w-24 bg-[#C99A63]/40" />
+          <StarDivider className="mb-8 justify-start" />
 
           <h1
             className="
@@ -53,7 +59,7 @@ export default function MentionsLegales() {
             Éditeur du site
           </h2>
 
-          <div className="space-y-5 text-lg leading-8 text-[#E6DED5]">
+          <div className="space-y-5 text-lg leading-8 text-[#CFC4B8]">
 
             <p>
               <strong className="text-[#F5F1EB]">
@@ -108,7 +114,7 @@ export default function MentionsLegales() {
               E-mail :{" "}
               <a
                 href="mailto:m.everlybooks@gmail.com"
-                className="text-[#C99A63] transition hover:text-white"
+                className="text-[#EFC17E] transition hover:text-[#F5F1EB]"
               >
                 m.everlybooks@gmail.com
               </a>
@@ -130,7 +136,7 @@ export default function MentionsLegales() {
             Hébergement
           </h2>
 
-          <div className="space-y-5 text-lg leading-8 text-[#E6DED5]">
+          <div className="space-y-5 text-lg leading-8 text-[#CFC4B8]">
 
             <p>
               Le site est hébergé par :
@@ -154,7 +160,7 @@ export default function MentionsLegales() {
                 href="https://vercel.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#C99A63] transition hover:text-white"
+                className="text-[#EFC17E] transition hover:text-[#F5F1EB]"
               >
                 vercel.com
               </a>
@@ -176,12 +182,12 @@ export default function MentionsLegales() {
             Données personnelles
           </h2>
 
-          <div className="space-y-6 text-lg leading-8 text-[#E6DED5]">
+          <div className="space-y-6 text-lg leading-8 text-[#CFC4B8]">
 
             <p>
-              Le formulaire de contact présent sur ce site collecte les
-              informations nécessaires au traitement de votre demande :
-              nom, adresse e-mail, sujet et contenu du message.
+              Ce site ne comporte aucun formulaire et ne collecte aucune
+              donnée personnelle auprès de ses visiteurs. Aucun compte ne
+              peut y être créé et aucune inscription n’y est proposée.
             </p>
 
             <p>
@@ -194,58 +200,27 @@ export default function MentionsLegales() {
               E-mail :{" "}
               <a
                 href="mailto:m.everlybooks@gmail.com"
-                className="text-[#C99A63] transition hover:text-white"
+                className="text-[#EFC17E] transition hover:text-[#F5F1EB]"
               >
                 m.everlybooks@gmail.com
               </a>
             </p>
 
             <p>
-              Les données sont collectées afin de recevoir, traiter et
-              répondre aux demandes adressées via le formulaire de contact.
+              La simple consultation du site entraîne le traitement de
+              données techniques de connexion, telles que l’adresse IP et
+              les données de journalisation, par l’hébergeur du site, pour
+              les seuls besoins de son fonctionnement et de sa sécurité.
+              Aucun autre prestataire ne traite de données personnelles
+              pour le compte de MEVERLY.
             </p>
 
             <p>
-              La base légale du traitement est l’intérêt légitime du
-              responsable du traitement à répondre aux demandes qui lui
-              sont adressées.
-            </p>
-
-            <p>
-              Les champs du formulaire sont nécessaires au traitement de
-              la demande. L’absence de renseignement des informations
-              demandées peut empêcher MEVERLY de répondre au message.
-            </p>
-
-            <p>
-              Les données sont destinées à MEVERLY ainsi qu’aux prestataires
-              techniques nécessaires au fonctionnement du site et du
-              formulaire de contact, notamment Vercel pour l’hébergement
-              et Resend pour l’envoi des e-mails.
-            </p>
-
-            <p>
-              Les données transmises via le formulaire peuvent notamment
-              comprendre le nom, l’adresse e-mail, le sujet et le contenu
-              du message.
-            </p>
-
-            <p>
-              Les données transmises via le formulaire de contact sont
-              conservées pendant la durée nécessaire au traitement et au
-              suivi de la demande, et au maximum pendant un mois à compter
-              du dernier échange, sauf obligation légale imposant une
-              durée de conservation plus longue.
-            </p>
-
-            <p>
-              Certains prestataires techniques utilisés pour le
-              fonctionnement du site ou du formulaire peuvent traiter des
-              données personnelles en dehors de l’Espace économique
-              européen. Les transferts internationaux de données sont
-              encadrés par les mécanismes prévus par la réglementation
-              applicable, notamment lorsque des garanties appropriées sont
-              requises.
+              Ces données techniques peuvent être traitées en dehors de
+              l’Espace économique européen. Les transferts internationaux
+              de données sont encadrés par les mécanismes prévus par la
+              réglementation applicable, notamment lorsque des garanties
+              appropriées sont requises.
             </p>
 
             <p>
@@ -264,12 +239,11 @@ export default function MentionsLegales() {
             <p>
               <a
                 href="mailto:m.everlybooks@gmail.com"
-                className="text-[#C99A63] transition hover:text-white"
+                className="text-[#EFC17E] transition hover:text-[#F5F1EB]"
               >
                 m.everlybooks@gmail.com
               </a>
             </p>
-
             <p>
               Vous pouvez également introduire une réclamation auprès de
               la Commission nationale de l’informatique et des libertés
@@ -292,7 +266,7 @@ export default function MentionsLegales() {
             Propriété intellectuelle
           </h2>
 
-          <div className="space-y-6 text-lg leading-8 text-[#E6DED5]">
+          <div className="space-y-6 text-lg leading-8 text-[#CFC4B8]">
 
             <p>
               L’ensemble des contenus présents sur ce site, notamment les
@@ -325,7 +299,7 @@ export default function MentionsLegales() {
             Contact
           </h2>
 
-          <div className="text-lg leading-8 text-[#E6DED5]">
+          <div className="text-lg leading-8 text-[#CFC4B8]">
             <p>
               Pour toute question concernant le site, les œuvres ou
               l’utilisation de vos données personnelles, vous pouvez
@@ -335,7 +309,7 @@ export default function MentionsLegales() {
             <p className="mt-5">
               <a
                 href="mailto:m.everlybooks@gmail.com"
-                className="text-[#C99A63] transition hover:text-white"
+                className="text-[#EFC17E] transition hover:text-[#F5F1EB]"
               >
                 m.everlybooks@gmail.com
               </a>
@@ -347,13 +321,16 @@ export default function MentionsLegales() {
         <div className="border-t border-white/10 pt-10">
           <Link
             href="/"
-            className="text-[#C99A63] transition hover:text-white"
+            className="text-[#EFC17E] transition hover:text-[#F5F1EB]"
           >
-            ← Retour à l'accueil
+            ← Retour à l&apos;accueil
           </Link>
         </div>
 
       </div>
     </main>
+
+      <Footer />
+    </>
   );
 }

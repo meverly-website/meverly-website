@@ -5,7 +5,7 @@
  *
  * Par défaut, les sources sont celles déposées sur le Bureau :
  *   3.png — l'illustration seule : les deux mains et le fil, sur fond noir
- *   1.png — la couverture complète, titre compris
+ *   « Couverture florale… (625 x 1000 px).png » — la couverture complète
  *
  * Produit :
  *   public/hero-illustration.png — l'illustration détourée en PNG alpha
@@ -24,7 +24,9 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const PUBLIC = path.join(ROOT, "public");
 
 const ILLUSTRATION_SRC = process.argv[2] ?? "C:/Users/magco/Desktop/3.png";
-const COVER_SRC = process.argv[3] ?? "C:/Users/magco/Desktop/1.png";
+const COVER_SRC =
+  process.argv[3] ??
+  "C:/Users/magco/Desktop/Couverture florale de livre de Wattpad illustrée couleur pêche (625 x 1000 px).png";
 
 /** Marge conservée autour du contenu lumineux, en pixels source. */
 const PADDING = 12;
@@ -173,10 +175,16 @@ async function buildCover() {
 
   console.log(`couverture    ${width}×${height}`);
 
-  if (width < 700) {
+  // La mise en scène plafonne à 300 px de large : il faut donc 600 px pour
+  // couvrir un écran 2×, 900 px pour un écran 3×.
+  if (width < 600) {
     console.log(
-      `              ⚠ basse définition : la couverture s'affiche jusqu'à 300 px,\n` +
-      `                soit 600 px sur écran retina. Un export plus grand serait plus net.`
+      `              ⚠ insuffisant : 600 px sont nécessaires pour un écran 2×.`
+    );
+  } else if (width < 900) {
+    console.log(
+      `              écran 2× couvert. Au-delà de 900 px on couvrirait aussi\n` +
+      `              le 3×, et la mise en scène pourrait être agrandie.`
     );
   }
 

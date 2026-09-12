@@ -6,8 +6,6 @@ import BookSection from "@/components/BookSection";
 import CharactersSection from "@/components/CharactersSection";
 import PullQuote from "@/components/PullQuote";
 import MusicSection from "@/components/MusicSection";
-import AboutSection from "@/components/AboutSection";
-import FinalCta from "@/components/FinalCta";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -38,10 +36,6 @@ export default function Home() {
           </PullQuote>
 
           <MusicSection />
-
-          <AboutSection />
-
-          <FinalCta />
 
         </main>
 

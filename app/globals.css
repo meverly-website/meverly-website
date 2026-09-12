@@ -59,6 +59,39 @@ body {
 }
 
 /* ==================================================
+   FOND : NOIR ET GRAIN
+
+   Le grain est une tuile de bruit SVG (feTurbulence) répétée en CSS, cousue
+   par stitchTiles pour que la répétition ne se voie pas. Il casse le banding
+   des dégradés très sombres, notamment sur écran OLED. Rasterisé une fois,
+   posé derrière tout le contenu : aucun coût au scroll, aucun script.
+================================================== */
+
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  opacity: 0.05;
+}
+
+/* ==================================================
+   ILLUSTRATION DU HERO
+
+   Elle passe du statut de sujet à celui d'atmosphère : le fichier
+   hero-atmosphere.png a déjà les mains atténuées et le fil préservé, et le
+   masque radial la fond dans le noir sur ses bords — pas de contour net,
+   pas de vignette rapportée.
+================================================== */
+
+.hero-atmosphere {
+  mask-image: radial-gradient(
+    ellipse 62% 58% at 50% 50%,
+    #000 30%,
+    rgba(0, 0, 0, 0.55) 62%,
+    transparent 86%
+  );
+}
+
+/* ==================================================
    RÉVÉLATION AU SCROLL
    Piloté par la progression de l'élément dans le viewport,
    en CSS natif. Sans support : contenu affiché, sans animation.
@@ -161,24 +194,21 @@ body {
     drop-shadow(0 0 2px rgba(165, 2, 1, 0.5))
     drop-shadow(0 0 6px rgba(61, 0, 0, 0.9));
   mask-image:
+    /*
+     * Le tracé contourne désormais tous les textes : la seule disparition qui
+     * reste est volontaire, dans la longue descente calme entre l'onde et le
+     * pied de page. Le fil s'efface, puis réapparaît.
+     */
     linear-gradient(
       to bottom,
-      /* le titre des personnages */
-      #000 0%,
-      #000 33.5%,
-      transparent 35%,
-      transparent 36.5%,
-      #000 38%,
-      /* le lien de fin de section */
-      #000 47%,
-      transparent 47.9%,
-      transparent 49%,
-      #000 50%,
-      /* la section à propos, volontairement calme */
-      #000 73%,
-      transparent 77%,
-      transparent 84%,
-      #000 88%,
+      /* naissance : le fil émerge de l'illustration au lieu d'y être posé */
+      transparent 0%,
+      transparent 5%,
+      #000 10.5%,
+      #000 82%,
+      transparent 85.5%,
+      transparent 88.5%,
+      #000 92%,
       #000 100%
     ),
     linear-gradient(

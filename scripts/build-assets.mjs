@@ -45,6 +45,20 @@ const RAMP = 14;
 const OG_WIDTH = 1734;
 const OG_HEIGHT = 907;
 
+/*
+ * Variante « atmosphère » du Hero : les mains doivent se deviner dans le noir
+ * sans capter l'attention, alors que le fil rouge doit rester l'élément le
+ * plus lumineux de l'écran. Une simple baisse d'opacité en CSS atténuerait
+ * les deux dans les mêmes proportions ; l'atténuation est donc appliquée ici,
+ * pixel par pixel, en fonction de la dominante rouge.
+ */
+const ATMOSPHERE_HAND = 0.34;
+const ATMOSPHERE_THREAD = 0.95;
+
+/** Un pixel n'est « du fil » qu'au-delà de cet écart entre le rouge et le reste. */
+const REDNESS_FLOOR = 60;
+const REDNESS_RANGE = 120;
+
 /** mulberry32, pour un semis d'étoiles irrégulier mais reproductible. */
 function createRandom(seed) {
   let state = seed;
@@ -86,6 +100,7 @@ async function buildIllustration() {
   const h = Math.min(height - 1, maxY + PADDING) - top + 1;
 
   const out = Buffer.alloc(w * h * 4);
+  const soft = Buffer.alloc(w * h * 4);
 
   let threadX = 0, threadY = 0;
 
@@ -103,10 +118,27 @@ async function buildIllustration() {
       if (alpha === 0) continue;
 
       // Couleur démultipliée : recomposer sur du noir redonne la source.
-      out[o] = Math.min(255, Math.round((r * 255) / alpha));
-      out[o + 1] = Math.min(255, Math.round((g * 255) / alpha));
-      out[o + 2] = Math.min(255, Math.round((b * 255) / alpha));
+      const cr = Math.min(255, Math.round((r * 255) / alpha));
+      const cg = Math.min(255, Math.round((g * 255) / alpha));
+      const cb = Math.min(255, Math.round((b * 255) / alpha));
+
+      out[o] = cr;
+      out[o + 1] = cg;
+      out[o + 2] = cb;
       out[o + 3] = alpha;
+
+      // Variante atmosphère : les lignes claires reculent, le fil reste.
+      const redness = Math.min(
+        1,
+        Math.max(0, (r - Math.max(g, b) - REDNESS_FLOOR) / REDNESS_RANGE)
+      );
+
+      const keep = ATMOSPHERE_HAND + (ATMOSPHERE_THREAD - ATMOSPHERE_HAND) * redness;
+
+      soft[o] = cr;
+      soft[o + 1] = cg;
+      soft[o + 2] = cb;
+      soft[o + 3] = Math.round(alpha * keep);
 
       // Point le plus bas du fil : c'est là que ThreadLine prend le relais.
       if (r > 140 && r - g > 70 && r - b > 70 && y > threadY) {
@@ -119,6 +151,10 @@ async function buildIllustration() {
   await sharp(out, { raw: { width: w, height: h, channels: 4 } })
     .png({ compressionLevel: 9 })
     .toFile(path.join(PUBLIC, "hero-illustration.png"));
+
+  await sharp(soft, { raw: { width: w, height: h, channels: 4 } })
+    .png({ compressionLevel: 9 })
+    .toFile(path.join(PUBLIC, "hero-atmosphere.png"));
 
   console.log(`illustration  ${width}×${height} → ${w}×${h}`);
   console.log(

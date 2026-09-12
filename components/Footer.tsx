@@ -5,7 +5,6 @@ const NAV = [
   { href: "/before-i-knew-you", label: "Roman" },
   { href: "/#personnages", label: "Personnages" },
   { href: "/#musique", label: "Musique" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export default function Footer() {

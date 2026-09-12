@@ -88,8 +88,9 @@ export default function RootLayout({
       <body>
 
         {/*
-          Fond commun à toutes les pages : jamais un aplat pur, un semis
-          d'étoiles discret par-dessus le noir. Couche fixe, derrière tout.
+          Fond commun à toutes les pages : du noir et un léger grain. Les
+          étoiles ne sont plus un ciel, seulement quelques points que l'on
+          devine. Couche fixe, derrière tout.
         */}
 
         <div
@@ -102,7 +103,9 @@ export default function RootLayout({
             bg-[radial-gradient(140%_100%_at_50%_0%,#0D0C0A_0%,#000000_78%)]
           "
         >
-          <StarField />
+          <StarField count={26} sparkles={0} className="opacity-45" />
+
+          <div className="grain absolute inset-0" />
         </div>
 
         {children}

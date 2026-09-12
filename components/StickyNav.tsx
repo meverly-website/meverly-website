@@ -14,12 +14,24 @@ import { BUY_URL, INSTAGRAM_URL } from "@/lib/site";
  * listener de scroll recalculé à chaque frame.
  */
 
+/*
+ * Instagram remplace Contact : la page de contact est supprimée, et c'est
+ * désormais le canal assumé. Il tient aussi la navigation à quatre entrées,
+ * qui paraissait dégarnie à trois.
+ */
+
 const LINKS = [
-  { href: "/before-i-knew-you", label: "Roman" },
-  { href: "/#personnages", label: "Personnages" },
-  { href: "/#musique", label: "Musique" },
-  { href: "/contact", label: "Contact" },
+  { href: "/before-i-knew-you", label: "Roman", external: false },
+  { href: "/#personnages", label: "Personnages", external: false },
+  { href: "/#musique", label: "Musique", external: false },
+  { href: INSTAGRAM_URL, label: "Instagram", external: true },
 ];
+
+const DESKTOP_LINK =
+  "btn-underline relative py-1 text-[0.7rem] uppercase tracking-[0.3em] text-muted transition-colors hover:text-gold";
+
+const MOBILE_LINK =
+  "font-serif text-4xl font-light text-text transition-colors hover:text-gold";
 
 export default function StickyNav() {
   const [condensed, setCondensed] = useState(false);
@@ -133,15 +145,23 @@ export default function StickyNav() {
 
           <nav className="hidden items-center gap-7 md:flex lg:gap-10">
 
-            {LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="btn-underline relative py-1 text-[0.7rem] uppercase tracking-[0.3em] text-muted transition-colors hover:text-gold"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {LINKS.map((link) =>
+              link.external ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={DESKTOP_LINK}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link key={link.href} href={link.href} className={DESKTOP_LINK}>
+                  {link.label}
+                </Link>
+              )
+            )}
 
           </nav>
 
@@ -219,16 +239,29 @@ export default function StickyNav() {
 
           <nav className="mt-16 flex flex-col gap-8">
 
-            {LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="font-serif text-4xl font-light text-text transition-colors hover:text-gold"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {LINKS.map((link) =>
+              link.external ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                  className={MOBILE_LINK}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className={MOBILE_LINK}
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
 
           </nav>
 
@@ -243,16 +276,6 @@ export default function StickyNav() {
             >
               {BUY_URL ? "Acheter le roman" : "Bientôt disponible"}
             </Button>
-
-            <a
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
-              className="text-[0.7rem] uppercase tracking-[0.3em] text-muted transition-colors hover:text-gold"
-            >
-              Instagram
-            </a>
 
           </div>
 

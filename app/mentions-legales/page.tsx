@@ -185,9 +185,9 @@ export default function MentionsLegales() {
           <div className="space-y-6 text-lg leading-8 text-[#CFC4B8]">
 
             <p>
-              Le formulaire de contact présent sur ce site collecte les
-              informations nécessaires au traitement de votre demande :
-              nom, adresse e-mail, sujet et contenu du message.
+              Ce site ne comporte aucun formulaire et ne collecte aucune
+              donnée personnelle auprès de ses visiteurs. Aucun compte ne
+              peut y être créé et aucune inscription n’y est proposée.
             </p>
 
             <p>
@@ -207,51 +207,20 @@ export default function MentionsLegales() {
             </p>
 
             <p>
-              Les données sont collectées afin de recevoir, traiter et
-              répondre aux demandes adressées via le formulaire de contact.
+              La simple consultation du site entraîne le traitement de
+              données techniques de connexion, telles que l’adresse IP et
+              les données de journalisation, par l’hébergeur du site, pour
+              les seuls besoins de son fonctionnement et de sa sécurité.
+              Aucun autre prestataire ne traite de données personnelles
+              pour le compte de MEVERLY.
             </p>
 
             <p>
-              La base légale du traitement est l’intérêt légitime du
-              responsable du traitement à répondre aux demandes qui lui
-              sont adressées.
-            </p>
-
-            <p>
-              Les champs du formulaire sont nécessaires au traitement de
-              la demande. L’absence de renseignement des informations
-              demandées peut empêcher MEVERLY de répondre au message.
-            </p>
-
-            <p>
-              Les données sont destinées à MEVERLY ainsi qu’aux prestataires
-              techniques nécessaires au fonctionnement du site et du
-              formulaire de contact, notamment Vercel pour l’hébergement
-              et Resend pour l’envoi des e-mails.
-            </p>
-
-            <p>
-              Les données transmises via le formulaire peuvent notamment
-              comprendre le nom, l’adresse e-mail, le sujet et le contenu
-              du message.
-            </p>
-
-            <p>
-              Les données transmises via le formulaire de contact sont
-              conservées pendant la durée nécessaire au traitement et au
-              suivi de la demande, et au maximum pendant un mois à compter
-              du dernier échange, sauf obligation légale imposant une
-              durée de conservation plus longue.
-            </p>
-
-            <p>
-              Certains prestataires techniques utilisés pour le
-              fonctionnement du site ou du formulaire peuvent traiter des
-              données personnelles en dehors de l’Espace économique
-              européen. Les transferts internationaux de données sont
-              encadrés par les mécanismes prévus par la réglementation
-              applicable, notamment lorsque des garanties appropriées sont
-              requises.
+              Ces données techniques peuvent être traitées en dehors de
+              l’Espace économique européen. Les transferts internationaux
+              de données sont encadrés par les mécanismes prévus par la
+              réglementation applicable, notamment lorsque des garanties
+              appropriées sont requises.
             </p>
 
             <p>
@@ -275,7 +244,6 @@ export default function MentionsLegales() {
                 m.everlybooks@gmail.com
               </a>
             </p>
-
             <p>
               Vous pouvez également introduire une réclamation auprès de
               la Commission nationale de l’informatique et des libertés

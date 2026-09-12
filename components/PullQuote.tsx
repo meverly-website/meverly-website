@@ -15,7 +15,7 @@ export default function PullQuote({ children, source }: PullQuoteProps) {
   return (
     <section className="relative px-6 py-36 md:py-52">
 
-      <RevealOnScroll slow className="mx-auto max-w-5xl">
+      <RevealOnScroll slow className="mx-auto max-w-4xl">
 
         <StarDivider className="mb-16" />
 

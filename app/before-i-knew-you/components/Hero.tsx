@@ -1,46 +1,39 @@
-import Image from "next/image";
+import CoverShowcase from "@/components/CoverShowcase";
+import StarDivider from "@/components/StarDivider";
+
+/**
+ * Ouverture de la page du roman.
+ *
+ * L'ancienne version pointait vers `/bookhero.jpg`, un fichier absent de
+ * `public/` : l'image était cassée en production. Elle est remplacée par une
+ * ouverture typographique sur le champ d'étoiles, avec la couverture mise en
+ * scène — même langage que la page d'accueil.
+ */
 
 export default function Hero() {
   return (
-    <section className="relative flex h-[65vh] sm:h-[72vh] lg:h-[80vh] items-center justify-center overflow-hidden">
+    <section className="px-6 pb-24 pt-40 md:pb-32 md:pt-52">
 
-      {/* Image */}
+      <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
 
-      <Image
-        src="/bookhero.jpg"
-        alt="Before I Knew You"
-        fill
-        priority
-        className="object-cover"
-      />
+        <StarDivider className="mb-10" />
 
-      {/* Overlay */}
-
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/45 to-[#0E0B0B]" />
-
-      {/* Contenu */}
-
-      <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
-
-        {/* Ligne */}
-
-        <div className="mx-auto mb-8 h-px w-16 bg-[#C99A63]/50 sm:mb-10 sm:w-24" />
-
-        {/* Titre */}
+        <p className="text-[0.7rem] uppercase tracking-[0.45em] text-gold">
+          Le roman
+        </p>
 
         <h1
           className="
-            font-[family-name:var(--font-cormorant)]
-
+            mt-8
+            font-serif
             text-5xl
+            font-light
+            leading-[0.95]
+            tracking-[0.04em]
+            text-text
             sm:text-6xl
             md:text-7xl
-            lg:text-[7rem]
-
-            leading-[0.9]
-            tracking-[0.05em]
-
-            text-[#F5F1EB]
+            lg:text-8xl
           "
         >
           BEFORE I
@@ -48,35 +41,13 @@ export default function Hero() {
           KNEW YOU
         </h1>
 
-        {/* Citation */}
-
-        <p
-          className="
-            mx-auto
-            mt-8
-
-            font-[family-name:var(--font-cormorant)]
-
-            text-lg
-            sm:text-2xl
-            md:text-3xl
-
-            italic
-            text-[#D9C8B7]
-          "
-        >
-          Tu n'as pas besoin d'être fort tout le temps
+        <p className="mt-10 font-serif text-xl italic text-muted sm:text-2xl md:text-3xl">
+          Tu n&apos;as pas besoin d&apos;être fort tout le temps.
         </p>
 
-        {/* Ligne */}
-
-        <div className="mx-auto mt-10 h-px w-12 bg-[#C99A63]/40 sm:w-16" />
+        <CoverShowcase href="#synopsis" className="mt-20 flex justify-center" />
 
       </div>
-
-      {/* Dégradé bas */}
-
-      <div className="absolute bottom-0 left-0 h-28 w-full bg-gradient-to-t from-[#0E0B0B] to-transparent sm:h-36 lg:h-40" />
 
     </section>
   );

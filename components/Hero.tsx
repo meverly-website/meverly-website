@@ -1,114 +1,89 @@
 import Image from "next/image";
-import Navbar from "./Navbar";
+import StarDivider from "./StarDivider";
+import {
+  HERO_ILLUSTRATION_HEIGHT,
+  HERO_ILLUSTRATION_SRC,
+  HERO_ILLUSTRATION_WIDTH,
+} from "@/lib/site";
+
+/**
+ * L'affiche éditoriale prolongée.
+ *
+ * L'illustration de la couverture — les deux mains, le fil — occupe le premier
+ * écran. Le fil qui en sort en bas à droite est repris par ThreadLine, qui le
+ * fait descendre dans toute la page : le site se lit comme la continuation de
+ * la couverture, pas comme une page décorée d'un motif inspiré d'elle.
+ */
 
 export default function Hero() {
   return (
-    <>
-      <Navbar />
+    <section
+      className="
+        relative
+        flex
+        min-h-svh
+        flex-col
+        items-center
+        justify-center
+        px-6
+        pb-20
+        pt-28
+      "
+    >
 
-      <section
-        className="
-          relative
-          flex
-          h-[60vh]
-          min-h-[520px]
-          items-center
-          justify-center
-          overflow-hidden
-          sm:h-[62vh]
-          lg:h-[65vh]
-        "
-      >
+      {/* Illustration — bornée en hauteur pour que le premier écran tienne. */}
 
-        {/* Image */}
+      <div className="relative flex w-full max-w-[860px] justify-center">
 
         <Image
-          src="/hero.jpg"
-          alt="Meverly"
-          fill
+          src={HERO_ILLUSTRATION_SRC}
+          alt="Deux mains qui se tendent l'une vers l'autre, reliées aux poignets par le fil rouge du destin, sur un ciel étoilé."
+          width={HERO_ILLUSTRATION_WIDTH}
+          height={HERO_ILLUSTRATION_HEIGHT}
           priority
-          sizes="100vw"
-          className="object-cover"
+          sizes="(max-width: 900px) 94vw, 860px"
+          className="h-auto max-h-[54svh] w-auto max-w-full"
         />
 
-        {/* Overlay */}
+      </div>
 
-        <div className="absolute inset-0 bg-black/55" />
+      {/* Titre — présent, mais il ne concurrence pas l'illustration. */}
 
-        {/* Contenu */}
+      <div className="relative z-10 mt-10 text-center">
 
-        <div
+        <StarDivider size={12} className="mb-6" />
+
+        <h1
           className="
-            relative
-            z-10
-            mx-auto
-            max-w-4xl
-            px-6
-            pt-10
-            text-center
+            font-serif
+            text-2xl
+            font-light
+            leading-none
+            tracking-[0.16em]
+            text-gold
+            sm:text-3xl
+            md:text-4xl
           "
         >
+          <span className="sr-only">Meverly, autrice de </span>
+          BEFORE I KNEW YOU
+        </h1>
 
-          {/* Nom */}
+        <p
+          className="
+            mt-5
+            font-serif
+            text-base
+            italic
+            text-muted
+            sm:text-lg
+          "
+        >
+          Certaines rencontres ne se prévoient pas.
+        </p>
 
-          <h1
-            className="
-              font-[family-name:var(--font-cormorant)]
-              text-5xl
-              tracking-[0.15em]
-              text-[#F5F1EB]
-              sm:text-6xl
-              md:text-7xl
-              lg:text-8xl
-              lg:tracking-[0.22em]
-            "
-          >
-            MEVERLY
-          </h1>
+      </div>
 
-          {/* Citation */}
-
-          <div className="mt-7 sm:mt-9 lg:mt-10">
-
-            <p
-              className="
-                font-[family-name:var(--font-cormorant)]
-                text-xl
-                italic
-                leading-relaxed
-                text-[#F5F1EB]
-                sm:text-2xl
-                lg:text-3xl
-              "
-            >
-              L'amour ne guérit pas tout.
-            </p>
-
-            <p
-              className="
-                mt-2
-                font-[family-name:var(--font-cormorant)]
-                text-xl
-                italic
-                leading-relaxed
-                text-[#F5F1EB]
-                sm:mt-3
-                sm:text-2xl
-                lg:text-3xl
-              "
-            >
-              Mais parfois, il offre une raison de recommencer.
-            </p>
-
-          </div>
-
-          {/* Petit repère visuel */}
-
-          <div className="mx-auto mt-9 h-px w-12 bg-[#C99A63]/60 sm:mt-11" />
-
-        </div>
-
-      </section>
-    </>
+    </section>
   );
 }

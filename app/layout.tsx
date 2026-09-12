@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
+import StarField from "@/components/StarField";
 import "./globals.css";
 
 const inter = Inter({
@@ -84,7 +85,29 @@ export default function RootLayout({
       lang="fr"
       className={`${inter.variable} ${cormorant.variable}`}
     >
-      <body>{children}</body>
+      <body>
+
+        {/*
+          Fond commun à toutes les pages : jamais un aplat pur, un semis
+          d'étoiles discret par-dessus le noir. Couche fixe, derrière tout.
+        */}
+
+        <div
+          aria-hidden="true"
+          className="
+            pointer-events-none
+            fixed
+            inset-0
+            -z-10
+            bg-[radial-gradient(140%_100%_at_50%_0%,#0D0C0A_0%,#000000_78%)]
+          "
+        >
+          <StarField />
+        </div>
+
+        {children}
+
+      </body>
     </html>
   );
 }

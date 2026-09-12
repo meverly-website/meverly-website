@@ -1,4 +1,5 @@
 import Image from "next/image";
+import StarDivider from "@/components/StarDivider";
 
 const mainCharacters = [
   {
@@ -49,7 +50,7 @@ export default function Characters() {
 
         {/* Séparateur */}
 
-        <div className="mx-auto mb-16 h-px w-20 bg-[#C99A63]/40" />
+        <StarDivider className="mb-16" />
 
         {/* Personnages principaux */}
 
@@ -59,7 +60,7 @@ export default function Characters() {
 
             <article
               key={character.name}
-              className="group relative overflow-hidden rounded-[40px]"
+              className="group relative overflow-hidden rounded-[4px]"
             >
 
               <Image
@@ -78,11 +79,11 @@ export default function Characters() {
                   transition-transform
                   duration-700
 
-                  group-hover:scale-[1.04]
+
                 "
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-[#090909] via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0D0C0A] via-black/20 to-transparent" />
 
               <div className="absolute bottom-0 left-0 w-full p-8 sm:p-12 lg:p-16">
 
@@ -109,7 +110,7 @@ export default function Characters() {
 
                     italic
 
-                    text-[#D9C8B7]
+                    text-[#CFC4B8]
                   "
                 >
                   {character.traits}
@@ -131,7 +132,7 @@ export default function Characters() {
 
             <article
               key={character.name}
-              className="group relative overflow-hidden rounded-[32px]"
+              className="group relative overflow-hidden rounded-[4px]"
             >
 
               <Image
@@ -149,11 +150,11 @@ export default function Characters() {
                   transition-transform
                   duration-700
 
-                  group-hover:scale-[1.04]
+
                 "
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-[#090909] via-black/25 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0D0C0A] via-black/25 to-transparent" />
 
               <div className="absolute bottom-0 left-0 p-8">
 
@@ -180,7 +181,7 @@ export default function Characters() {
                     italic
                     leading-relaxed
 
-                    text-[#D9C8B7]
+                    text-[#CFC4B8]
                   "
                 >
                   {character.traits}

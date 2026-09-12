@@ -1,3 +1,4 @@
+import StarDivider from "@/components/StarDivider";
 export default function Quote() {
   return (
     <section className="px-6 py-28 md:py-40">
@@ -6,7 +7,7 @@ export default function Quote() {
 
         {/* Séparateur */}
 
-        <div className="mx-auto mb-16 h-px w-20 bg-[#C99A63]/40" />
+        <StarDivider className="mb-16" />
 
         {/* Citation */}
 
@@ -23,19 +24,19 @@ export default function Quote() {
             italic
             leading-relaxed
 
-            text-[#E7DDD2]
+            text-[#CFC4B8]
           "
         >
-          « Parfois, aimer quelqu'un,
-          c'est simplement lui rappeler
-          qu'il mérite encore d'être heureux. »
+          « Parfois, aimer quelqu&apos;un,
+          c&apos;est simplement lui rappeler
+          qu&apos;il mérite encore d&apos;être heureux. »
         </blockquote>
 
         {/* Signature */}
 
         <div className="mt-14 flex flex-col items-center">
 
-          <span className="mb-5 h-px w-16 bg-[#C99A63]/40" />
+          <span className="mb-5 h-px w-16 bg-[#EFC17E]/40" />
 
           <p
             className="
@@ -46,7 +47,7 @@ export default function Quote() {
               text-xs
               sm:text-sm
 
-              text-[#C99A63]
+              text-[#EFC17E]
             "
           >
             Before I Knew You

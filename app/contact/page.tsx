@@ -1,7 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import Link from "next/link";
+import Button from "@/components/Button";
+import Container from "@/components/Container";
+import Footer from "@/components/Footer";
+import SectionHeading from "@/components/SectionHeading";
+import StickyNav from "@/components/StickyNav";
+
+const FIELD = `
+  w-full
+  rounded-none
+  border-0
+  border-b
+  border-gold/20
+  bg-transparent
+  py-4
+  text-text
+  outline-none
+  transition-colors
+  duration-300
+  focus:border-gold
+`;
+
+const LABEL = `
+  mb-3
+  block
+  text-[0.65rem]
+  uppercase
+  tracking-[0.3em]
+  text-gold
+`;
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
@@ -15,7 +44,7 @@ export default function ContactPage() {
     message: "",
   });
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     setLoading(true);
@@ -53,375 +82,191 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#0E0B0B] text-[#F5F1EB]">
+    <>
+      <StickyNav />
 
-      {/* ================= INTRODUCTION ================= */}
+      <main className="relative">
 
-      <section className="mx-auto flex max-w-5xl flex-col items-center px-6 py-32 text-center">
+        {/* ================= INTRODUCTION ================= */}
 
-        <div className="mb-12 h-px w-24 bg-[#C99A63]/40" />
+        <section className="px-6 pb-16 pt-40 md:pt-52">
 
-        <h1
-          className="
-            font-[family-name:var(--font-cormorant)]
-            text-6xl
-            md:text-8xl
-          "
-        >
-          Écrire à Meverly
-        </h1>
+          <div className="mx-auto max-w-3xl text-center">
 
-        <p
-          className="
-            mt-8
-            max-w-2xl
-            font-[family-name:var(--font-cormorant)]
-            text-2xl
-            italic
-            leading-relaxed
-            text-[#CFC4B8]
-          "
-        >
-          Merci d'avoir pris le temps de visiter mon univers.
-        </p>
-
-        <p
-          className="
-            mt-10
-            max-w-2xl
-            text-lg
-            leading-9
-            text-[#E6DED5]
-          "
-        >
-          Que ce soit pour un retour sur un roman,
-          une question, une proposition
-          ou simplement quelques mots,
-          je serai heureuse de vous lire.
-        </p>
-
-      </section>
-
-      {/* ================= FORMULAIRE ================= */}
-
-      <section className="mx-auto max-w-3xl px-6 pb-32">
-
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-10"
-        >
-
-          {/* ================= NOM ================= */}
-
-          <div>
-
-            <label
-              htmlFor="name"
-              className="
-                mb-3
-                block
-                uppercase
-                tracking-[0.25em]
-                text-[#C99A63]
-              "
-            >
-              Nom
-            </label>
-
-            <input
-              id="name"
-              name="name"
-              type="text"
-              required
-              autoComplete="name"
-              value={form.name}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  name: e.target.value,
-                })
-              }
-              className="
-                w-full
-                border-b
-                border-white/20
-                bg-transparent
-                py-4
-                outline-none
-                transition-all
-                focus:border-[#C99A63]
-              "
+            <SectionHeading
+              as="h1"
+              eyebrow="Contact"
+              title="Écrire à Meverly"
             />
+
+            <p className="mt-10 font-serif text-xl italic leading-relaxed text-muted sm:text-2xl">
+              Merci d&apos;avoir pris le temps de visiter mon univers.
+            </p>
+
+            <p className="mt-8 text-base leading-8 text-muted sm:text-lg">
+              Que ce soit pour un retour sur un roman, une question, une
+              proposition ou simplement quelques mots, je serai heureuse de
+              vous lire.
+            </p>
 
           </div>
 
-          {/* ================= EMAIL ================= */}
+        </section>
 
-          <div>
+        {/* ================= FORMULAIRE ================= */}
 
-            <label
-              htmlFor="email"
-              className="
-                mb-3
-                block
-                uppercase
-                tracking-[0.25em]
-                text-[#C99A63]
-              "
-            >
-              Adresse e-mail
-            </label>
+        <section className="pb-32">
 
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              autoComplete="email"
-              value={form.email}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  email: e.target.value,
-                })
-              }
-              className="
-                w-full
-                border-b
-                border-white/20
-                bg-transparent
-                py-4
-                outline-none
-                transition-all
-                focus:border-[#C99A63]
-              "
-            />
+          <Container>
 
-          </div>
+            <form onSubmit={handleSubmit} className="mx-auto max-w-2xl space-y-10">
 
-          {/* ================= SUJET ================= */}
+              <div>
 
-          <div>
+                <label htmlFor="name" className={LABEL}>
+                  Nom
+                </label>
 
-            <label
-              htmlFor="subject"
-              className="
-                mb-3
-                block
-                uppercase
-                tracking-[0.25em]
-                text-[#C99A63]
-              "
-            >
-              Sujet
-            </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  autoComplete="name"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className={FIELD}
+                />
 
-            <input
-              id="subject"
-              name="subject"
-              type="text"
-              required
-              value={form.subject}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  subject: e.target.value,
-                })
-              }
-              className="
-                w-full
-                border-b
-                border-white/20
-                bg-transparent
-                py-4
-                outline-none
-                transition-all
-                focus:border-[#C99A63]
-              "
-            />
+              </div>
 
-          </div>
+              <div>
 
-          {/* ================= MESSAGE ================= */}
+                <label htmlFor="email" className={LABEL}>
+                  Adresse e-mail
+                </label>
 
-          <div>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className={FIELD}
+                />
 
-            <label
-              htmlFor="message"
-              className="
-                mb-3
-                block
-                uppercase
-                tracking-[0.25em]
-                text-[#C99A63]
-              "
-            >
-              Message
-            </label>
+              </div>
 
-            <textarea
-              id="message"
-              name="message"
-              required
-              rows={8}
-              value={form.message}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  message: e.target.value,
-                })
-              }
-              className="
-                w-full
-                rounded-2xl
-                border
-                border-white/20
-                bg-white/5
-                p-6
-                outline-none
-                backdrop-blur-sm
-                transition-all
-                focus:border-[#C99A63]
-              "
-            />
+              <div>
 
-          </div>
+                <label htmlFor="subject" className={LABEL}>
+                  Sujet
+                </label>
 
-          {/* ================= BOUTON ================= */}
+                <input
+                  id="subject"
+                  name="subject"
+                  type="text"
+                  required
+                  value={form.subject}
+                  onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                  className={FIELD}
+                />
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="
-              inline-flex
-              items-center
-              gap-3
-              rounded-full
-              border
-              border-white/20
-              bg-white/10
-              px-10
-              py-5
-              uppercase
-              tracking-[0.30em]
-              backdrop-blur-xl
-              transition-all
-              duration-500
-              hover:border-[#C99A63]
-              hover:bg-[#C99A63]
-              hover:text-[#0E0B0B]
-              disabled:cursor-not-allowed
-              disabled:opacity-50
-            "
-          >
-            {loading ? "Envoi..." : "Envoyer"}
+              </div>
 
-            {!loading && <span>→</span>}
-          </button>
+              <div>
 
-          {/* ================= INFORMATION RGPD ================= */}
+                <label htmlFor="message" className={LABEL}>
+                  Message
+                </label>
 
-          <p
-            className="
-              max-w-2xl
-              text-sm
-              leading-6
-              text-[#8B8178]
-            "
-          >
-            Les informations transmises via ce formulaire sont utilisées
-            uniquement pour traiter et répondre à votre demande. Les champs
-            sont nécessaires au traitement de votre message. Pour en savoir
-            plus sur l'utilisation de vos données et sur vos droits, consultez
-            les{" "}
-            <Link
-              href="/mentions-legales"
-              className="
-                text-[#C99A63]
-                transition-colors
-                duration-300
-                hover:text-[#F5F1EB]
-              "
-            >
-              mentions légales
-            </Link>
-            .
-          </p>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={8}
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  className="
+                    w-full
+                    rounded-card
+                    border
+                    border-gold/20
+                    bg-transparent
+                    p-6
+                    text-text
+                    outline-none
+                    transition-colors
+                    duration-300
+                    focus:border-gold
+                  "
+                />
 
-          {/* ================= MESSAGE DE SUCCÈS ================= */}
+              </div>
 
-          {success && (
-            <div
-              className="
-                rounded-2xl
-                border
-                border-[#C99A63]/40
-                bg-[#C99A63]/10
-                p-6
-                text-center
-              "
-            >
+              <div className="pt-2">
 
-              <p
-                className="
-                  font-[family-name:var(--font-cormorant)]
-                  text-2xl
-                  italic
-                  text-[#F5F1EB]
-                "
-              >
-                Votre message est bien arrivé.
+                <Button type="submit" variant="primary" loading={loading}>
+                  {loading ? "Envoi en cours" : "Envoyer"}
+                </Button>
+
+              </div>
+
+              <p className="text-sm leading-7 text-muted/70">
+                Les informations transmises via ce formulaire sont utilisées
+                uniquement pour traiter et répondre à votre demande. Les champs
+                sont nécessaires au traitement de votre message. Pour en savoir
+                plus sur l&apos;utilisation de vos données et sur vos droits,
+                consultez les{" "}
+                <Link
+                  href="/mentions-legales"
+                  className="text-gold transition-colors duration-300 hover:text-text"
+                >
+                  mentions légales
+                </Link>
+                .
               </p>
 
-              <p className="mt-3 text-[#E6DED5]">
-                Merci d'avoir pris le temps de m'écrire.
-                <br />
-                Je vous répondrai dès que possible.
-              </p>
+              {/* Retours du formulaire, annoncés aux lecteurs d'écran. */}
 
-            </div>
-          )}
+              <div aria-live="polite">
 
-          {/* ================= MESSAGE D'ERREUR ================= */}
+                {success && (
+                  <div className="rounded-card border border-gold/35 p-8 text-center">
 
-          {error && (
-            <div
-              className="
-                rounded-2xl
-                border
-                border-red-500/40
-                bg-red-500/10
-                p-6
-                text-center
-                text-red-200
-              "
-            >
-              {error}
-            </div>
-          )}
+                    <p className="font-serif text-2xl italic text-text">
+                      Votre message est bien arrivé.
+                    </p>
 
-        </form>
+                    <p className="mt-4 leading-7 text-muted">
+                      Merci d&apos;avoir pris le temps de m&apos;écrire.
+                      <br />
+                      Je vous répondrai dès que possible.
+                    </p>
 
-        {/* ================= RETOUR ================= */}
+                  </div>
+                )}
 
-        <div className="mt-24 text-center">
+                {error && (
+                  <div className="rounded-card border border-text/25 p-8 text-center text-muted">
+                    {error}
+                  </div>
+                )}
 
-          <Link
-            href="/"
-            className="
-              text-[#C99A63]
-              transition
-              duration-300
-              hover:text-white
-            "
-          >
-            ← Retour à l'accueil
-          </Link>
+              </div>
 
-        </div>
+            </form>
 
-      </section>
+          </Container>
 
-    </main>
+        </section>
+
+      </main>
+
+      <Footer />
+    </>
   );
 }

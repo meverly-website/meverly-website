@@ -1,8 +1,14 @@
+import StarDivider from "@/components/StarDivider";
 import Link from "next/link";
+import Footer from "@/components/Footer";
+import StickyNav from "@/components/StickyNav";
 
 export default function MentionsLegales() {
   return (
-    <main className="min-h-screen bg-[#0E0B0B] px-6 py-24 text-[#F5F1EB]">
+    <>
+      <StickyNav />
+
+      <main className="min-h-screen px-6 pb-32 pt-40 text-[#F5F1EB]">
       <div className="mx-auto max-w-4xl">
 
         {/* Retour à l'accueil */}
@@ -16,17 +22,17 @@ export default function MentionsLegales() {
             text-sm
             uppercase
             tracking-[0.25em]
-            text-[#C99A63]
+            text-[#EFC17E]
             transition
-            hover:text-white
+            hover:text-[#F5F1EB]
           "
         >
-          ← Retour à l'accueil
+          ← Retour à l&apos;accueil
         </Link>
 
         {/* Titre */}
         <div className="mb-16">
-          <div className="mb-8 h-px w-24 bg-[#C99A63]/40" />
+          <StarDivider className="mb-8 justify-start" />
 
           <h1
             className="
@@ -53,7 +59,7 @@ export default function MentionsLegales() {
             Éditeur du site
           </h2>
 
-          <div className="space-y-5 text-lg leading-8 text-[#E6DED5]">
+          <div className="space-y-5 text-lg leading-8 text-[#CFC4B8]">
 
             <p>
               <strong className="text-[#F5F1EB]">
@@ -108,7 +114,7 @@ export default function MentionsLegales() {
               E-mail :{" "}
               <a
                 href="mailto:m.everlybooks@gmail.com"
-                className="text-[#C99A63] transition hover:text-white"
+                className="text-[#EFC17E] transition hover:text-[#F5F1EB]"
               >
                 m.everlybooks@gmail.com
               </a>
@@ -130,7 +136,7 @@ export default function MentionsLegales() {
             Hébergement
           </h2>
 
-          <div className="space-y-5 text-lg leading-8 text-[#E6DED5]">
+          <div className="space-y-5 text-lg leading-8 text-[#CFC4B8]">
 
             <p>
               Le site est hébergé par :
@@ -154,7 +160,7 @@ export default function MentionsLegales() {
                 href="https://vercel.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#C99A63] transition hover:text-white"
+                className="text-[#EFC17E] transition hover:text-[#F5F1EB]"
               >
                 vercel.com
               </a>
@@ -176,7 +182,7 @@ export default function MentionsLegales() {
             Données personnelles
           </h2>
 
-          <div className="space-y-6 text-lg leading-8 text-[#E6DED5]">
+          <div className="space-y-6 text-lg leading-8 text-[#CFC4B8]">
 
             <p>
               Le formulaire de contact présent sur ce site collecte les
@@ -194,7 +200,7 @@ export default function MentionsLegales() {
               E-mail :{" "}
               <a
                 href="mailto:m.everlybooks@gmail.com"
-                className="text-[#C99A63] transition hover:text-white"
+                className="text-[#EFC17E] transition hover:text-[#F5F1EB]"
               >
                 m.everlybooks@gmail.com
               </a>
@@ -264,7 +270,7 @@ export default function MentionsLegales() {
             <p>
               <a
                 href="mailto:m.everlybooks@gmail.com"
-                className="text-[#C99A63] transition hover:text-white"
+                className="text-[#EFC17E] transition hover:text-[#F5F1EB]"
               >
                 m.everlybooks@gmail.com
               </a>
@@ -292,7 +298,7 @@ export default function MentionsLegales() {
             Propriété intellectuelle
           </h2>
 
-          <div className="space-y-6 text-lg leading-8 text-[#E6DED5]">
+          <div className="space-y-6 text-lg leading-8 text-[#CFC4B8]">
 
             <p>
               L’ensemble des contenus présents sur ce site, notamment les
@@ -325,7 +331,7 @@ export default function MentionsLegales() {
             Contact
           </h2>
 
-          <div className="text-lg leading-8 text-[#E6DED5]">
+          <div className="text-lg leading-8 text-[#CFC4B8]">
             <p>
               Pour toute question concernant le site, les œuvres ou
               l’utilisation de vos données personnelles, vous pouvez
@@ -335,7 +341,7 @@ export default function MentionsLegales() {
             <p className="mt-5">
               <a
                 href="mailto:m.everlybooks@gmail.com"
-                className="text-[#C99A63] transition hover:text-white"
+                className="text-[#EFC17E] transition hover:text-[#F5F1EB]"
               >
                 m.everlybooks@gmail.com
               </a>
@@ -347,13 +353,16 @@ export default function MentionsLegales() {
         <div className="border-t border-white/10 pt-10">
           <Link
             href="/"
-            className="text-[#C99A63] transition hover:text-white"
+            className="text-[#EFC17E] transition hover:text-[#F5F1EB]"
           >
-            ← Retour à l'accueil
+            ← Retour à l&apos;accueil
           </Link>
         </div>
 
       </div>
     </main>
+
+      <Footer />
+    </>
   );
 }

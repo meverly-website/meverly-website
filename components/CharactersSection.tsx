@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Link from "next/link";
 import CharacterCard from "./CharacterCard";
 import Container from "./Container";
 import RevealOnScroll from "./RevealOnScroll";
@@ -16,7 +16,7 @@ export default function CharactersSection() {
   return (
     <section
       id="personnages"
-      className="relative scroll-mt-24 py-28 md:py-40"
+      className="relative scroll-mt-24 py-16 md:py-24 xl:py-40"
     >
 
       <Container>
@@ -27,16 +27,17 @@ export default function CharactersSection() {
 
         <div
           className="
-            mt-24
+            mt-14
             grid
-            gap-20
+            gap-14
+            md:mt-16
             md:grid-cols-2
-            md:gap-14
             lg:gap-20
+            xl:mt-24
           "
         >
 
-          <RevealOnScroll slow className="md:mt-24">
+          <RevealOnScroll slow className="md:mt-16 xl:mt-24">
 
             <CharacterCard
               name="Ezra"
@@ -62,11 +63,32 @@ export default function CharactersSection() {
 
         </div>
 
-        <RevealOnScroll className="mt-24 flex justify-center">
+        {/*
+          Pas de bouton : une ligne, dont les prénoms sont le lien. Niveau
+          tertiaire — texte seul et trait qui s'allonge au survol, comme les
+          autres liens du site, mais dans la typographie de la phrase plutôt
+          qu'en capitales d'interface. Le fil rouge vient s'y arrêter.
+        */}
 
-          <Button variant="ghost" href="/before-i-knew-you#characters">
-            Tous les personnages
-          </Button>
+        <RevealOnScroll className="mt-14 text-center md:mt-16 xl:mt-24">
+
+          <p className="font-serif text-xl font-light italic leading-relaxed text-muted sm:text-2xl">
+            Ils ne sont pas seuls :{" "}
+            <Link
+              href="/before-i-knew-you#characters"
+              aria-label="Noah, Gabriel, Liam, Adam et Félix — tous les personnages du roman"
+              className="group text-text transition-colors duration-500 hover:text-gold"
+            >
+              Noah, Gabriel, Liam,{" "}
+              <span className="whitespace-nowrap">
+                Adam et Félix
+                <span
+                  aria-hidden="true"
+                  className="btn-trail ml-3 align-middle"
+                />
+              </span>
+            </Link>
+          </p>
 
         </RevealOnScroll>
 

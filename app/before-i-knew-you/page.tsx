@@ -1,4 +1,6 @@
 import StickyNav from "@/components/StickyNav";
+import ThreadSection from "@/components/ThreadSection";
+import { BOOK_THREAD } from "@/lib/threads";
 import Hero from "./components/Hero";
 import Synopsis from "./components/Synopsis";
 import Themes from "./components/Themes";
@@ -10,6 +12,10 @@ import Footer from "@/components/Footer";
  * La page utilise la navigation du site plutôt qu'une barre propre : le §8 ne
  * définit qu'un seul système de navigation, et l'ancienne BookNavbar en
  * dupliquait un second, dans l'ancienne palette.
+ *
+ * Le fil de l'accueil se poursuit ici, section par section : il accompagne le
+ * synopsis, se resserre à hauteur des personnages et s'éteint après la
+ * citation. Une continuation, pas un second nouage.
  */
 
 export default function BeforeIKnewYouPage() {
@@ -17,25 +23,35 @@ export default function BeforeIKnewYouPage() {
     <>
       <StickyNav />
 
-      <main className="relative text-text">
+      <main className="text-text">
 
-        <Hero />
+        <ThreadSection thread={BOOK_THREAD.hero} wide>
+          <Hero />
+        </ThreadSection>
 
-        <section id="synopsis" className="scroll-mt-28">
-          <Synopsis />
-        </section>
+        <ThreadSection thread={BOOK_THREAD.synopsis} wide>
+          <section id="synopsis" className="scroll-mt-28">
+            <Synopsis />
+          </section>
+        </ThreadSection>
 
-        <section id="themes" className="scroll-mt-28">
-          <Themes />
-        </section>
+        <ThreadSection thread={BOOK_THREAD.themes} wide>
+          <section id="themes" className="scroll-mt-28">
+            <Themes />
+          </section>
+        </ThreadSection>
 
-        <section id="characters" className="scroll-mt-28">
-          <Characters />
-        </section>
+        <ThreadSection thread={BOOK_THREAD.personnages} wide>
+          <section id="characters" className="scroll-mt-28">
+            <Characters />
+          </section>
+        </ThreadSection>
 
-        <section id="quote" className="scroll-mt-28">
-          <Quote />
-        </section>
+        <ThreadSection thread={BOOK_THREAD.citation} wide>
+          <section id="quote" className="scroll-mt-28">
+            <Quote />
+          </section>
+        </ThreadSection>
 
       </main>
 

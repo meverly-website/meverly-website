@@ -29,16 +29,3 @@ export const COVER_SRC = "/cover.png";
 
 export const COVER_WIDTH = 1250;
 export const COVER_HEIGHT = 2000;
-
-/** Illustration détourée de la couverture : les deux mains et le fil. */
-export const HERO_ILLUSTRATION_SRC = "/hero-illustration.png";
-
-/**
- * Même illustration, mains atténuées et fil préservé, pour le fond du Hero.
- * L'écart est fait à la génération, pas en CSS : une baisse d'opacité
- * atténuerait le fil autant que les mains.
- */
-export const HERO_ATMOSPHERE_SRC = "/hero-atmosphere.png";
-
-export const HERO_ILLUSTRATION_WIDTH = 1114;
-export const HERO_ILLUSTRATION_HEIGHT = 774;

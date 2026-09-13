@@ -10,11 +10,11 @@ const NAV = [
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-gold/10 px-6 py-20 lg:px-10">
+    <footer className="relative border-t border-gold/10 px-6 py-14 md:py-16 lg:px-10 xl:py-20">
 
       <div className="mx-auto max-w-7xl">
 
-        <div className="flex flex-col gap-16 md:flex-row md:items-start md:justify-between">
+        <div className="flex flex-col gap-12 md:flex-row md:gap-16 md:items-start md:justify-between">
 
           {/* Signature */}
 
@@ -35,13 +35,18 @@ export default function Footer() {
 
           {/* Navigation */}
 
-          <nav className="flex flex-col gap-4">
+          {/*
+            Sur mobile, chaque lien est une cible de 36 px espacée de 8 :
+            assez pour le doigt, sans changer le rythme de la liste.
+          */}
+
+          <nav className="flex flex-col gap-2 md:gap-4">
 
             {NAV.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="btn-underline relative w-fit py-1 text-[0.7rem] uppercase tracking-[0.3em] text-muted transition-colors hover:text-gold"
+                className="btn-underline relative w-fit py-2.5 text-[0.7rem] md:py-1 uppercase tracking-[0.3em] text-muted transition-colors hover:text-gold"
               >
                 {item.label}
               </Link>
@@ -51,20 +56,20 @@ export default function Footer() {
 
           {/* Liens sortants */}
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2 md:gap-4">
 
             <a
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-underline relative w-fit py-1 text-[0.7rem] uppercase tracking-[0.3em] text-muted transition-colors hover:text-gold"
+              className="btn-underline relative w-fit py-2.5 text-[0.7rem] md:py-1 uppercase tracking-[0.3em] text-muted transition-colors hover:text-gold"
             >
               Instagram
             </a>
 
             <Link
               href="/mentions-legales"
-              className="btn-underline relative w-fit py-1 text-[0.7rem] uppercase tracking-[0.3em] text-muted transition-colors hover:text-gold"
+              className="btn-underline relative w-fit py-2.5 text-[0.7rem] md:py-1 uppercase tracking-[0.3em] text-muted transition-colors hover:text-gold"
             >
               Mentions légales
             </Link>
@@ -73,7 +78,7 @@ export default function Footer() {
 
         </div>
 
-        <div className="mt-20 border-t border-gold/10 pt-8">
+        <div className="mt-14 border-t border-gold/10 pt-8 md:mt-16 xl:mt-20">
 
           <p className="text-xs tracking-[0.15em] text-muted/60">
             © {new Date().getFullYear()} Meverly — Tous droits réservés.

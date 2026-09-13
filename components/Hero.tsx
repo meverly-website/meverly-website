@@ -1,18 +1,16 @@
-import Image from "next/image";
 import StarDivider from "./StarDivider";
-import {
-  HERO_ATMOSPHERE_SRC,
-  HERO_ILLUSTRATION_HEIGHT,
-  HERO_ILLUSTRATION_WIDTH,
-} from "@/lib/site";
 
 /**
  * Le premier écran accueille dans l'univers de l'autrice.
  *
- * L'illustration de la couverture n'est plus le sujet : elle passe derrière le
- * texte, atténuée et fondue dans le noir. Ses mains se devinent, son fil rouge
- * reste l'élément le plus lumineux — c'est lui qui amorce le scroll, et
- * ThreadLine le reprend pour traverser toute la page.
+ * Le titre, très espacé, se resserre un peu sous 370 px de large : à taille
+ * fixe, il touchait les deux bords d'un écran de 320.
+ *
+ * Aucune image : la couverture apparaît quelques centaines de pixels plus
+ * bas, et les mains de l'illustration sont propres au tome 1. L'écran repose
+ * sur ce qui est commun aux trois tomes — le fil et les étoiles. Le fil y
+ * entre par la gauche, tracé par ThreadSection, et traverse ensuite toute la
+ * page.
  */
 
 export default function Hero() {
@@ -22,7 +20,8 @@ export default function Hero() {
         relative
         flex
         min-h-[66svh]
-        items-center
+        items-start
+        md:items-center
         justify-center
         overflow-hidden
         px-6
@@ -31,26 +30,7 @@ export default function Hero() {
       "
     >
 
-      {/* Atmosphère */}
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-center justify-center"
-      >
-
-        <Image
-          src={HERO_ATMOSPHERE_SRC}
-          alt=""
-          width={HERO_ILLUSTRATION_WIDTH}
-          height={HERO_ILLUSTRATION_HEIGHT}
-          priority
-          sizes="(max-width: 860px) 96vw, 860px"
-          className="hero-atmosphere w-[min(96vw,860px)] max-w-none opacity-45"
-        />
-
-      </div>
-
-      {/* Voile : garantit le contraste du texte par-dessus l'illustration. */}
+      {/* Voile : assombrit le fond derrière le texte, sans contour. */}
 
       <div
         aria-hidden="true"
@@ -69,7 +49,7 @@ export default function Hero() {
         <h1
           className="
             font-serif
-            text-5xl
+            text-[clamp(2.25rem,13vw,3rem)]
             font-light
             leading-none
             tracking-[0.3em]

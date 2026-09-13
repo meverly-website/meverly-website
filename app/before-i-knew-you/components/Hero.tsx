@@ -12,7 +12,7 @@ import StarDivider from "@/components/StarDivider";
 
 export default function Hero() {
   return (
-    <section className="px-6 pb-24 pt-40 md:pb-32 md:pt-52">
+    <section className="px-6 pb-16 pt-32 md:pb-20 md:pt-40 xl:pb-32 xl:pt-52">
 
       <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
 
@@ -45,7 +45,7 @@ export default function Hero() {
           Tu n&apos;as pas besoin d&apos;être fort tout le temps.
         </p>
 
-        <CoverShowcase href="#synopsis" className="mt-20 flex justify-center" />
+        <CoverShowcase href="#synopsis" eager className="mt-14 flex justify-center md:mt-16 xl:mt-20" />
 
       </div>
 

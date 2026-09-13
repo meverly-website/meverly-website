@@ -7,7 +7,7 @@ import RevealOnScroll from "./RevealOnScroll";
 
 export default function Breath() {
   return (
-    <section className="relative px-6 py-24 md:py-28">
+    <section className="relative px-6 py-16 md:py-20 xl:py-28">
 
       <RevealOnScroll className="mx-auto max-w-3xl text-center">
 

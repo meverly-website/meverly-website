@@ -1,4 +1,11 @@
 import StarDivider from "@/components/StarDivider";
+
+/*
+ * Sur téléphone, la taille des mots suit la largeur d'écran : à taille fixe,
+ * « Reconstruction » débordait de sa colonne et chevauchait « Santé mentale »
+ * sur un écran de 320.
+ */
+
 export default function Themes() {
   const themes = [
     "Reconstruction",
@@ -10,7 +17,7 @@ export default function Themes() {
   ];
 
   return (
-    <section className="px-6 py-24 md:py-36">
+    <section className="px-6 py-16 md:py-24 xl:py-36">
 
       <div className="mx-auto max-w-6xl">
 
@@ -24,11 +31,13 @@ export default function Themes() {
           className="
             grid
             grid-cols-2
-            gap-y-14
-            gap-x-8
+            gap-y-10
+            gap-x-6
+            sm:gap-x-8
 
             md:grid-cols-3
-            md:gap-y-20
+            md:gap-y-14
+            xl:gap-y-20
           "
         >
 
@@ -43,7 +52,7 @@ export default function Themes() {
                 className="
                   font-[family-name:var(--font-cormorant)]
 
-                  text-3xl
+                  text-[clamp(1.25rem,6.4vw,1.875rem)]
                   sm:text-4xl
                   md:text-5xl
 

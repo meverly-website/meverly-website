@@ -1,7 +1,7 @@
 import StarDivider from "@/components/StarDivider";
 export default function Quote() {
   return (
-    <section className="px-6 py-28 md:py-40">
+    <section className="px-6 py-20 md:py-28 xl:py-40">
 
       <div className="mx-auto max-w-5xl">
 

@@ -1,37 +1,62 @@
 /**
- * Trajets du fil rouge, page par page.
+ * Trajets du fil rouge, section par section.
  *
- * Chaque trajet est une suite de points d'ancrage [x, y] : x en pourcentage de
- * la largeur de la page, y en pour-mille de sa hauteur. Le tracé est lissé par
- * une spline de Catmull-Rom, ce qui garantit des tangentes continues : on
- * déplace un point, la courbe suit sans cassure.
+ * Chaque section de page porte son propre morceau de fil, étiré à sa hauteur.
+ * Les morceaux se raccordent aux frontières : le point de sortie d'une section
+ * a le même x que le point d'entrée de la suivante, et le fil y passe à la
+ * verticale, pour que la jonction soit invisible.
  *
- * Les points sont calés sur la géométrie réelle relevée dans le navigateur
- * (sections, blocs de texte, cartes). Un changement de mise en page qui
- * modifie la hauteur d'une section impose de les revérifier.
+ * Coordonnées d'un point [x, y] :
+ *   y — en % de la hauteur de la section ;
+ *   x — en % de la largeur de la « boîte » du fil : l'écran en mobile et en
+ *       tablette, la colonne de contenu (1280 px au plus) sur ordinateur.
  *
- * `bands` règle la visibilité le long de la page (arrêts d'un dégradé
- * vertical) : naissance du fil, arrêts, réapparitions, extinction.
+ * Ancrer y à la section plutôt qu'à la page, et x à la colonne sur
+ * ordinateur, rend le fil indépendant de la hauteur d'écran (le Hero en
+ * dépend) et de la largeur au-delà de 1280 px : un changement de texte ou
+ * d'écran ne décale plus rien ailleurs que dans la section concernée.
+ *
+ * Trois variantes, choisies en CSS :
+ *   mobile  < 768 px · tablet 768–1279 px · desktop ≥ 1280 px
+ *
+ * En mobile et en tablette, le fil longe les bords de l'écran (1,8 % et 1 %
+ * de la largeur) : les marges n'y font que 24 px, et ce sont les seules
+ * positions qui restent hors du texte sur toute la plage de largeurs. Il ne
+ * s'en écarte que là où la page lui laisse de la place : le nœud, au-dessus
+ * de la citation, et l'extinction, sous la signature.
+ *
+ * Les points se suivent à intervalles comparables (un écart au plus double du
+ * suivant) : un point très proche d'un voisin lointain ferait boucler la
+ * courbe.
+ *
+ * `bands` règle la visibilité le long de la section (arrêts d'un dégradé
+ * vertical, en % de la section) : naissance, arrêts, extinction.
  */
 
 export type ThreadPoint = readonly [x: number, y: number];
 
-export type ThreadVariant = {
+export type Segment = {
   points: readonly ThreadPoint[];
-  bands: string;
+  bands?: string;
 };
 
-export type Thread = {
-  desktop: ThreadVariant;
-  mobile: ThreadVariant;
+export type SectionThread = {
+  mobile?: Segment;
+  tablet?: Segment;
+  desktop?: Segment;
 };
 
-/** Catmull-Rom → Bézier cubiques, dans le viewBox 100 × 1000 de ThreadLine. */
-export function threadPath(points: readonly ThreadPoint[], tension = 6) {
+export type Bezier = readonly [
+  x0: number, y0: number,
+  c1x: number, c1y: number,
+  c2x: number, c2y: number,
+  x1: number, y1: number,
+];
+
+/** Catmull-Rom → Bézier cubiques : tangentes continues entre les points. */
+export function threadCurves(points: readonly ThreadPoint[], tension = 6): Bezier[] {
   const p = [points[0], ...points, points[points.length - 1]];
-  const r = (n: number) => Math.round(n * 10) / 10;
-
-  let d = `M ${points[0][0]},${points[0][1]}`;
+  const curves: Bezier[] = [];
 
   for (let i = 1; i < p.length - 2; i++) {
     const [x0, y0] = p[i - 1];
@@ -39,193 +64,286 @@ export function threadPath(points: readonly ThreadPoint[], tension = 6) {
     const [x2, y2] = p[i + 1];
     const [x3, y3] = p[i + 2];
 
-    d +=
-      ` C ${r(x1 + (x2 - x0) / tension)},${r(y1 + (y2 - y0) / tension)}` +
-      ` ${r(x2 - (x3 - x1) / tension)},${r(y2 - (y3 - y1) / tension)}` +
-      ` ${r(x2)},${r(y2)}`;
+    curves.push([
+      x1, y1,
+      x1 + (x2 - x0) / tension, y1 + (y2 - y0) / tension,
+      x2 - (x3 - x1) / tension, y2 - (y3 - y1) / tension,
+      x2, y2,
+    ]);
   }
 
-  return d;
+  return curves;
 }
 
-/* ==================================================================
-   ACCUEIL — relevé à 1440 × 6291 et 390 × 6657
-================================================================== */
+/** Chemin SVG, dans le viewBox 100 × 100 du segment. */
+export function threadPath(points: readonly ThreadPoint[]) {
+  const r = (n: number) => Math.round(n * 100) / 100;
+  const curves = threadCurves(points);
 
-/*
- * Le nœud est le même dessin sur toute la vie du site, simplement recalé :
- * une boucle, un seul croisement. Il n'existe que sur l'accueil.
- */
-const HOME_KNOT_DESKTOP: ThreadPoint[] = [
-  [59, 514.8], [71, 522.8], [76, 532.9], [65, 540.9],
-  [61, 530.8], [66, 522.8], [75, 536.9], [83, 551],
-];
+  return curves.reduce(
+    (d, [, , c1x, c1y, c2x, c2y, x1, y1]) =>
+      `${d} C ${r(c1x)},${r(c1y)} ${r(c2x)},${r(c2y)} ${r(x1)},${r(y1)}`,
+    `M ${r(points[0][0])},${r(points[0][1])}`
+  );
+}
 
-const HOME_KNOT_MOBILE: ThreadPoint[] = [
-  [45, 574.5], [64, 580.6], [72.5, 588.7], [55, 594.8],
-  [48, 586.7], [56, 580.6], [71, 591.8], [84, 602.9],
-];
+/* Les trajets sont définis plus bas, page par page. */
 
-/* Desktop, à partir de la respiration. */
-const HOME_DESKTOP_BODY: ThreadPoint[] = [
-  [22, 106.1],
-  [17, 120.1],   // respiration : le texte ne descend pas sous 23 %
-  [17, 136.1],
-  [24, 152.1],
-  [42, 170.1],   // bande libre entre la respiration et le roman
-  [57, 186.2],
-  [63.5, 205.2], // roman : gouttière entre le texte (≤ 60 %) et la couverture (≥ 67 %)
-  [63.5, 240.2],
-  [63, 275.3],
-  [64, 300.3],
-  [66, 330.3],   // contourne l'étoile, le sur-titre et « Eux deux » (38–62 %)
-  [66, 344.3],
-  [58, 356.4],
-  [50.5, 368.4], // gouttière entre les deux fiches (47–53 %)
-  [50, 420.3],
-  [50, 470.4],
-  [50, 487.5],
-  [50, 493.1],   // ── s'arrête juste au-dessus de la ligne des prénoms (495,6 ‰)
-  [56, 505.7],     //    (tronçon masqué)
-  ...HOME_KNOT_DESKTOP, // ── réapparaît et se noue, une seule fois du site
-  [88, 564.1],
-  [89, 581.7],     // marge droite de la citation (texte ≤ 81 %)
-  [89, 613.3],
-  [88, 644.5],
-  [87, 697.9],     // univers musical
-  [89, 753.3],
-  [88, 793.6],     // l'onde s'arrête à 81 %
-  [82, 853.6],   // mot de l'autrice, centré : la phrase occupe 28–72 %
-  [78, 878.9],   // passe à droite de la première ligne…
-  [77, 891],     // …et de la seconde
-  [72, 904],     // longe le filet et la signature par la droite
-  [64, 914.2],   // passe sous la signature…
-  [56, 920.2],
-  [50, 924.2],   // …et s'y éteint, au centre
-];
-
-/* Mobile, à partir de la respiration. Aucune gouttière : le fil suit un bord. */
-const HOME_MOBILE_BODY: ThreadPoint[] = [
-  [2.5, 99.2],   // bord gauche, le long de la respiration
-  [2.5, 141.6],
-  [2.5, 202.3],
-  [2.5, 263],
-  [2.5, 323.7],
-  [2.5, 384.4],
-  [2.5, 465.3],
-  [2.5, 526],
-  [3, 546.1],
-  [9, 554.2],      // ── vient s'arrêter au début de la ligne des prénoms (557,5 ‰)
-  [22, 562.3],     //    (tronçon masqué)
-  [34, 568.4],
-  ...HOME_KNOT_MOBILE, // ── se noue, et bascule vers le bord droit
-  [92, 613.1],
-  [96, 624.2],
-  [96, 649.6],
-  [95, 710.5],
-  [97, 771.4],
-  [96, 812.1],
-  [96, 842.4],   // mot de l'autrice centré, pleine largeur : le fil tient le bord
-  [96, 853.8],
-  [95, 864.1],
-  [90, 874.1],   // passe à droite de la signature…
-  [78, 879.2],
-  [64, 882.2],
-  [54, 884.3],   // …et s'éteint dessous
-];
-
-/**
- * Le Hero n'a plus d'image : le fil y entre par la gauche, dessiné par le
- * site comme partout ailleurs. Il repose sur le fil et les étoiles, communs
- * aux trois tomes — rien à refaire au premier écran quand le tome 2 sortira.
- */
-export const HOME_THREAD: Thread = {
-  desktop: {
-    points: [[-3, 28], [8, 46.1], [18, 66.1], [23, 86.2], ...HOME_DESKTOP_BODY],
-    bands: `
-      transparent 0%, transparent 2.5%, #000 5.1%,
-      #000 48.7%, transparent 49.4%,
-      transparent 51%, #000 51.5%,
-      #000 90.4%, transparent 92.5%`,
+export const HOME_THREAD = {
+  hero: {
+    mobile: {
+      points: [
+        [-3, 43.62], [1.8, 63.1], [1.8, 98.2], [1.8, 100],
+      ],
+      bands: "transparent 0%, transparent 37.05%, #000 60.95%, #000 100%",
+    },
+    tablet: {
+      points: [
+        [-3, 43.62], [1, 63.1], [1, 98.2], [1, 100],
+      ],
+      bands: "transparent 0%, transparent 37.05%, #000 60.95%, #000 100%",
+    },
+    desktop: {
+      points: [
+        [-9.62, 29.65], [2.75, 48.82], [14, 70.01], [19.62, 91.29],
+        [19.88, 98.32], [19.88, 100],
+      ],
+      bands: "transparent 0%, transparent 26.48%, #000 54.01%, #000 100%",
+    },
   },
-  mobile: {
-    points: [[-3, 36.5], [2.5, 52.8], [2.5, 71.1], ...HOME_MOBILE_BODY],
-    bands: `
-      transparent 0%, transparent 3.1%, #000 5.1%,
-      #000 54.7%, transparent 55.3%,
-      transparent 57%, #000 57.5%,
-      #000 87.2%, transparent 88.3%`,
+  breath: {
+    mobile: {
+      points: [
+        [1.8, 0], [1.8, 3.14], [1.8, 96.86], [1.8, 100],
+      ],
+    },
+    tablet: {
+      points: [
+        [1, 0], [1, 3.14], [1, 96.86], [1, 100],
+      ],
+    },
+    desktop: {
+      points: [
+        [19.88, 0], [19.88, 2.35], [18.5, 17.25], [12.88, 37.92],
+        [12.88, 61.55], [20.75, 85.18], [29.66, 97.65], [31.57, 100],
+      ],
+    },
   },
-};
-
-/* ==================================================================
-   PAGE DU ROMAN — relevé à 1440 × 6402 et 390 × 7190
-
-   Une continuation, jamais un second nouage : aucune boucle, aucun
-   croisement. Le nœud unique du site reste sur l'accueil.
-================================================================== */
-
-export const BOOK_THREAD: Thread = {
-  desktop: {
-    points: [
-      [102, 40],     // entre par la droite, sous la navigation
-      [90, 60],
-      [83, 90],      // à droite du titre (≤ 68 %)
-      [82, 130],     // à droite de la couverture (≤ 65 %, filet compris)
-      [84, 180],
-      [86, 215],
-      [87, 250],     // accompagne la lecture du synopsis (texte ≤ 79 %)
-      [87, 300],
-      [87, 345],
-      [90, 375],
-      [94, 400],     // thèmes : les mots ne dépassent pas 88 %
-      [95, 440],
-      [96.5, 475],
-      [97, 530],     // Ezra et Sasha : fiches pleine largeur (≤ 94 %)
-      [97, 600],
-      [97, 680],
-      [97, 720],     // longe Liam, dernière fiche de la première rangée
-      [96, 750],
-      [88, 765],     // ── se resserre dans la place vide de la grille,
-      [78, 780],     //    tout près de Félix (≤ 64 %)
-      [74, 796],
-      [78, 812],
-      [86, 840],
-      [90, 868],     // marge droite de la citation (texte ≤ 86 %)
-      [89.5, 890],
-      [82, 905],     // passe la ligne « Before I Knew You »…
-      [70, 913],
-      [62, 918],     // …et s'éteint juste après
-    ],
-    bands: `
-      transparent 0%, transparent 3.5%, #000 6.5%,
-      #000 89.5%, transparent 92%`,
+  roman: {
+    mobile: {
+      points: [
+        [1.8, 0], [1.8, 0.74], [1.8, 99.26], [1.8, 100],
+      ],
+    },
+    tablet: {
+      points: [
+        [1, 0], [1, 0.74], [1, 99.26], [1, 100],
+      ],
+    },
+    desktop: {
+      points: [
+        [31.57, 0], [33.51, 1.24], [41, 6.19], [57.88, 18.71],
+        [65.19, 33.49], [65.19, 60.7], [64.63, 88], [65.07, 98.76],
+        [65.16, 100],
+      ],
+    },
   },
-  mobile: {
-    points: [
-      [96, 25],      // tout est pleine largeur : le fil suit le bord droit
-      [96, 60],
-      [95, 120],
-      [97, 180],     // synopsis
-      [96, 240],
-      [95, 300],
-      [97, 360],     // thèmes
-      [96, 420],
-      [97, 480],     // les sept fiches, empilées
-      [96, 540],
-      [97, 600],
-      [96, 660],
-      [97, 720],
-      [96, 780],
-      [96, 830],
-      [96, 860],     // citation
-      [92, 871],
-      [82, 882],     // passe sous la citation…
-      [72, 888],
-      [66, 891],     // …et s'éteint à côté de « Before I Knew You »
-    ],
-    bands: `
-      transparent 0%, transparent 1.5%, #000 4%,
-      #000 88.2%, transparent 89.4%`,
+  personnages: {
+    mobile: {
+      points: [
+        [1.8, 0], [1.8, 0.61], [1.8, 45], [1.8, 70], [1.8, 82],
+        [1.8, 88.6], [9, 90.6], [22, 92.9], [36, 95.5], [50, 98],
+        [60, 99.4], [60, 100],
+      ],
+      bands: "#000 0%, #000 85.2%, transparent 88.4%, transparent 100%",
+    },
+    tablet: {
+      points: [
+        [1, 0], [1, 0.61], [1, 45], [1, 70], [1, 82], [1, 88.6],
+        [9, 90.6], [22, 92.9], [36, 95.5], [50, 98], [60, 99.4],
+        [60, 100],
+      ],
+      bands: "#000 0%, #000 85.2%, transparent 88.4%, transparent 100%",
+    },
+    desktop: {
+      points: [
+        [65.16, 0], [65.25, 0.68], [63, 3], [54, 6.5], [42, 10],
+        [34.5, 14.5], [33.5, 20.5], [35, 26.5], [41, 31], [48.5, 34.5],
+        [50, 38], [50, 55.71], [50, 77.26], [50, 82], [50, 87.02],
+        [56.75, 92.44], [58, 99.32], [58, 100],
+      ],
+      bands: "#000 0%, #000 82.5%, transparent 85.4%, transparent 94.29%, #000 96.44%, #000 100%",
+    },
   },
-};
+  citation: {
+    mobile: {
+      points: [
+        [60, 0], [60, 1], [62.5, 3.5], [72.5, 8.86], [55, 15.18],
+        [48, 6.79], [71, 12.07], [84, 23.56], [92, 34.12], [98.2, 45.61],
+        [98.2, 98.44], [98.2, 100],
+      ],
+      bands: "transparent 0%, transparent 1%, #000 5.5%, #000 100%",
+    },
+    tablet: {
+      points: [
+        [60, 0], [60, 1], [62.5, 3.5], [74, 8.5], [78.5, 14.5],
+        [69, 19.5], [65, 13.5], [70, 8.5], [78, 16.5], [86, 24],
+        [94, 31], [99, 40], [99, 50], [99, 70], [99, 98.44], [99, 100],
+      ],
+      bands: "transparent 0%, transparent 1%, #000 5.5%, #000 100%",
+    },
+    desktop: {
+      points: [
+        [58, 0], [58, 1.04], [60.13, 3.38], [73.63, 8.59],
+        [79.25, 15.16], [66.88, 20.37], [62.38, 13.8], [68, 8.59],
+        [78.13, 17.77], [87.13, 26.95], [93.88, 38.14], [93.88, 58.72],
+        [92.75, 79.04], [91.84, 98.96], [91.8, 100],
+      ],
+    },
+  },
+  musique: {
+    mobile: {
+      points: [
+        [98.2, 0], [98.2, 1.11], [98.2, 98.89], [98.2, 100],
+      ],
+    },
+    tablet: {
+      points: [
+        [99, 0], [99, 1.11], [99, 98.89], [99, 100],
+      ],
+    },
+    desktop: {
+      points: [
+        [91.8, 0], [91.77, 0.93], [91.63, 12.45], [93.88, 44.96],
+        [92.75, 68.61], [87.05, 99.07], [86.84, 100],
+      ],
+    },
+  },
+  auteur: {
+    mobile: {
+      points: [
+        [98.2, 0], [98.2, 2.03], [98.2, 70.25], [90, 83.75], [78, 90.64],
+        [64, 94.69], [54, 97.52],
+      ],
+      bands: "#000 0%, #000 80.91%, transparent 95.77%, transparent 100%",
+    },
+    tablet: {
+      points: [
+        [99, 0], [99, 2.03], [99, 70.25], [90, 83.75], [78, 90.64],
+        [64, 94.69], [54, 97.52],
+      ],
+      bands: "#000 0%, #000 80.91%, transparent 95.77%, transparent 100%",
+    },
+    desktop: {
+      points: [
+        [86.84, 0], [86.64, 1.9], [86, 7.81], [81.5, 38.13],
+        [80.38, 52.62], [74.75, 68.2], [65.75, 80.43], [56.75, 87.61],
+        [50, 92.41],
+      ],
+      bands: "#000 0%, #000 68.2%, transparent 93.37%, transparent 100%",
+    },
+  },
+} satisfies Record<string, SectionThread>;
+
+export const BOOK_THREAD = {
+  hero: {
+    mobile: {
+      points: [
+        [98.2, 18.27], [98.2, 43.84], [98.2, 98.98], [98.2, 100],
+      ],
+      bands: "transparent 0%, transparent 10.96%, #000 29.23%, #000 100%",
+    },
+    tablet: {
+      points: [
+        [99, 18.27], [99, 43.84], [99, 98.98], [99, 100],
+      ],
+      bands: "transparent 0%, transparent 10.96%, #000 29.23%, #000 100%",
+    },
+    desktop: {
+      points: [
+        [108.5, 18.94], [95, 28.41], [87.13, 42.61], [86, 61.55],
+        [88.25, 85.22], [90.3, 99.26], [90.3, 100],
+      ],
+      bands: "transparent 0%, transparent 16.57%, #000 30.77%, #000 100%",
+    },
+  },
+  synopsis: {
+    mobile: {
+      points: [
+        [98.2, 0], [98.2, 0.78], [98.2, 99.22], [98.2, 100],
+      ],
+    },
+    tablet: {
+      points: [
+        [99, 0], [99, 0.78], [99, 99.22], [99, 100],
+      ],
+    },
+    desktop: {
+      points: [
+        [90.3, 0], [90.3, 1.01], [90.5, 2.46], [91.63, 25.23],
+        [91.63, 57.76], [91.63, 87.04], [93.31, 98.99], [93.52, 100],
+      ],
+    },
+  },
+  themes: {
+    mobile: {
+      points: [
+        [98.2, 0], [98.2, 1.64], [98.2, 98.36], [98.2, 100],
+      ],
+    },
+    tablet: {
+      points: [
+        [99, 0], [99, 1.64], [99, 98.36], [99, 100],
+      ],
+    },
+    desktop: {
+      points: [
+        [93.52, 0], [93.75, 1.76], [95, 11.38], [99.5, 39.61],
+        [100.63, 84.79], [101.22, 98.24], [101.32, 100],
+      ],
+    },
+  },
+  personnages: {
+    mobile: {
+      points: [
+        [98.2, 0], [98.2, 0.34], [98.2, 99.66], [98.2, 100],
+      ],
+    },
+    tablet: {
+      points: [
+        [99, 0], [99, 0.34], [99, 99.66], [99, 100],
+      ],
+    },
+    desktop: {
+      points: [
+        [101.32, 0], [101.41, 0.41], [102.31, 5.72], [102.88, 20.32],
+        [102.88, 38.91], [102.88, 60.15], [102.88, 70.77],
+        [101.75, 78.74], [92.75, 82.72], [81.5, 86.7], [77, 90.95],
+        [81.5, 95.2], [87.11, 99.59], [87.62, 100],
+      ],
+    },
+  },
+  citation: {
+    mobile: {
+      points: [
+        [98.2, 0], [98.2, 1.69], [98.2, 30], [98.2, 45], [98.2, 58.01],
+        [95, 72], [88.5, 84], [80, 89.5], [70, 93.5], [64, 96],
+      ],
+      bands: "#000 0%, #000 84.73%, transparent 99.3%, transparent 100%",
+    },
+    tablet: {
+      points: [
+        [99, 0], [99, 1.69], [99, 30], [99, 45], [99, 58.01], [99, 72],
+        [88.5, 84], [80, 89.5], [70, 93.5], [64, 96],
+      ],
+      bands: "#000 0%, #000 84.73%, transparent 99.3%, transparent 100%",
+    },
+    desktop: {
+      points: [
+        [87.62, 0], [88.12, 1.53], [90.5, 9.74], [95, 37.25],
+        [94.44, 58.86], [86, 73.59], [72.5, 81.45], [63.5, 86.37],
+      ],
+      bands: "#000 0%, #000 63.77%, transparent 88.33%, transparent 100%",
+    },
+  },
+} satisfies Record<string, SectionThread>;

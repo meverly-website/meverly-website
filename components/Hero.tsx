@@ -6,7 +6,7 @@ import StarDivider from "./StarDivider";
  * Aucune image : la couverture apparaît quelques centaines de pixels plus
  * bas, et les mains de l'illustration sont propres au tome 1. L'écran repose
  * sur ce qui est commun aux trois tomes — le fil et les étoiles. Le fil y
- * entre par la gauche, tracé par ThreadLine, et traverse ensuite toute la
+ * entre par la gauche, tracé par ThreadSection, et traverse ensuite toute la
  * page.
  */
 

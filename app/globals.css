@@ -152,8 +152,7 @@ body {
 @keyframes thread-reveal {
 
   from {
-    /* Le premier écran est déjà révélé : le fil y entre dès l'arrivée. */
-    --thread-reveal: 15%;
+    --thread-reveal: 0%;
   }
 
   to {
@@ -167,8 +166,8 @@ body {
  * filtre posé sur le tracé donnerait une lueur ovale.
  *
  * Deux calques de masque, combinés par intersection :
- *   1. --thread-bands, propre à chaque page et à chaque variante (voir
- *      lib/threads.ts) : naissance, arrêts, réapparitions, extinction ;
+ *   1. --thread-bands, propre à chaque segment (voir lib/threads.ts) :
+ *      naissance, arrêts, extinction ;
  *   2. la révélation progressive au scroll.
  */
 
@@ -186,14 +185,20 @@ body {
   mask-composite: intersect;
 }
 
-@supports (animation-timeline: scroll()) {
+/*
+ * Chaque segment se révèle pendant que sa section franchit le bas de l'écran
+ * (entry-crossing : de son bord haut à son bord bas). Le front du tracé suit
+ * donc le bas de l'écran, section après section, sans calcul de page.
+ */
+
+@supports (animation-timeline: view()) {
 
   @media (prefers-reduced-motion: no-preference) {
 
     .thread-svg {
-      animation: thread-reveal linear forwards;
-      animation-timeline: scroll(root block);
-      animation-range: 0% 92%;
+      animation: thread-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry-crossing 0% entry-crossing 100%;
     }
 
   }

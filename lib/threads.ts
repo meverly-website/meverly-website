@@ -66,7 +66,7 @@ const HOME_KNOT_MOBILE: ThreadPoint[] = [
   [48, 578], [56, 572], [71, 583], [84, 594],
 ];
 
-/* Suite commune aux deux cadrages du Hero, desktop, à partir de la respiration. */
+/* Desktop, à partir de la respiration. */
 const HOME_DESKTOP_BODY: ThreadPoint[] = [
   [22, 105.3],
   [17, 119.2],   // respiration : le texte ne descend pas sous 23 %
@@ -104,7 +104,7 @@ const HOME_DESKTOP_BODY: ThreadPoint[] = [
   [32, 926],     // …et s'y éteint
 ];
 
-/* Suite commune, mobile. Aucune gouttière : le fil suit un bord. */
+/* Mobile, à partir de la respiration. Aucune gouttière : le fil suit un bord. */
 const HOME_MOBILE_BODY: ThreadPoint[] = [
   [2.5, 97.7],   // bord gauche, le long de la respiration
   [2.5, 139.5],
@@ -134,33 +134,11 @@ const HOME_MOBILE_BODY: ThreadPoint[] = [
 ];
 
 /**
- * Cadrage A — le fragment : le fil du Hero est celui de l'illustration ;
- * ThreadLine le reprend là où il sort du cadre, en bas du fragment.
+ * Le Hero n'a plus d'image : le fil y entre par la gauche, dessiné par le
+ * site comme partout ailleurs. Il repose sur le fil et les étoiles, communs
+ * aux trois tomes — rien à refaire au premier écran quand le tome 2 sortira.
  */
-export const HOME_THREAD_FRAGMENT: Thread = {
-  desktop: {
-    points: [[32, 85.5], [30.5, 94.4], ...HOME_DESKTOP_BODY],
-    bands: `
-      transparent 0%, transparent 8.5%, #000 9.3%,
-      #000 48.3%, transparent 49%,
-      transparent 50.6%, #000 51.1%,
-      #000 88%, transparent 92.9%`,
-  },
-  mobile: {
-    points: [[39, 79.7], [36, 83.7], [20, 87.7], [6, 91.7], ...HOME_MOBILE_BODY],
-    bands: `
-      transparent 0%, transparent 7.9%, #000 8.4%,
-      #000 53.9%, transparent 54.5%,
-      transparent 56.2%, #000 56.6%,
-      #000 87.4%, transparent 88.5%`,
-  },
-};
-
-/**
- * Cadrage B — le fil seul : plus aucune image dans le Hero. Le fil y entre
- * par la gauche, dessiné par le site comme partout ailleurs.
- */
-export const HOME_THREAD_FIL: Thread = {
+export const HOME_THREAD: Thread = {
   desktop: {
     points: [[-3, 27.8], [8, 45.7], [18, 65.6], [23, 85.5], ...HOME_DESKTOP_BODY],
     bands: `

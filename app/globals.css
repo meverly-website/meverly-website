@@ -74,34 +74,6 @@ body {
 }
 
 /* ==================================================
-   FRAGMENT DU HERO
-
-   Taillé dans la variante atmosphère (mains atténuées, fil préservé), puis
-   fondu vers le noir sur ses quatre bords : la main émerge de l'ombre au
-   lieu d'être découpée, et le fil s'efface en bas à droite, là où ThreadLine
-   le reprend.
-================================================== */
-
-.hero-fragment {
-  mask-image:
-    linear-gradient(
-      to right,
-      transparent 0%,
-      #000 38%,
-      #000 82%,
-      transparent 100%
-    ),
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      #000 32%,
-      #000 72%,
-      transparent 100%
-    );
-  mask-composite: intersect;
-}
-
-/* ==================================================
    RÉVÉLATION AU SCROLL
    Piloté par la progression de l'élément dans le viewport,
    en CSS natif. Sans support : contenu affiché, sans animation.
@@ -180,7 +152,7 @@ body {
 @keyframes thread-reveal {
 
   from {
-    /* Le premier écran est déjà révélé : le fil sort de l'illustration. */
+    /* Le premier écran est déjà révélé : le fil y entre dès l'arrivée. */
     --thread-reveal: 15%;
   }
 

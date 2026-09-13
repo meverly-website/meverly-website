@@ -8,8 +8,7 @@ import PullQuote from "@/components/PullQuote";
 import MusicSection from "@/components/MusicSection";
 import AboutSection from "@/components/AboutSection";
 import Footer from "@/components/Footer";
-import { HERO_CADRAGE } from "@/lib/site";
-import { HOME_THREAD_FIL, HOME_THREAD_FRAGMENT } from "@/lib/threads";
+import { HOME_THREAD } from "@/lib/threads";
 
 export default function Home() {
   return (
@@ -20,11 +19,7 @@ export default function Home() {
 
       <div className="relative">
 
-        <ThreadLine
-          thread={
-            HERO_CADRAGE === "fragment" ? HOME_THREAD_FRAGMENT : HOME_THREAD_FIL
-          }
-        />
+        <ThreadLine thread={HOME_THREAD} />
 
         <main className="relative z-10">
 

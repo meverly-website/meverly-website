@@ -8,7 +8,7 @@
  *   okok.png — la couverture complète, titre compris
  *
  * Produit :
- *   public/hero-illustration.png — l'illustration détourée en PNG alpha
+ *   public/hero-illustration.png — l'illustration détourée, pour le partage
  *   public/cover.png             — la couverture
  *   public/og-image.png          — l'image de partage, 1734 × 907
  *
@@ -44,34 +44,6 @@ const RAMP = 14;
 
 const OG_WIDTH = 1734;
 const OG_HEIGHT = 907;
-
-/*
- * Variante « atmosphère » du Hero : les mains doivent se deviner dans le noir
- * sans capter l'attention, alors que le fil rouge doit rester l'élément le
- * plus lumineux de l'écran. Une simple baisse d'opacité en CSS atténuerait
- * les deux dans les mêmes proportions ; l'atténuation est donc appliquée ici,
- * pixel par pixel, en fonction de la dominante rouge.
- */
-const ATMOSPHERE_HAND = 0.52;
-const ATMOSPHERE_THREAD = 0.95;
-
-/** Un pixel n'est « du fil » qu'au-delà de cet écart entre le rouge et le reste. */
-const REDNESS_FLOOR = 60;
-const REDNESS_RANGE = 120;
-
-/*
- * Fragment du Hero, en pourcentage de l'illustration détourée.
- *
- * Le Hero ne montre plus la composition entière : la couverture complète
- * apparaît quelques centaines de pixels plus bas, et les mains sont propres au
- * tome 1 alors que le fil est commun à la trilogie.
- *
- * Le fil est noué aux doigts des deux mains : aucun cadrage ne l'isole seul à
- * une taille exploitable. Ce cadrage garde donc le bout de la main claire,
- * d'où le fil repart, et s'arrête juste au-dessus de la main sombre. Il est
- * taillé dans la variante atmosphère, pour que le fil reste le plus lumineux.
- */
-const HERO_FRAGMENT = { x: 26, y: 30, width: 31, height: 34 };
 
 /** mulberry32, pour un semis d'étoiles irrégulier mais reproductible. */
 function createRandom(seed) {
@@ -114,9 +86,6 @@ async function buildIllustration() {
   const h = Math.min(height - 1, maxY + PADDING) - top + 1;
 
   const out = Buffer.alloc(w * h * 4);
-  const soft = Buffer.alloc(w * h * 4);
-
-  let threadX = 0, threadY = 0;
 
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
@@ -132,33 +101,10 @@ async function buildIllustration() {
       if (alpha === 0) continue;
 
       // Couleur démultipliée : recomposer sur du noir redonne la source.
-      const cr = Math.min(255, Math.round((r * 255) / alpha));
-      const cg = Math.min(255, Math.round((g * 255) / alpha));
-      const cb = Math.min(255, Math.round((b * 255) / alpha));
-
-      out[o] = cr;
-      out[o + 1] = cg;
-      out[o + 2] = cb;
+      out[o] = Math.min(255, Math.round((r * 255) / alpha));
+      out[o + 1] = Math.min(255, Math.round((g * 255) / alpha));
+      out[o + 2] = Math.min(255, Math.round((b * 255) / alpha));
       out[o + 3] = alpha;
-
-      // Variante atmosphère : les lignes claires reculent, le fil reste.
-      const redness = Math.min(
-        1,
-        Math.max(0, (r - Math.max(g, b) - REDNESS_FLOOR) / REDNESS_RANGE)
-      );
-
-      const keep = ATMOSPHERE_HAND + (ATMOSPHERE_THREAD - ATMOSPHERE_HAND) * redness;
-
-      soft[o] = cr;
-      soft[o + 1] = cg;
-      soft[o + 2] = cb;
-      soft[o + 3] = Math.round(alpha * keep);
-
-      // Point le plus bas du fil : c'est là que ThreadLine prend le relais.
-      if (r > 140 && r - g > 70 && r - b > 70 && y > threadY) {
-        threadX = x;
-        threadY = y;
-      }
     }
   }
 
@@ -166,35 +112,9 @@ async function buildIllustration() {
     .png({ compressionLevel: 9 })
     .toFile(path.join(PUBLIC, "hero-illustration.png"));
 
-  await sharp(soft, { raw: { width: w, height: h, channels: 4 } })
-    .png({ compressionLevel: 9 })
-    .toFile(path.join(PUBLIC, "hero-atmosphere.png"));
-
   console.log(`illustration  ${width}×${height} → ${w}×${h}`);
-  console.log(
-    `              le fil sort à ${((100 * threadX) / w).toFixed(1)}% × ${((100 * threadY) / h).toFixed(1)}%`
-  );
 
   return { width: w, height: h };
-}
-
-async function buildHeroFragment() {
-  const source = path.join(PUBLIC, "hero-atmosphere.png");
-  const { width, height } = await sharp(source).metadata();
-
-  const box = {
-    left: Math.round((HERO_FRAGMENT.x / 100) * width),
-    top: Math.round((HERO_FRAGMENT.y / 100) * height),
-    width: Math.round((HERO_FRAGMENT.width / 100) * width),
-    height: Math.round((HERO_FRAGMENT.height / 100) * height),
-  };
-
-  await sharp(source)
-    .extract(box)
-    .png({ compressionLevel: 9 })
-    .toFile(path.join(PUBLIC, "hero-fragment.png"));
-
-  console.log(`fragment      ${box.width}×${box.height}`);
 }
 
 async function buildCover() {
@@ -280,6 +200,5 @@ async function buildOgImage() {
 }
 
 await buildIllustration();
-await buildHeroFragment();
 await buildCover();
 await buildOgImage();

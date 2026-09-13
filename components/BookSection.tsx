@@ -14,9 +14,16 @@ const THEMES = [
   "Romance M/M",
 ];
 
+/*
+ * overflow-x-clip : entre 1024 et ~1340 px de large, la couverture touche le
+ * bord droit de la colonne et son halo (64 px) dépassait de l'écran, ce qui
+ * créait un défilement horizontal. `clip` coupe ce débordement sans créer de
+ * zone de défilement.
+ */
+
 export default function BookSection() {
   return (
-    <section id="roman" className="relative scroll-mt-24 py-20 md:py-28">
+    <section id="roman" className="relative scroll-mt-24 overflow-x-clip py-20 md:py-28">
 
       <Container>
 

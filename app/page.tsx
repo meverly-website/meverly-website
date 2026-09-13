@@ -39,8 +39,8 @@ export default function Home() {
 
           <PullQuote source="Before I Knew You">
             <span className="block">&laquo; Pas invincible.</span>
-            <span className="mt-6 block md:mt-9">Pas complètement guéri.</span>
-            <span className="mt-6 block text-balance md:mt-9">
+            <span className="block">Pas complètement guéri.</span>
+            <span className="block text-balance">
               Mais suffisamment fort pour continuer d&apos;avancer. &raquo;
             </span>
           </PullQuote>

@@ -26,7 +26,7 @@ export default function PullQuote({ children, source }: PullQuoteProps) {
             text-3xl
             font-light
             italic
-            leading-[1.25]
+            leading-relaxed
             text-text
             sm:text-4xl
             md:text-5xl

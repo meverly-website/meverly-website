@@ -49,7 +49,7 @@ export function threadPath(points: readonly ThreadPoint[], tension = 6) {
 }
 
 /* ==================================================================
-   ACCUEIL — relevé à 1440 × 6337 et 390 × 6760
+   ACCUEIL — relevé à 1440 × 6355 et 390 × 6757
 ================================================================== */
 
 /*
@@ -57,8 +57,8 @@ export function threadPath(points: readonly ThreadPoint[], tension = 6) {
  * une boucle, un seul croisement. Il n'existe que sur l'accueil.
  */
 const HOME_KNOT_DESKTOP: ThreadPoint[] = [
-  [59, 511], [71, 519], [76, 529], [65, 537],
-  [61, 527], [66, 519], [75, 533], [83, 547],
+  [59, 509.6], [71, 517.5], [76, 527.5], [65, 535.5],
+  [61, 525.5], [66, 517.5], [75, 531.5], [83, 545.5],
 ];
 
 const HOME_KNOT_MOBILE: ThreadPoint[] = [
@@ -68,40 +68,40 @@ const HOME_KNOT_MOBILE: ThreadPoint[] = [
 
 /* Desktop, à partir de la respiration. */
 const HOME_DESKTOP_BODY: ThreadPoint[] = [
-  [22, 105.3],
-  [17, 119.2],   // respiration : le texte ne descend pas sous 23 %
-  [17, 135.1],
-  [24, 151],
-  [42, 168.9],   // bande libre entre la respiration et le roman
-  [57, 184.8],
-  [63.5, 203.7], // roman : gouttière entre le texte (≤ 60 %) et la couverture (≥ 67 %)
-  [63.5, 238.5],
-  [63, 273.3],
-  [64, 298.1],
-  [66, 327.9],   // contourne l'étoile, le sur-titre et « Eux deux » (38–62 %)
-  [66, 341.8],
-  [58, 353.8],
-  [50.5, 365.7], // gouttière entre les deux fiches (47–53 %)
-  [50, 417.3],
-  [50, 467],
-  [50, 484],
-  [50, 489.5],   // ── s'arrête juste au-dessus de la ligne des prénoms (492 ‰)
-  [56, 502],     //    (tronçon masqué)
+  [22, 105],
+  [17, 118.9],   // respiration : le texte ne descend pas sous 23 %
+  [17, 134.7],
+  [24, 150.6],
+  [42, 168.4],   // bande libre entre la respiration et le roman
+  [57, 184.3],
+  [63.5, 203.1], // roman : gouttière entre le texte (≤ 60 %) et la couverture (≥ 67 %)
+  [63.5, 237.8],
+  [63, 272.5],
+  [64, 297.3],
+  [66, 327],   // contourne l'étoile, le sur-titre et « Eux deux » (38–62 %)
+  [66, 340.8],
+  [58, 352.8],
+  [50.5, 364.7], // gouttière entre les deux fiches (47–53 %)
+  [50, 416.1],
+  [50, 465.7],
+  [50, 482.6],
+  [50, 488.1],   // ── s'arrête juste au-dessus de la ligne des prénoms (490,7 ‰)
+  [56, 500.6],     //    (tronçon masqué)
   ...HOME_KNOT_DESKTOP, // ── réapparaît et se noue, une seule fois du site
-  [88, 560],
-  [89, 577],     // marge droite de la citation (texte ≤ 81 %)
-  [89, 607],
-  [88, 637],
-  [87, 690],     // univers musical
-  [89, 745],
-  [88, 785],     // l'onde s'arrête à 81 %
-  [86, 818],
-  [80, 845],
-  [71, 861],     // mot de l'autrice : le texte occupe 8–48 %
-  [60, 878],
-  [53, 898],
-  [43, 914],     // passe sous la signature…
-  [32, 926],     // …et s'y éteint
+  [88, 558.4],
+  [89, 575.8],     // marge droite de la citation (texte ≤ 81 %)
+  [89, 607.1],
+  [88, 638],
+  [87, 690.9],     // univers musical
+  [89, 745.7],
+  [88, 785.6],     // l'onde s'arrête à 81 %
+  [82, 845],     // mot de l'autrice, désormais centré : texte 30–70 %
+  [78, 870],     // passe à droite du premier paragraphe…
+  [77, 892],     // …et du second
+  [72, 905],     // longe le filet et la signature par la droite
+  [64, 915],     // passe sous la signature…
+  [56, 921],
+  [50, 925],     // …et s'y éteint, au centre
 ];
 
 /* Mobile, à partir de la respiration. Aucune gouttière : le fil suit un bord. */
@@ -126,11 +126,12 @@ const HOME_MOBILE_BODY: ThreadPoint[] = [
   [97, 760],
   [96, 800],
   [96, 830],
-  [96, 856],
-  [88, 864],     // passe entre le dernier paragraphe et la signature
-  [66, 873],
-  [48, 880],
-  [40, 885],     // s'éteint sous la signature
+  [96, 856],     // mot de l'autrice centré, pleine largeur : le fil tient le bord
+  [95, 866],
+  [90, 876],     // passe à droite de la signature…
+  [78, 881],
+  [64, 884],
+  [54, 886],     // …et s'éteint dessous
 ];
 
 /**
@@ -140,12 +141,12 @@ const HOME_MOBILE_BODY: ThreadPoint[] = [
  */
 export const HOME_THREAD: Thread = {
   desktop: {
-    points: [[-3, 27.8], [8, 45.7], [18, 65.6], [23, 85.5], ...HOME_DESKTOP_BODY],
+    points: [[-3, 27.7], [8, 45.6], [18, 65.4], [23, 85.3], ...HOME_DESKTOP_BODY],
     bands: `
       transparent 0%, transparent 2.5%, #000 5%,
-      #000 48.3%, transparent 49%,
-      transparent 50.6%, #000 51.1%,
-      #000 88%, transparent 92.9%`,
+      #000 48.2%, transparent 48.9%,
+      transparent 50.5%, #000 51%,
+      #000 90.5%, transparent 92.6%`,
   },
   mobile: {
     points: [[-3, 36], [2.5, 52], [2.5, 70], ...HOME_MOBILE_BODY],

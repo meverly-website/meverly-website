@@ -8,9 +8,9 @@ import StarDivider from "./StarDivider";
  * Registre factuel : qui écrit, quoi, pourquoi. Pas une seconde envolée après
  * celle du Hero — Inter pour le corps, Cormorant réservé à la signature.
  *
- * Le bloc est calé à gauche : la moitié droite reste libre pour que le fil
- * rouge vienne y descendre et s'y éteindre, à hauteur de la signature. C'est
- * cet ancrage qui referme la page, à défaut de portrait.
+ * Centré, comme le reste du site. Le fil rouge descend à droite des
+ * paragraphes puis revient s'éteindre sous la signature : c'est cet ancrage
+ * qui referme la page, à défaut de portrait.
  */
 
 export default function AboutSection() {
@@ -22,9 +22,9 @@ export default function AboutSection() {
 
       <Container>
 
-        <RevealOnScroll className="max-w-xl">
+        <RevealOnScroll className="mx-auto max-w-xl text-center">
 
-          <StarDivider className="mb-12 justify-start" />
+          <StarDivider className="mb-12" />
 
           <p className="text-base leading-9 text-muted sm:text-lg">
             À celles qui parlent de reconstruction, de confiance, de secondes
@@ -40,7 +40,7 @@ export default function AboutSection() {
 
             <span
               aria-hidden="true"
-              className="mb-6 block h-px w-14 bg-gold/40"
+              className="mx-auto mb-6 block h-px w-14 bg-gold/40"
             />
 
             <p className="font-serif text-2xl italic text-gold sm:text-3xl">

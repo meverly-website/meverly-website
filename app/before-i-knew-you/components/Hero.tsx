@@ -45,7 +45,7 @@ export default function Hero() {
           Tu n&apos;as pas besoin d&apos;être fort tout le temps.
         </p>
 
-        <CoverShowcase href="#synopsis" className="mt-14 flex justify-center md:mt-16 xl:mt-20" />
+        <CoverShowcase href="#synopsis" eager className="mt-14 flex justify-center md:mt-16 xl:mt-20" />
 
       </div>
 

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import StarField from "@/components/StarField";
 import "./globals.css";
@@ -8,11 +8,19 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+/* Seules les graisses 300 et 400 sont employées sur le site. */
+
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-cormorant",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400"],
 });
+
+/* Barre du navigateur mobile dans la couleur du fond, plutôt que blanche. */
+
+export const viewport: Viewport = {
+  themeColor: "#0D0C0A",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://meverly.fr"),

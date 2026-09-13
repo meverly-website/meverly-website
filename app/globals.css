@@ -41,6 +41,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Pas de flash bleu ou gris au toucher : les liens ont leurs propres états. */
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {

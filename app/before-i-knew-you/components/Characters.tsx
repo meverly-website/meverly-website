@@ -42,6 +42,14 @@ const secondaryCharacters = [
   },
 ];
 
+/*
+ * `sizes` : largeur réellement dessinée, pas celle de la carte. Les images
+ * sont recadrées (object-cover) dans des cartes plus hautes que leur ratio :
+ * une carte principale de 420 px de haut dessine une image de 840 px de large,
+ * même sur un écran de 360. Les valeurs sont plafonnées pour qu'un téléphone
+ * reçoive une version de 1080 à 1920 px, et non de 3840 comme sans `sizes`.
+ */
+
 export default function Characters() {
   return (
     <section className="px-6 py-16 md:py-24 xl:py-36">
@@ -68,6 +76,7 @@ export default function Characters() {
                 alt={character.name}
                 width={1800}
                 height={900}
+                sizes="(max-width: 639px) 640px, (max-width: 1023px) 800px, 1232px"
                 className="
                   h-[420px]
                   sm:h-[520px]
@@ -140,6 +149,7 @@ export default function Characters() {
                 alt={character.name}
                 width={900}
                 height={700}
+                sizes="(max-width: 639px) 380px, 480px"
                 className="
                   h-[320px]
                   sm:h-[340px]

@@ -51,7 +51,10 @@ export default function StickyNav() {
     return () => observer.disconnect();
   }, []);
 
-  /* Menu plein écran : on gèle le défilement et on ferme à l'échappement. */
+  /*
+ * Menu plein écran : on gèle le défilement et on ferme à l'échappement. Les
+ * boutons d'ouverture et de fermeture font 48 px, taille de doigt.
+ */
 
   useEffect(() => {
     if (!open) return;
@@ -192,7 +195,7 @@ export default function StickyNav() {
             onClick={() => setOpen(true)}
             aria-label="Ouvrir le menu"
             aria-expanded={open}
-            className="flex h-10 w-10 shrink-0 items-center justify-end text-text transition-colors hover:text-gold md:hidden"
+            className="flex h-12 w-12 shrink-0 items-center justify-end text-text transition-colors hover:text-gold md:hidden"
           >
 
             <span aria-hidden="true" className="flex flex-col items-end gap-[6px]">
@@ -225,7 +228,7 @@ export default function StickyNav() {
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Fermer le menu"
-              className="flex h-10 w-10 items-center justify-end text-text transition-colors hover:text-gold"
+              className="flex h-12 w-12 items-center justify-end text-text transition-colors hover:text-gold"
             >
 
               <span aria-hidden="true" className="relative block h-5 w-5">

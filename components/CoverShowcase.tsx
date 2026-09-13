@@ -11,11 +11,17 @@ import { COVER_HEIGHT, COVER_SRC, COVER_WIDTH } from "@/lib/site";
 type CoverShowcaseProps = {
   href?: string;
   className?: string;
+  /**
+   * Couverture visible dès l'arrivée (page du roman) : chargée tout de suite
+   * et en priorité, c'est elle qui fait le premier affichage.
+   */
+  eager?: boolean;
 };
 
 export default function CoverShowcase({
   href = "/before-i-knew-you",
   className = "",
+  eager = false,
 }: CoverShowcaseProps) {
   return (
     <div className={`relative ${className}`}>
@@ -71,6 +77,8 @@ export default function CoverShowcase({
           width={COVER_WIDTH}
           height={COVER_HEIGHT}
           sizes="(max-width: 640px) 240px, (max-width: 1024px) 300px, 360px"
+          loading={eager ? "eager" : "lazy"}
+          fetchPriority={eager ? "high" : "auto"}
           className="
             relative
             h-auto

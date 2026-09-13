@@ -3,6 +3,9 @@ import StarDivider from "./StarDivider";
 /**
  * Le premier écran accueille dans l'univers de l'autrice.
  *
+ * Le titre, très espacé, se resserre un peu sous 370 px de large : à taille
+ * fixe, il touchait les deux bords d'un écran de 320.
+ *
  * Aucune image : la couverture apparaît quelques centaines de pixels plus
  * bas, et les mains de l'illustration sont propres au tome 1. L'écran repose
  * sur ce qui est commun aux trois tomes — le fil et les étoiles. Le fil y
@@ -46,7 +49,7 @@ export default function Hero() {
         <h1
           className="
             font-serif
-            text-5xl
+            text-[clamp(2.25rem,13vw,3rem)]
             font-light
             leading-none
             tracking-[0.3em]

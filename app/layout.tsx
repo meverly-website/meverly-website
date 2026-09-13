@@ -3,6 +3,15 @@ import { Inter, Cormorant_Garamond } from "next/font/google";
 import StarField from "@/components/StarField";
 import "./globals.css";
 
+/*
+ * L'italique de Cormorant est chargée pour de vrai : sans elle, le
+ * navigateur penche simplement les lettres droites, alors que la vraie est
+ * calligraphique — c'est elle qui porte les citations, l'accroche et la
+ * signature. Pas celle d'Inter : préchargée sur chaque page (51 Ko) pour
+ * quelques lignes de la page du roman, où elle se distingue à peine d'un
+ * romain penché.
+ */
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -14,6 +23,7 @@ const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-cormorant",
   weight: ["300", "400"],
+  style: ["normal", "italic"],
 });
 
 /* Barre du navigateur mobile dans la couleur du fond, plutôt que blanche. */

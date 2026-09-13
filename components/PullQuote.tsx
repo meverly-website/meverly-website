@@ -13,7 +13,7 @@ type PullQuoteProps = {
 
 export default function PullQuote({ children, source }: PullQuoteProps) {
   return (
-    <section className="relative px-6 py-36 md:py-52">
+    <section className="relative px-6 py-24 md:py-32 xl:py-52">
 
       <RevealOnScroll slow className="mx-auto max-w-4xl">
 

@@ -44,7 +44,7 @@ const secondaryCharacters = [
 
 export default function Characters() {
   return (
-    <section className="px-6 py-24 md:py-36">
+    <section className="px-6 py-16 md:py-24 xl:py-36">
 
       <div className="mx-auto max-w-7xl">
 
@@ -126,7 +126,7 @@ export default function Characters() {
 
         {/* Personnages secondaires */}
 
-        <div className="mt-20 grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 md:mt-14 xl:mt-20 xl:grid-cols-3">
 
           {secondaryCharacters.map((character) => (
 

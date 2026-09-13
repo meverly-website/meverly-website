@@ -1,7 +1,7 @@
 import StarDivider from "@/components/StarDivider";
 export default function Synopsis() {
   return (
-    <section className="mx-auto max-w-4xl px-6 py-20 md:py-32">
+    <section className="mx-auto max-w-4xl px-6 py-14 md:py-20 xl:py-32">
 
       {/* Ligne */}
 

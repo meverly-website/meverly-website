@@ -23,7 +23,7 @@ const THEMES = [
 
 export default function BookSection() {
   return (
-    <section id="roman" className="relative scroll-mt-24 overflow-x-clip py-20 md:py-28">
+    <section id="roman" className="relative scroll-mt-24 overflow-x-clip py-14 md:py-20 xl:py-28">
 
       <Container>
 
@@ -31,7 +31,8 @@ export default function BookSection() {
           className="
             grid
             items-center
-            gap-14
+            gap-10
+            md:gap-12
             lg:grid-cols-[1fr_auto]
             lg:gap-24
           "

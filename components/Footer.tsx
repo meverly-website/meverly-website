@@ -10,11 +10,11 @@ const NAV = [
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-gold/10 px-6 py-20 lg:px-10">
+    <footer className="relative border-t border-gold/10 px-6 py-14 md:py-16 lg:px-10 xl:py-20">
 
       <div className="mx-auto max-w-7xl">
 
-        <div className="flex flex-col gap-16 md:flex-row md:items-start md:justify-between">
+        <div className="flex flex-col gap-12 md:flex-row md:gap-16 md:items-start md:justify-between">
 
           {/* Signature */}
 
@@ -73,7 +73,7 @@ export default function Footer() {
 
         </div>
 
-        <div className="mt-20 border-t border-gold/10 pt-8">
+        <div className="mt-14 border-t border-gold/10 pt-8 md:mt-16 xl:mt-20">
 
           <p className="text-xs tracking-[0.15em] text-muted/60">
             © {new Date().getFullYear()} Meverly — Tous droits réservés.

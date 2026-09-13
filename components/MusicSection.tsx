@@ -13,7 +13,7 @@ import { SPOTIFY_URL } from "@/lib/site";
 
 export default function MusicSection() {
   return (
-    <section id="musique" className="relative scroll-mt-24 py-28 md:py-40">
+    <section id="musique" className="relative scroll-mt-24 py-16 md:py-24 xl:py-40">
 
       <Container>
 
@@ -32,7 +32,7 @@ export default function MusicSection() {
 
         {/* L'onde, dans le langage de la couverture. */}
 
-        <RevealOnScroll slow className="mt-24">
+        <RevealOnScroll slow className="mt-14 md:mt-16 xl:mt-24">
 
           <div className="relative mx-auto h-40 max-w-4xl sm:h-52">
             <SoundWave />
@@ -40,7 +40,7 @@ export default function MusicSection() {
 
         </RevealOnScroll>
 
-        <RevealOnScroll className="mt-20 flex justify-center">
+        <RevealOnScroll className="mt-12 flex justify-center md:mt-14 xl:mt-20">
 
           <Button variant="secondary" href={SPOTIFY_URL} external>
             Écouter la playlist

@@ -10,7 +10,7 @@ export default function Themes() {
   ];
 
   return (
-    <section className="px-6 py-24 md:py-36">
+    <section className="px-6 py-16 md:py-24 xl:py-36">
 
       <div className="mx-auto max-w-6xl">
 
@@ -24,11 +24,12 @@ export default function Themes() {
           className="
             grid
             grid-cols-2
-            gap-y-14
+            gap-y-10
             gap-x-8
 
             md:grid-cols-3
-            md:gap-y-20
+            md:gap-y-14
+            xl:gap-y-20
           "
         >
 

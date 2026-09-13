@@ -25,29 +25,29 @@ export default function BeforeIKnewYouPage() {
 
       <main className="text-text">
 
-        <ThreadSection thread={BOOK_THREAD.hero}>
+        <ThreadSection thread={BOOK_THREAD.hero} wide>
           <Hero />
         </ThreadSection>
 
-        <ThreadSection thread={BOOK_THREAD.synopsis}>
+        <ThreadSection thread={BOOK_THREAD.synopsis} wide>
           <section id="synopsis" className="scroll-mt-28">
             <Synopsis />
           </section>
         </ThreadSection>
 
-        <ThreadSection thread={BOOK_THREAD.themes}>
+        <ThreadSection thread={BOOK_THREAD.themes} wide>
           <section id="themes" className="scroll-mt-28">
             <Themes />
           </section>
         </ThreadSection>
 
-        <ThreadSection thread={BOOK_THREAD.personnages}>
+        <ThreadSection thread={BOOK_THREAD.personnages} wide>
           <section id="characters" className="scroll-mt-28">
             <Characters />
           </section>
         </ThreadSection>
 
-        <ThreadSection thread={BOOK_THREAD.citation}>
+        <ThreadSection thread={BOOK_THREAD.citation} wide>
           <section id="quote" className="scroll-mt-28">
             <Quote />
           </section>

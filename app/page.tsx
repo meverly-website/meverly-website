@@ -8,6 +8,8 @@ import PullQuote from "@/components/PullQuote";
 import MusicSection from "@/components/MusicSection";
 import AboutSection from "@/components/AboutSection";
 import Footer from "@/components/Footer";
+import { HERO_CADRAGE } from "@/lib/site";
+import { HOME_THREAD_FIL, HOME_THREAD_FRAGMENT } from "@/lib/threads";
 
 export default function Home() {
   return (
@@ -18,8 +20,11 @@ export default function Home() {
 
       <div className="relative">
 
-        <ThreadLine variant="desktop" />
-        <ThreadLine variant="mobile" />
+        <ThreadLine
+          thread={
+            HERO_CADRAGE === "fragment" ? HOME_THREAD_FRAGMENT : HOME_THREAD_FIL
+          }
+        />
 
         <main className="relative z-10">
 
@@ -31,9 +36,18 @@ export default function Home() {
 
           <CharactersSection />
 
+          {/*
+            Trois temps, trois lignes : chaque souffle a la sienne. L'ancienne
+            citation reste en clôture de la page du roman — les deux pages ne
+            portent pas la même.
+          */}
+
           <PullQuote source="Before I Knew You">
-            &laquo; Parfois, aimer quelqu&apos;un, c&apos;est simplement lui
-            rappeler qu&apos;il mérite encore d&apos;être heureux. &raquo;
+            <span className="block">&laquo; Pas invincible.</span>
+            <span className="mt-6 block md:mt-9">Pas complètement guéri.</span>
+            <span className="mt-6 block text-balance md:mt-9">
+              Mais suffisamment fort pour continuer d&apos;avancer. &raquo;
+            </span>
           </PullQuote>
 
           <MusicSection />

@@ -22,18 +22,22 @@ export default function AboutSection() {
 
       <Container>
 
-        <RevealOnScroll className="mx-auto max-w-xl text-center">
+        {/*
+          Une phrase en deux temps, une ligne chacun. Le bloc est un peu plus
+          large que le reste pour que la seconde tienne sur une seule ligne dès
+          la tablette ; sur mobile elle se replie, l'écran est trop étroit.
+        */}
+
+        <RevealOnScroll className="mx-auto max-w-2xl text-center">
 
           <StarDivider className="mb-12" />
 
           <p className="text-base leading-9 text-muted sm:text-lg">
-            À celles qui parlent de reconstruction, de confiance, de secondes
-            chances et de l&apos;amour sous toutes ses formes.
-          </p>
-
-          <p className="mt-7 text-base leading-9 text-muted sm:text-lg">
-            J&apos;écris des histoires où les émotions comptent autant que les
-            mots.
+            <span className="block">Certaines histoires parlent d’amour.</span>
+            <span className="block">
+              Les miennes parlent aussi de ce qu’il faut pour oser y croire
+              encore.
+            </span>
           </p>
 
           <div className="mt-14">

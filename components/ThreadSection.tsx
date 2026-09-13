@@ -16,8 +16,8 @@ import {
  * Le fil est derrière le contenu (`isolate` + `-z-10`) et en position absolue
  * sur la section, rogné sur les côtés (`overflow-x-clip`, la marge du halo du
  * nœud déborderait sinon de l'écran) : il n'élargit jamais la page et ne
- * décale rien. Trois tracés
- * au plus — mobile, tablette, ordinateur — dont un seul est affiché.
+ * décale rien. Quatre tracés au plus — téléphone, grand mobile, tablette,
+ * ordinateur — dont un seul est affiché.
  *
  * Sur ordinateur, le tracé est posé sur une colonne centrée et non sur la
  * largeur d'écran : il reste à sa place quel que soit l'écran. `wide` élargit
@@ -31,7 +31,8 @@ type ThreadSectionProps = {
 };
 
 const VARIANT_BOX: Record<Variant, string> = {
-  mobile: "md:hidden",
+  mobile: "min-[480px]:hidden",
+  phablet: "hidden min-[480px]:block md:hidden",
   tablet: "hidden md:block xl:hidden",
   desktop: "mx-auto hidden xl:block",
 };
@@ -40,7 +41,7 @@ export default function ThreadSection({ thread, wide = false, children }: Thread
   return (
     <div className="relative isolate">
 
-      {(["mobile", "tablet", "desktop"] as const).map((variant) => {
+      {(["mobile", "phablet", "tablet", "desktop"] as const).map((variant) => {
         const piece = thread?.[variant];
 
         return piece ? (

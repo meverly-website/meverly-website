@@ -1,18 +1,21 @@
 import Image from "next/image";
 import StarDivider from "./StarDivider";
 import {
-  HERO_ATMOSPHERE_SRC,
-  HERO_ILLUSTRATION_HEIGHT,
-  HERO_ILLUSTRATION_WIDTH,
+  HERO_CADRAGE,
+  HERO_FRAGMENT_HEIGHT,
+  HERO_FRAGMENT_SRC,
+  HERO_FRAGMENT_WIDTH,
 } from "@/lib/site";
 
 /**
  * Le premier écran accueille dans l'univers de l'autrice.
  *
- * L'illustration de la couverture n'est plus le sujet : elle passe derrière le
- * texte, atténuée et fondue dans le noir. Ses mains se devinent, son fil rouge
- * reste l'élément le plus lumineux — c'est lui qui amorce le scroll, et
- * ThreadLine le reprend pour traverser toute la page.
+ * Il ne montre plus la composition entière de la couverture, qui apparaît
+ * quelques centaines de pixels plus bas : seulement un fragment, le bout de
+ * la main claire qui entre par la gauche et le fil qui en repart. Les mains
+ * sont propres au tome 1 ; le fil et les étoiles sont communs à la trilogie,
+ * c'est sur eux que repose l'écran. ThreadLine reprend le fil là où le
+ * fragment s'efface et le fait traverser toute la page.
  */
 
 export default function Hero() {
@@ -22,7 +25,8 @@ export default function Hero() {
         relative
         flex
         min-h-[66svh]
-        items-center
+        items-start
+        md:items-center
         justify-center
         overflow-hidden
         px-6
@@ -31,26 +35,37 @@ export default function Hero() {
       "
     >
 
-      {/* Atmosphère */}
+      {/* Fragment : ancré en bas à gauche, fondu vers le noir sur ses bords. */}
 
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 flex items-center justify-center"
-      >
+      {HERO_CADRAGE === "fragment" && (
+        <div
+          aria-hidden="true"
+          className="
+            hero-fragment
+            pointer-events-none
+            absolute
+            bottom-0
+            left-0
+            w-[44vw]
+            opacity-80
+            md:w-[min(40vw,520px)]
+          "
+        >
 
-        <Image
-          src={HERO_ATMOSPHERE_SRC}
-          alt=""
-          width={HERO_ILLUSTRATION_WIDTH}
-          height={HERO_ILLUSTRATION_HEIGHT}
-          priority
-          sizes="(max-width: 860px) 96vw, 860px"
-          className="hero-atmosphere w-[min(96vw,860px)] max-w-none opacity-45"
-        />
+          <Image
+            src={HERO_FRAGMENT_SRC}
+            alt=""
+            width={HERO_FRAGMENT_WIDTH}
+            height={HERO_FRAGMENT_HEIGHT}
+            priority
+            sizes="(max-width: 768px) 44vw, (max-width: 1300px) 40vw, 520px"
+            className="h-auto w-full"
+          />
 
-      </div>
+        </div>
+      )}
 
-      {/* Voile : garantit le contraste du texte par-dessus l'illustration. */}
+      {/* Voile : garantit le contraste du texte. */}
 
       <div
         aria-hidden="true"

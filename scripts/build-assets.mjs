@@ -59,6 +59,20 @@ const ATMOSPHERE_THREAD = 0.95;
 const REDNESS_FLOOR = 60;
 const REDNESS_RANGE = 120;
 
+/*
+ * Fragment du Hero, en pourcentage de l'illustration détourée.
+ *
+ * Le Hero ne montre plus la composition entière : la couverture complète
+ * apparaît quelques centaines de pixels plus bas, et les mains sont propres au
+ * tome 1 alors que le fil est commun à la trilogie.
+ *
+ * Le fil est noué aux doigts des deux mains : aucun cadrage ne l'isole seul à
+ * une taille exploitable. Ce cadrage garde donc le bout de la main claire,
+ * d'où le fil repart, et s'arrête juste au-dessus de la main sombre. Il est
+ * taillé dans la variante atmosphère, pour que le fil reste le plus lumineux.
+ */
+const HERO_FRAGMENT = { x: 26, y: 30, width: 31, height: 34 };
+
 /** mulberry32, pour un semis d'étoiles irrégulier mais reproductible. */
 function createRandom(seed) {
   let state = seed;
@@ -164,6 +178,25 @@ async function buildIllustration() {
   return { width: w, height: h };
 }
 
+async function buildHeroFragment() {
+  const source = path.join(PUBLIC, "hero-atmosphere.png");
+  const { width, height } = await sharp(source).metadata();
+
+  const box = {
+    left: Math.round((HERO_FRAGMENT.x / 100) * width),
+    top: Math.round((HERO_FRAGMENT.y / 100) * height),
+    width: Math.round((HERO_FRAGMENT.width / 100) * width),
+    height: Math.round((HERO_FRAGMENT.height / 100) * height),
+  };
+
+  await sharp(source)
+    .extract(box)
+    .png({ compressionLevel: 9 })
+    .toFile(path.join(PUBLIC, "hero-fragment.png"));
+
+  console.log(`fragment      ${box.width}×${box.height}`);
+}
+
 async function buildCover() {
   const { width, height } = await sharp(COVER_SRC).metadata();
 
@@ -247,5 +280,6 @@ async function buildOgImage() {
 }
 
 await buildIllustration();
+await buildHeroFragment();
 await buildCover();
 await buildOgImage();

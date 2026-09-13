@@ -1,4 +1,6 @@
 import StickyNav from "@/components/StickyNav";
+import ThreadLine from "@/components/ThreadLine";
+import { BOOK_THREAD } from "@/lib/threads";
 import Hero from "./components/Hero";
 import Synopsis from "./components/Synopsis";
 import Themes from "./components/Themes";
@@ -17,29 +19,43 @@ export default function BeforeIKnewYouPage() {
     <>
       <StickyNav />
 
-      <main className="relative text-text">
+      {/*
+        Le fil de l'accueil se poursuit ici : il accompagne le synopsis, se
+        resserre à hauteur des personnages et s'éteint après la citation.
+        Une continuation, pas un second nouage.
+      */}
 
-        <Hero />
+      <div className="relative">
 
-        <section id="synopsis" className="scroll-mt-28">
-          <Synopsis />
-        </section>
+        <ThreadLine thread={BOOK_THREAD} />
 
-        <section id="themes" className="scroll-mt-28">
-          <Themes />
-        </section>
+        <main className="relative z-10 text-text">
 
-        <section id="characters" className="scroll-mt-28">
-          <Characters />
-        </section>
+          <Hero />
 
-        <section id="quote" className="scroll-mt-28">
-          <Quote />
-        </section>
+          <section id="synopsis" className="scroll-mt-28">
+            <Synopsis />
+          </section>
 
-      </main>
+          <section id="themes" className="scroll-mt-28">
+            <Themes />
+          </section>
 
-      <Footer />
+          <section id="characters" className="scroll-mt-28">
+            <Characters />
+          </section>
+
+          <section id="quote" className="scroll-mt-28">
+            <Quote />
+          </section>
+
+        </main>
+
+        <div className="relative z-10">
+          <Footer />
+        </div>
+
+      </div>
     </>
   );
 }

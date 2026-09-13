@@ -20,14 +20,20 @@ export default function CoverShowcase({
   return (
     <div className={`relative ${className}`}>
 
-      {/* Halo, très bas, pour décoller la couverture du fond. */}
+      {/*
+        Halo, très bas, pour décoller la couverture du fond. Sur mobile il ne
+        déborde que de 24 px sur les côtés : à 64 px, une couverture de 240 px
+        faisait 368 px de large et élargissait la page sur un écran de 360.
+      */}
 
       <div
         aria-hidden="true"
         className="
           pointer-events-none
           absolute
-          -inset-16
+          -inset-x-6
+          -inset-y-16
+          sm:-inset-16
           bg-[radial-gradient(closest-side,rgba(239,193,126,0.07),transparent)]
         "
       />

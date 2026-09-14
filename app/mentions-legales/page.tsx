@@ -5,11 +5,13 @@ import Footer from "@/components/Footer";
 import StickyNav from "@/components/StickyNav";
 
 /*
- * Adresse canonique propre : sans elle, la page hérite de celle du layout
- * (l'accueil) et passe pour un doublon auprès des moteurs.
+ * Titre, description et adresse canonique propres (validés par l'autrice) :
+ * sans eux, la page hérite de ceux de l'accueil.
  */
 
 export const metadata: Metadata = {
+  title: "Mentions légales",
+  description: "Mentions légales du site meverly.fr.",
   alternates: {
     canonical: "https://meverly.fr/mentions-legales",
   },

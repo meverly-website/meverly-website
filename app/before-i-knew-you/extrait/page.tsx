@@ -178,7 +178,8 @@ export default function ExtraitPage() {
           <p className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[0.7rem] uppercase tracking-[0.3em] text-muted/70">
             <span className="whitespace-nowrap">570 pages</span>
             <span className="whitespace-nowrap">Slow burn M/M</span>
-            <span className="whitespace-nowrap">Musique • Reconstruction</span>
+            {/* Séparateur du site : le point médian, partout (voir la fiche technique). */}
+            <span className="whitespace-nowrap">Musique · Reconstruction</span>
           </p>
 
           <BuyActions withExtract={false} align="center" className="mt-14" />

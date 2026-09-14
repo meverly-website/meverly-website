@@ -1,51 +1,83 @@
+import BookFacts from "@/components/BookFacts";
+import BuyActions from "@/components/BuyActions";
 import CoverShowcase from "@/components/CoverShowcase";
-import StarDivider from "@/components/StarDivider";
 
 /**
- * Ouverture de la page du roman.
+ * Ouverture de la page du roman : le bloc de décision.
  *
- * L'ancienne version pointait vers `/bookhero.jpg`, un fichier absent de
- * `public/` : l'image était cassée en production. Elle est remplacée par une
- * ouverture typographique sur le champ d'étoiles, avec la couverture mise en
- * scène — même langage que la page d'accueil.
+ * Tout ce qui sert à décider tient dans le premier écran, avant le résumé :
+ * la couverture d'un côté ; de l'autre le titre, l'accroche, la fiche
+ * technique et les actions. Sur téléphone, le même ordre s'empile, avec une
+ * couverture un peu plus petite pour que les actions restent hautes.
+ *
+ * La colonne de texte ne dépasse pas la hauteur de la couverture. Pas de
+ * couverture fixe au défilement.
  */
 
 export default function Hero() {
   return (
-    <section className="px-6 pb-16 pt-32 md:pb-20 md:pt-40 xl:pb-32 xl:pt-52">
+    /*
+      overflow-x-clip : page empilée, la couverture occupe toute la largeur de
+      la colonne et son halo (64 px) déborderait de l'écran.
+    */
+    <section className="overflow-x-clip px-6 pb-16 pt-24 md:pb-20 md:pt-32 lg:pt-24 xl:pb-28">
 
-      <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
+      <div
+        className="
+          mx-auto
+          grid
+          max-w-6xl
+          items-center
+          gap-8
+          sm:gap-12
+          lg:grid-cols-[auto_1fr]
+          lg:gap-20
+          xl:gap-24
+        "
+      >
 
-        <StarDivider className="mb-10" />
+        <CoverShowcase
+          href="#synopsis"
+          eager
+          widths="w-[180px] sm:w-[240px] lg:w-[320px] xl:w-[360px]"
+          sizes="(max-width: 639px) 180px, (max-width: 1023px) 240px, (max-width: 1279px) 320px, 360px"
+          className="flex justify-center"
+        />
 
-        <p className="text-[0.7rem] uppercase tracking-[0.45em] text-gold">
-          Le roman
-        </p>
+        <div className="text-center lg:text-left">
 
-        <h1
-          className="
-            mt-8
-            font-serif
-            text-5xl
-            font-light
-            leading-[0.95]
-            tracking-[0.04em]
-            text-text
-            sm:text-6xl
-            md:text-7xl
-            lg:text-8xl
-          "
-        >
-          BEFORE I
-          <br />
-          KNEW YOU
-        </h1>
+          <p className="text-[0.7rem] uppercase tracking-[0.45em] text-gold">
+            Le roman
+          </p>
 
-        <p className="mt-10 font-serif text-xl italic text-muted sm:text-2xl md:text-3xl">
-          Tu n&apos;as pas besoin d&apos;être fort tout le temps.
-        </p>
+          <h1
+            className="
+              mt-4
+              font-serif
+              text-5xl
+              font-light
+              leading-[0.95]
+              tracking-[0.04em]
+              text-text
+              sm:text-6xl
+            "
+          >
+            BEFORE I
+            <br />
+            KNEW YOU
+          </h1>
 
-        <CoverShowcase href="#synopsis" eager className="mt-14 flex justify-center md:mt-16 xl:mt-20" />
+          <p className="mt-4 font-serif text-xl italic text-muted sm:text-2xl">
+            Tu n&apos;as pas besoin d&apos;être fort tout le temps.
+          </p>
+
+          <BookFacts className="mt-6 lg:mt-8" />
+
+          <div id="acheter" className="mt-7 scroll-mt-28 lg:mt-8">
+            <BuyActions align="responsive" />
+          </div>
+
+        </div>
 
       </div>
 

@@ -19,8 +19,15 @@ import { BUY_EBOOK_URL, BUY_PAPERBACK_URL } from "@/lib/site";
 type BuyActionsProps = {
   /** Lien vers l'extrait (absent sur la page de l'extrait elle-même). */
   withExtract?: boolean;
-  align?: "left" | "center";
+  /** « responsive » : centré tant que la page est empilée, à gauche en deux colonnes. */
+  align?: "left" | "center" | "responsive";
   className?: string;
+};
+
+const ALIGN = {
+  left: { text: "", row: "" },
+  center: { text: "text-center", row: "justify-center" },
+  responsive: { text: "text-center lg:text-left", row: "justify-center lg:justify-start" },
 };
 
 export default function BuyActions({
@@ -28,16 +35,14 @@ export default function BuyActions({
   align = "left",
   className = "",
 }: BuyActionsProps) {
-  const centered = align === "center";
-
   return (
-    <div className={`${centered ? "text-center" : ""} ${className}`}>
+    <div className={`${ALIGN[align].text} ${className}`}>
 
       <p className="text-[0.7rem] uppercase tracking-[0.45em] text-gold">
         Acheter le roman
       </p>
 
-      <div className={`mt-6 flex flex-wrap gap-4 ${centered ? "justify-center" : ""}`}>
+      <div className={`mt-5 flex flex-wrap gap-4 ${ALIGN[align].row}`}>
         <Edition href={BUY_PAPERBACK_URL}>Broché</Edition>
         <Edition href={BUY_EBOOK_URL}>E-book</Edition>
       </div>
@@ -45,11 +50,11 @@ export default function BuyActions({
       <Availability />
 
       {withExtract && (
-        <div className="mt-14">
+        <div className="mt-8">
 
           <Link
             href="/before-i-knew-you/extrait"
-            className="group inline-flex items-center gap-5 font-serif text-3xl font-light italic text-text transition-colors duration-500 hover:text-gold sm:text-4xl"
+            className="group inline-flex items-center gap-5 font-serif text-3xl font-light italic text-text transition-colors duration-500 hover:text-gold"
           >
             Lire un extrait
             <span aria-hidden="true" className="btn-trail" />

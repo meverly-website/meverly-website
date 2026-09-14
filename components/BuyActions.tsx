@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Button from "./Button";
+import ExtractLink from "./ExtractLink";
 import { BUY_EBOOK_URL, BUY_PAPERBACK_URL } from "@/lib/site";
 
 /**
@@ -52,38 +52,7 @@ export default function BuyActions({
       {withExtract && (
         <div className="mt-8">
 
-          {/*
-            Encadré, filet or plein et texte en italique : plus visible que les
-            boutons d'achat, puisque c'est l'action ouverte dès aujourd'hui.
-            Toujours sans or plein — un seul par écran, réservé à l'achat.
-          */}
-
-          <Link
-            href="/before-i-knew-you/extrait"
-            className="
-              group
-              inline-flex
-              items-center
-              gap-5
-              rounded-edge
-              border
-              border-gold
-              px-8
-              py-3.5
-              font-serif
-              text-2xl
-              font-light
-              italic
-              text-text
-              transition-colors
-              duration-500
-              hover:bg-gold/10
-              hover:text-gold
-            "
-          >
-            Lire un extrait
-            <span aria-hidden="true" className="btn-trail" />
-          </Link>
+          <ExtractLink />
 
           <p className="mt-3 text-sm text-muted">
             Le premier chapitre, en entier.

@@ -1,10 +1,11 @@
-import Link from "next/link";
+import ExtractLink from "@/components/ExtractLink";
 import StarDivider from "@/components/StarDivider";
 
 /**
  * Le résumé, après le bloc de décision : une colonne de lecture d'environ
- * 65 signes, avec sa lettrine. Il se termine par une seule porte, discrète,
- * vers le premier chapitre — la seule action répétée sur la page.
+ * 65 signes, avec sa lettrine. Il se termine par une seule porte vers le
+ * premier chapitre, le même bouton encadré que dans le bloc de décision — la
+ * seule action répétée sur la page.
  */
 
 export default function Synopsis() {
@@ -47,27 +48,23 @@ export default function Synopsis() {
 
         </div>
 
-        {/* Signature */}
+        {/* Signature et porte vers le chapitre, centrées : la fin du résumé. */}
 
-        <div className="mt-14">
+        <div className="mt-14 text-center">
 
-          <span aria-hidden="true" className="mb-6 block h-px w-16 bg-gold/40" />
+          <span aria-hidden="true" className="mx-auto mb-6 block h-px w-16 bg-gold/40" />
 
-          <p className="font-serif text-2xl italic leading-relaxed text-muted sm:text-3xl">
+          <p className="text-balance font-serif text-2xl italic leading-relaxed text-muted sm:text-3xl">
             Une histoire de reconstruction, de musique et d&apos;amour.
           </p>
 
+          {/* Pour qui vient de finir le résumé : une seule porte, vers le chapitre. */}
+
+          <div className="mt-10">
+            <ExtractLink>Lire le premier chapitre</ExtractLink>
+          </div>
+
         </div>
-
-        {/* Pour qui vient de finir le résumé : une seule porte, vers le chapitre. */}
-
-        <Link
-          href="/before-i-knew-you/extrait"
-          className="group mt-12 inline-flex items-center gap-4 text-xs uppercase tracking-[0.25em] text-muted transition-colors duration-500 hover:text-gold"
-        >
-          Lire le premier chapitre
-          <span aria-hidden="true" className="btn-trail" />
-        </Link>
 
       </div>
 

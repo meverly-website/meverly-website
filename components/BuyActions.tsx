@@ -6,17 +6,15 @@ import { BUY_EBOOK_URL, BUY_PAPERBACK_URL } from "@/lib/site";
  * Les actions du roman : acheter (broché, e-book) et lire un extrait.
  *
  * Un seul niveau fort par écran : jamais trois pastilles or côte à côte.
+ * L'achat forme un seul groupe, sous un intitulé, les deux éditions en
+ * boutons secondaires de même poids — pas d'or plein : désactivé, il
+ * attirerait l'œil vers une action impossible.
+ *
  * « Lire un extrait » est tertiaire par son poids visuel, pas par son
  * importance — pour une autrice qu'on découvre, c'est souvent le premier
  * clic, et tant que les éditions ne sont pas en vente, la seule action
  * possible. Il vient donc juste sous l'achat, en grand, avec de l'air.
- *
- * Deux arrangements, en attente d'arbitrage :
- *   A — l'achat en un seul groupe, les deux éditions en boutons de même poids ;
- *   B — broché en primaire, e-book en secondaire.
  */
-
-export const BUY_LAYOUT: "A" | "B" = "A";
 
 type BuyActionsProps = {
   /** Lien vers l'extrait (absent sur la page de l'extrait elle-même). */
@@ -31,38 +29,18 @@ export default function BuyActions({
   className = "",
 }: BuyActionsProps) {
   const centered = align === "center";
-  const row = `flex flex-wrap gap-4 ${centered ? "justify-center" : ""}`;
 
   return (
     <div className={`${centered ? "text-center" : ""} ${className}`}>
 
-      {BUY_LAYOUT === "A" ? (
-        <div>
+      <p className="text-[0.7rem] uppercase tracking-[0.45em] text-gold">
+        Acheter le roman
+      </p>
 
-          <p className="text-[0.7rem] uppercase tracking-[0.45em] text-gold">
-            Acheter le roman
-          </p>
-
-          <div className={`mt-6 ${row}`}>
-            <Edition href={BUY_PAPERBACK_URL} variant="secondary">
-              Broché
-            </Edition>
-            <Edition href={BUY_EBOOK_URL} variant="secondary">
-              E-book
-            </Edition>
-          </div>
-
-        </div>
-      ) : (
-        <div className={row}>
-          <Edition href={BUY_PAPERBACK_URL} variant="primary">
-            Acheter le roman
-          </Edition>
-          <Edition href={BUY_EBOOK_URL} variant="secondary">
-            Acheter l&apos;e-book
-          </Edition>
-        </div>
-      )}
+      <div className={`mt-6 flex flex-wrap gap-4 ${centered ? "justify-center" : ""}`}>
+        <Edition href={BUY_PAPERBACK_URL}>Broché</Edition>
+        <Edition href={BUY_EBOOK_URL}>E-book</Edition>
+      </div>
 
       <Availability />
 
@@ -90,15 +68,13 @@ export default function BuyActions({
 
 function Edition({
   href,
-  variant,
   children,
 }: {
   href: string | null;
-  variant: "primary" | "secondary";
   children: React.ReactNode;
 }) {
   return (
-    <Button variant={variant} href={href ?? "#"} external disabled={!href}>
+    <Button variant="secondary" href={href ?? "#"} external disabled={!href}>
       {children}
     </Button>
   );

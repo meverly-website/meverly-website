@@ -139,6 +139,7 @@ export default function Button({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={onClick}
         aria-label={ariaLabel}
         className={classes}
       >
@@ -151,6 +152,7 @@ export default function Button({
     return (
       <Link
         href={href}
+        onClick={onClick}
         aria-label={ariaLabel}
         className={classes}
       >

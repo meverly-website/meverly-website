@@ -8,6 +8,9 @@ import SectionHeading from "./SectionHeading";
  * Ezra et Sasha seulement : les cinq personnages secondaires restent
  * réservés à la page du roman.
  *
+ * La marge haute, plus grande sur téléphone et tablette, accueille le nœud
+ * du fil rouge, juste avant le titre : c'est ici qu'il relie les deux.
+ *
  * Le décalage vertical des deux colonnes reprend la diagonale de la
  * couverture, main claire d'un côté, silhouette sombre de l'autre.
  */
@@ -16,13 +19,13 @@ export default function CharactersSection() {
   return (
     <section
       id="personnages"
-      className="relative scroll-mt-24 py-16 md:py-24 xl:py-40"
+      className="relative scroll-mt-24 pb-16 pt-28 md:pb-24 md:pt-32 xl:py-40"
     >
 
       <Container>
 
         <RevealOnScroll>
-          <SectionHeading eyebrow="Les personnages" title="Eux deux" />
+          <SectionHeading eyebrow="Les personnages" title="Avant de les rencontrer" />
         </RevealOnScroll>
 
         <div

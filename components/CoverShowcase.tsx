@@ -16,12 +16,17 @@ type CoverShowcaseProps = {
    * et en priorité, c'est elle qui fait le premier affichage.
    */
   eager?: boolean;
+  /** Largeurs de la couverture, et `sizes` correspondant pour l'image. */
+  widths?: string;
+  sizes?: string;
 };
 
 export default function CoverShowcase({
   href = "/before-i-knew-you",
   className = "",
   eager = false,
+  widths = "w-[240px] sm:w-[300px] lg:w-[360px]",
+  sizes = "(max-width: 640px) 240px, (max-width: 1024px) 300px, 360px",
 }: CoverShowcaseProps) {
   return (
     <div className={`relative ${className}`}>
@@ -46,7 +51,7 @@ export default function CoverShowcase({
 
       <Link
         href={href}
-        className="group relative block w-[240px] sm:w-[300px] lg:w-[360px]"
+        className={`group relative block ${widths}`}
         aria-label="Découvrir Before I Knew You"
       >
 
@@ -76,7 +81,7 @@ export default function CoverShowcase({
           alt="Couverture du roman Before I Knew You, de Meverly"
           width={COVER_WIDTH}
           height={COVER_HEIGHT}
-          sizes="(max-width: 640px) 240px, (max-width: 1024px) 300px, 360px"
+          sizes={sizes}
           loading={eager ? "eager" : "lazy"}
           fetchPriority={eager ? "high" : "auto"}
           className="

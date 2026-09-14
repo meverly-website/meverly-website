@@ -2,17 +2,9 @@ import Button from "./Button";
 import Container from "./Container";
 import CoverShowcase from "./CoverShowcase";
 import RevealOnScroll from "./RevealOnScroll";
+import GenreLine from "./GenreLine";
 import SectionHeading from "./SectionHeading";
-import { BUY_LABEL, BUY_URL } from "@/lib/site";
-
-const THEMES = [
-  "Reconstruction",
-  "Santé mentale",
-  "Musique",
-  "Famille de cœur",
-  "Slow Burn",
-  "Romance M/M",
-];
+import { BUY_ANCHOR, BUY_LABEL, IS_RELEASED } from "@/lib/site";
 
 /*
  * overflow-x-clip : entre 1024 et ~1340 px de large, la couverture touche le
@@ -55,38 +47,19 @@ export default function BookSection() {
               suffira à changer leur vie.
             </p>
 
-            {/* Thèmes, en bordures fines. */}
+            {/*
+              La ligne de genre seule : la fiche détaillée (pages, formats,
+              langue) reste sur la page du roman.
+            */}
 
-            <ul className="mt-10 flex flex-wrap gap-3">
-
-              {THEMES.map((theme) => (
-                <li
-                  key={theme}
-                  className="
-                    rounded-edge
-                    border
-                    border-gold/20
-                    px-4
-                    py-2
-                    text-[0.65rem]
-                    uppercase
-                    tracking-[0.2em]
-                    text-muted
-                  "
-                >
-                  {theme}
-                </li>
-              ))}
-
-            </ul>
+            <GenreLine className="mt-8" />
 
             <div className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-6">
 
               <Button
                 variant="primary"
-                href={BUY_URL ?? "#"}
-                external
-                disabled={!BUY_URL}
+                href={BUY_ANCHOR}
+                disabled={!IS_RELEASED}
               >
                 {BUY_LABEL}
               </Button>

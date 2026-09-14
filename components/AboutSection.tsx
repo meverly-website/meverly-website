@@ -1,6 +1,7 @@
 import Container from "./Container";
 import RevealOnScroll from "./RevealOnScroll";
 import StarDivider from "./StarDivider";
+import { INSTAGRAM_URL } from "@/lib/site";
 
 /**
  * Le mot de l'autrice, en clôture de page.
@@ -23,22 +24,28 @@ export default function AboutSection() {
       <Container>
 
         {/*
-          Une phrase en deux temps, une ligne chacun. Le bloc est un peu plus
-          large que le reste pour que la seconde tienne sur une seule ligne dès
-          la tablette ; sur mobile elle se replie, l'écran est trop étroit.
+          Trois paragraphes : qui elle est, ce qu'elle écrit, le premier roman.
+          text-pretty évite qu'un mot reste seul en fin de paragraphe centré.
         */}
 
         <RevealOnScroll className="mx-auto max-w-2xl text-center">
 
           <StarDivider className="mb-12" />
 
-          <p className="text-base leading-9 text-muted sm:text-lg">
-            <span className="block">Certaines histoires parlent d’amour.</span>
-            <span className="block">
-              Les miennes parlent aussi de ce qu’il faut pour oser y croire
-              encore.
-            </span>
-          </p>
+          <div className="space-y-6 text-pretty text-base leading-8 text-muted sm:text-lg sm:leading-9">
+            <p>
+              Je suis Meverly, autrice indépendante et amoureuse des histoires
+              qui prennent le temps de laisser leurs personnages se
+              reconstruire.
+            </p>
+            <p>
+              J’écris sur les liens qui se créent quand on ne les attend plus,
+              les blessures qui ne disparaissent pas en un claquement de doigts,
+              les familles que l’on choisit et les secondes chances que l’on
+              s’accorde.
+            </p>
+            <p>Before I Knew You est mon premier roman.</p>
+          </div>
 
           <div className="mt-14">
 
@@ -52,6 +59,22 @@ export default function AboutSection() {
             </p>
 
           </div>
+
+          {/*
+            L'invitation Instagram vit ici plutôt qu'en section à part : un
+            lien simple (aucune intégration, aucun script), qui referme le mot
+            de l'autrice sans répéter une section juste au-dessus du footer.
+          */}
+
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mt-12 inline-flex items-center gap-4 text-xs uppercase tracking-[0.2em] text-muted transition-colors duration-500 hover:text-gold sm:tracking-[0.25em]"
+          >
+            @meverlybooks sur Instagram
+            <span aria-hidden="true" className="btn-trail" />
+          </a>
 
         </RevealOnScroll>
 

@@ -1,79 +1,76 @@
+import ExtractLink from "@/components/ExtractLink";
+import SensitiveThemes from "@/components/SensitiveThemes";
 import StarDivider from "@/components/StarDivider";
+import { BEFORE_I_KNEW_YOU } from "@/lib/books";
+
+/**
+ * Le résumé, après le bloc de décision : une colonne de lecture d'environ
+ * 65 signes, avec sa lettrine. Il se termine par une seule porte vers le
+ * premier chapitre, le même bouton encadré que dans le bloc de décision — la
+ * seule action répétée sur la page.
+ */
+
 export default function Synopsis() {
   return (
-    <section className="mx-auto max-w-4xl px-6 py-14 md:py-20 xl:py-32">
+    <section className="px-6 py-14 md:py-20 xl:py-28">
 
-      {/* Ligne */}
+      <div className="mx-auto max-w-[34em] text-base sm:text-lg">
 
-      <StarDivider className="mb-12 justify-start" />
+        <StarDivider className="mb-12" />
 
-      {/* Texte */}
+        <div className="space-y-7 leading-8 text-muted sm:leading-9">
 
-      <div
-        className="
-          space-y-8
+          <p className="first-letter:float-left first-letter:mr-[0.1em] first-letter:mt-[0.08em] first-letter:font-serif first-letter:text-[3.6em] first-letter:leading-[0.8] first-letter:text-gold">
+            À vingt-cinq ans, Ezra vit reclus depuis des années. Marqué par les
+            violences homophobes qu&apos;il a subies et le rejet de sa famille, il
+            s&apos;est réfugié dans la musique, composant sous un pseudonyme derrière
+            l&apos;écran qui le protège du monde.
+          </p>
 
-          text-base
-          sm:text-lg
+          <p>
+            À vingt et un ans, Sasha poursuit un seul rêve : vivre de sa passion
+            pour la musique. Lorsqu&apos;il découvre les compositions d&apos;un mystérieux
+            producteur connu sous le nom d&apos;E.02, il décide de lui écrire, sans
+            imaginer que ce simple message changera leur vie.
+          </p>
 
-          leading-8
-          sm:leading-9
+          <p>
+            Au fil de leurs échanges, une complicité inattendue naît entre eux.
+            Derrière les silences d&apos;Ezra, Sasha découvre un homme profondément
+            blessé, tandis qu&apos;Ezra retrouve peu à peu le goût d&apos;espérer grâce à ce
+            jeune musicien incapable d&apos;abandonner ceux qu&apos;il aime.
+          </p>
 
-          text-[#CFC4B8]
-        "
-      >
+          <p>
+            Mais lorsque la frontière entre leur amitié et leurs sentiments
+            commence à s&apos;effacer, le passé d&apos;Ezra menace de tout faire voler en
+            éclats. Car certaines blessures ne disparaissent pas simplement parce
+            qu&apos;on rencontre la bonne personne.
+          </p>
 
-        <p>
-          À vingt-cinq ans, Ezra vit reclus depuis des années. Marqué par les
-          violences homophobes qu&apos;il a subies et le rejet de sa famille, il
-          s&apos;est réfugié dans la musique, composant sous un pseudonyme derrière
-          l&apos;écran qui le protège du monde.
-        </p>
+        </div>
 
-        <p>
-          À vingt et un ans, Sasha poursuit un seul rêve : vivre de sa passion
-          pour la musique. Lorsqu&apos;il découvre les compositions d&apos;un mystérieux
-          producteur connu sous le nom d&apos;E.02, il décide de lui écrire, sans
-          imaginer que ce simple message changera leur vie.
-        </p>
+        {/* Signature et porte vers le chapitre, centrées : la fin du résumé. */}
 
-        <p>
-          Au fil de leurs échanges, une complicité inattendue naît entre eux.
-          Derrière les silences d&apos;Ezra, Sasha découvre un homme profondément
-          blessé, tandis qu&apos;Ezra retrouve peu à peu le goût d&apos;espérer grâce à ce
-          jeune musicien incapable d&apos;abandonner ceux qu&apos;il aime.
-        </p>
+        <div className="mt-14 text-center">
 
-        <p>
-          Mais lorsque la frontière entre leur amitié et leurs sentiments
-          commence à s&apos;effacer, le passé d&apos;Ezra menace de tout faire voler en
-          éclats. Car certaines blessures ne disparaissent pas simplement parce
-          qu&apos;on rencontre la bonne personne.
-        </p>
+          <span aria-hidden="true" className="mx-auto mb-6 block h-px w-16 bg-gold/40" />
 
-      </div>
+          <p className="text-balance font-serif text-2xl italic leading-relaxed text-muted sm:text-3xl">
+            Une histoire de reconstruction, de musique et d&apos;amour.
+          </p>
 
-      {/* Signature */}
+          {/* Pour qui vient de finir le résumé : une seule porte, vers le chapitre. */}
 
-      <div className="mt-16 flex flex-col">
+          <div className="mt-10">
+            <ExtractLink>Lire le premier chapitre</ExtractLink>
+          </div>
 
-        <span className="mb-6 h-px w-16 bg-[#EFC17E]/40" />
+        </div>
 
-        <p
-          className="
-            font-[family-name:var(--font-cormorant)]
+        {/* Après le résumé, jamais dans le bloc de décision : ce n'est pas ce qui aide à choisir. */}
 
-            text-2xl
-            sm:text-3xl
-
-            italic
-            leading-relaxed
-
-            text-[#CFC4B8]
-          "
-        >
-          Une histoire de reconstruction, de musique et d&apos;amour.
-        </p>
+        <SensitiveThemes themes={BEFORE_I_KNEW_YOU.sensitiveThemes} className="mt-12" />
 
       </div>
 

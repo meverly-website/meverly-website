@@ -4,6 +4,9 @@ import StarDivider from "@/components/StarDivider";
  * Sur téléphone, la taille des mots suit la largeur d'écran : à taille fixe,
  * « Reconstruction » débordait de sa colonne et chevauchait « Santé mentale »
  * sur un écran de 320.
+ *
+ * Le genre (slow burn, romance M/M) est passé dans la fiche technique, en
+ * haut de page : il ne reste ici que les thèmes, en deux colonnes.
  */
 
 export default function Themes() {
@@ -12,14 +15,12 @@ export default function Themes() {
     "Santé mentale",
     "Musique",
     "Famille de cœur",
-    "Slow Burn",
-    "Romance M/M",
   ];
 
   return (
     <section className="px-6 py-16 md:py-24 xl:py-36">
 
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-4xl">
 
         {/* Séparateur */}
 
@@ -35,7 +36,6 @@ export default function Themes() {
             gap-x-6
             sm:gap-x-8
 
-            md:grid-cols-3
             md:gap-y-14
             xl:gap-y-20
           "

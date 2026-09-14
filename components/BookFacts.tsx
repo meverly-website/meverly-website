@@ -5,25 +5,15 @@ import { IS_RELEASED } from "@/lib/site";
  * information de référence, pas un argument de vente. Elle reste discrète et
  * ne concurrence ni la couverture ni les boutons.
  *
- * L'en-tête (le genre) est d'une autre nature que les quatre données qui
- * suivent : il passe légèrement au-dessus, elles en niveau tertiaire.
- *
- * Deux variantes, en attente d'arbitrage :
- *   sans intitulés — les lignes telles quelles, en liste sans puces ;
- *   avec intitulés — une <dl>, valeurs raccourcies pour ne pas répéter
- *   l'intitulé (« Pages : 570 » plutôt que « Pages : 570 pages »).
+ * L'en-tête (le genre) est d'une autre nature que les données qui suivent :
+ * il passe légèrement au-dessus, elles en niveau tertiaire.
  */
 
-export const FACTS_WITH_LABELS: boolean = false;
-
-/* Même donnée que les liens d'achat : pas de disponibilité annoncée avant la sortie. */
-const FORMATS = IS_RELEASED ? "Broché & numérique" : "À paraître en broché & numérique";
-
 const FACTS = [
-  { label: "Pages", short: "570", line: "570 pages" },
-  { label: "Formats", short: IS_RELEASED ? "Broché & numérique" : "À paraître, broché & numérique", line: FORMATS },
-  { label: "Univers", short: "Musical", line: "Univers musical" },
-  { label: "Langue", short: "Français", line: "Roman en français" },
+  "570 pages",
+  /* Même donnée que les liens d'achat : pas de disponibilité annoncée avant la sortie. */
+  IS_RELEASED ? "Broché & numérique" : "À paraître en broché & numérique",
+  "Roman en français",
 ];
 
 type BookFactsProps = {
@@ -49,34 +39,22 @@ export default function BookFacts({ className = "" }: BookFactsProps) {
         className="mx-auto my-4 block h-px w-10 bg-gold/40 lg:mx-0 lg:my-5"
       />
 
-      {FACTS_WITH_LABELS ? (
-        <dl className="inline-grid grid-cols-[auto_auto] gap-x-6 gap-y-2 text-left text-sm">
-          {FACTS.map((fact) => (
-            <div key={fact.label} className="contents">
-              <dt className="text-[0.65rem] uppercase leading-6 tracking-[0.25em] text-muted/60">
-                {fact.label}
-              </dt>
-              <dd className="leading-6 text-muted">{fact.short}</dd>
-            </div>
-          ))}
-        </dl>
-      ) : (
-        /*
-          Empilée à côté de la couverture ; sur la page empilée (téléphone,
-          tablette), les quatre données se suivent sur une ou deux lignes,
-          séparées par le point médian, pour que les actions restent hautes.
-        */
-        <ul className="flex list-none flex-wrap justify-center gap-y-1 text-sm leading-6 text-muted lg:block lg:space-y-1.5">
-          {FACTS.map((fact, index) => (
-            <li key={fact.label} className="whitespace-nowrap lg:whitespace-normal">
-              {fact.line}
-              {index < FACTS.length - 1 && (
-                <span aria-hidden="true" className="mx-2.5 text-gold/50 lg:hidden">·</span>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
+      {/*
+        Empilée à côté de la couverture ; sur la page empilée (téléphone,
+        tablette), les données se suivent sur une ou deux lignes, séparées par
+        le point médian, pour que les actions restent hautes.
+      */}
+
+      <ul className="flex list-none flex-wrap justify-center gap-y-1 text-sm leading-6 text-muted lg:block lg:space-y-1.5">
+        {FACTS.map((fact, index) => (
+          <li key={fact} className="whitespace-nowrap lg:whitespace-normal">
+            {fact}
+            {index < FACTS.length - 1 && (
+              <span aria-hidden="true" className="mx-2.5 text-gold/50 lg:hidden">·</span>
+            )}
+          </li>
+        ))}
+      </ul>
 
     </div>
   );

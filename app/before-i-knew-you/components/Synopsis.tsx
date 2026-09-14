@@ -1,5 +1,7 @@
 import ExtractLink from "@/components/ExtractLink";
+import SensitiveThemes from "@/components/SensitiveThemes";
 import StarDivider from "@/components/StarDivider";
+import { BEFORE_I_KNEW_YOU } from "@/lib/books";
 
 /**
  * Le résumé, après le bloc de décision : une colonne de lecture d'environ
@@ -65,6 +67,10 @@ export default function Synopsis() {
           </div>
 
         </div>
+
+        {/* Après le résumé, jamais dans le bloc de décision : ce n'est pas ce qui aide à choisir. */}
+
+        <SensitiveThemes themes={BEFORE_I_KNEW_YOU.sensitiveThemes} className="mt-12" />
 
       </div>
 

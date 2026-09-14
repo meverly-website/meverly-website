@@ -3,7 +3,9 @@ import Button from "@/components/Button";
 import BuyActions from "@/components/BuyActions";
 import Footer from "@/components/Footer";
 import StarDivider from "@/components/StarDivider";
+import SensitiveThemes from "@/components/SensitiveThemes";
 import StickyNav from "@/components/StickyNav";
+import { BEFORE_I_KNEW_YOU } from "@/lib/books";
 import { readChapter, type Inline } from "@/lib/chapter";
 import { IS_RELEASED } from "@/lib/site";
 
@@ -84,6 +86,16 @@ export default function ExtraitPage() {
           <StarDivider className="mt-12" />
 
         </header>
+
+        {/*
+          Avant le chapitre, pas après : il s'ouvre dès le premier paragraphe
+          sur une scène d'agression.
+        */}
+
+        <SensitiveThemes
+          themes={BEFORE_I_KNEW_YOU.sensitiveThemes}
+          className="mx-auto mb-14 max-w-[34em] md:mb-16"
+        />
 
         {/* ================= CHAPITRE ================= */}
 

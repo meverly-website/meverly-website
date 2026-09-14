@@ -1,3 +1,4 @@
+import BuyActions from "@/components/BuyActions";
 import StarDivider from "@/components/StarDivider";
 export default function Synopsis() {
   return (
@@ -75,6 +76,12 @@ export default function Synopsis() {
           Une histoire de reconstruction, de musique et d&apos;amour.
         </p>
 
+      </div>
+
+      {/* Acheter, ou d'abord lire : juste après le résumé. */}
+
+      <div id="acheter" className="mt-20 scroll-mt-28">
+        <BuyActions />
       </div>
 
     </section>

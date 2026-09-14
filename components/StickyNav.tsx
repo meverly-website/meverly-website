@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Button from "./Button";
-import { BUY_URL, INSTAGRAM_URL } from "@/lib/site";
+import { BUY_ANCHOR, INSTAGRAM_URL, IS_RELEASED } from "@/lib/site";
 
 /**
  * Navigation du site.
@@ -178,12 +178,11 @@ export default function StickyNav() {
 
             <Button
               variant="secondary"
-              href={BUY_URL ?? "#"}
-              external
-              disabled={!BUY_URL}
+              href={BUY_ANCHOR}
+              disabled={!IS_RELEASED}
               className="px-6 py-3 text-[0.65rem]"
             >
-              {BUY_URL ? "Acheter" : "Bientôt"}
+              {IS_RELEASED ? "Acheter" : "Bientôt"}
             </Button>
 
           </div>
@@ -272,12 +271,12 @@ export default function StickyNav() {
 
             <Button
               variant="primary"
-              href={BUY_URL ?? "#"}
-              external
-              disabled={!BUY_URL}
+              href={BUY_ANCHOR}
+              disabled={!IS_RELEASED}
+              onClick={() => setOpen(false)}
               className="w-full"
             >
-              {BUY_URL ? "Acheter le roman" : "Bientôt disponible"}
+              {IS_RELEASED ? "Acheter le roman" : "Bientôt disponible"}
             </Button>
 
           </div>

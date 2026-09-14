@@ -3,7 +3,7 @@ import Container from "./Container";
 import CoverShowcase from "./CoverShowcase";
 import RevealOnScroll from "./RevealOnScroll";
 import SectionHeading from "./SectionHeading";
-import { BUY_LABEL, BUY_URL } from "@/lib/site";
+import { BUY_ANCHOR, BUY_LABEL, IS_RELEASED } from "@/lib/site";
 
 const THEMES = [
   "Reconstruction",
@@ -84,9 +84,8 @@ export default function BookSection() {
 
               <Button
                 variant="primary"
-                href={BUY_URL ?? "#"}
-                external
-                disabled={!BUY_URL}
+                href={BUY_ANCHOR}
+                disabled={!IS_RELEASED}
               >
                 {BUY_LABEL}
               </Button>

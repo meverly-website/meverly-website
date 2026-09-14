@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import StickyNav from "@/components/StickyNav";
 import ThreadSection from "@/components/ThreadSection";
 import { BOOK_THREAD } from "@/lib/threads";
@@ -17,6 +18,18 @@ import Footer from "@/components/Footer";
  * synopsis, se resserre à hauteur des personnages et s'éteint après la
  * citation. Une continuation, pas un second nouage.
  */
+
+/*
+ * Adresse canonique propre : sans elle, la page hérite de celle du layout
+ * (l'accueil) et passe pour un doublon auprès des moteurs. Titre, description
+ * et partage restent ceux du site.
+ */
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://meverly.fr/before-i-knew-you",
+  },
+};
 
 export default function BeforeIKnewYouPage() {
   return (

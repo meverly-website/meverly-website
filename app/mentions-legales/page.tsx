@@ -1,7 +1,19 @@
+import type { Metadata } from "next";
 import StarDivider from "@/components/StarDivider";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import StickyNav from "@/components/StickyNav";
+
+/*
+ * Adresse canonique propre : sans elle, la page hérite de celle du layout
+ * (l'accueil) et passe pour un doublon auprès des moteurs.
+ */
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://meverly.fr/mentions-legales",
+  },
+};
 
 export default function MentionsLegales() {
   return (

@@ -1,19 +1,19 @@
 import StickyNav from "@/components/StickyNav";
 import ThreadSection from "@/components/ThreadSection";
 import Hero from "@/components/Hero";
-import Breath from "@/components/Breath";
+import PullQuote from "@/components/PullQuote";
 import BookSection from "@/components/BookSection";
 import CharactersSection from "@/components/CharactersSection";
-import PullQuote from "@/components/PullQuote";
 import MusicSection from "@/components/MusicSection";
+import StoryInvite from "@/components/StoryInvite";
 import AboutSection from "@/components/AboutSection";
 import Footer from "@/components/Footer";
 import { HOME_THREAD } from "@/lib/threads";
 
 /*
  * Chaque section porte son morceau de fil rouge (ThreadSection) : le fil naît
- * dans le Hero, se noue une seule fois avant la citation et s'éteint sous la
- * signature de l'autrice.
+ * dans le Hero, se noue une seule fois chez les personnages — les deux qu'il
+ * relie — et s'éteint sous la signature de l'autrice.
  */
 
 export default function Home() {
@@ -25,18 +25,6 @@ export default function Home() {
 
         <ThreadSection thread={HOME_THREAD.hero}>
           <Hero />
-        </ThreadSection>
-
-        <ThreadSection thread={HOME_THREAD.breath}>
-          <Breath />
-        </ThreadSection>
-
-        <ThreadSection thread={HOME_THREAD.roman}>
-          <BookSection />
-        </ThreadSection>
-
-        <ThreadSection thread={HOME_THREAD.personnages}>
-          <CharactersSection />
         </ThreadSection>
 
         {/*
@@ -55,8 +43,20 @@ export default function Home() {
           </PullQuote>
         </ThreadSection>
 
+        <ThreadSection thread={HOME_THREAD.roman}>
+          <BookSection />
+        </ThreadSection>
+
+        <ThreadSection thread={HOME_THREAD.personnages}>
+          <CharactersSection />
+        </ThreadSection>
+
         <ThreadSection thread={HOME_THREAD.musique}>
           <MusicSection />
+        </ThreadSection>
+
+        <ThreadSection thread={HOME_THREAD.histoire}>
+          <StoryInvite />
         </ThreadSection>
 
         <ThreadSection thread={HOME_THREAD.auteur}>

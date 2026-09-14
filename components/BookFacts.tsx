@@ -1,3 +1,4 @@
+import GenreLine from "./GenreLine";
 import { IS_RELEASED } from "@/lib/site";
 
 /**
@@ -24,15 +25,7 @@ export default function BookFacts({ className = "" }: BookFactsProps) {
   return (
     <div className={className}>
 
-      {/* Chaque mention reste d'un tenant : la ligne ne se coupe qu'entre elles. */}
-
-      <p className="text-[0.7rem] uppercase tracking-[0.28em] text-text/80 sm:text-xs">
-        <span className="whitespace-nowrap">Romance contemporaine</span>
-        {" · "}
-        <span className="whitespace-nowrap">M/M</span>
-        {" · "}
-        <span className="whitespace-nowrap">Slow burn</span>
-      </p>
+      <GenreLine />
 
       <span
         aria-hidden="true"

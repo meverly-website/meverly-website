@@ -1,6 +1,7 @@
 import Container from "./Container";
 import RevealOnScroll from "./RevealOnScroll";
 import StarDivider from "./StarDivider";
+import { INSTAGRAM_URL } from "@/lib/site";
 
 /**
  * Le mot de l'autrice, en clôture de page.
@@ -58,6 +59,22 @@ export default function AboutSection() {
             </p>
 
           </div>
+
+          {/*
+            L'invitation Instagram vit ici plutôt qu'en section à part : un
+            lien simple (aucune intégration, aucun script), qui referme le mot
+            de l'autrice sans répéter une section juste au-dessus du footer.
+          */}
+
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mt-12 inline-flex items-center gap-4 text-xs uppercase tracking-[0.2em] text-muted transition-colors duration-500 hover:text-gold sm:tracking-[0.25em]"
+          >
+            @meverlybooks sur Instagram
+            <span aria-hidden="true" className="btn-trail" />
+          </a>
 
         </RevealOnScroll>
 

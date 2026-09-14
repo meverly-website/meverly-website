@@ -2,8 +2,9 @@ import RevealOnScroll from "./RevealOnScroll";
 import StarDivider from "./StarDivider";
 
 /**
- * La citation, en très grand et isolée. C'est le moment narratif le plus fort
- * de la page : c'est derrière elle que le fil se croise, une seule fois.
+ * La citation, en très grand et isolée, juste après le Hero : elle donne le
+ * ton avant le roman. Le nœud du fil n'est plus ici mais chez les
+ * personnages, qu'il relie.
  */
 
 type PullQuoteProps = {
@@ -13,7 +14,7 @@ type PullQuoteProps = {
 
 export default function PullQuote({ children, source }: PullQuoteProps) {
   return (
-    <section className="relative px-6 py-24 md:py-32 xl:py-52">
+    <section className="relative px-6 py-16 md:py-24 xl:py-36">
 
       <RevealOnScroll slow className="mx-auto max-w-4xl">
 

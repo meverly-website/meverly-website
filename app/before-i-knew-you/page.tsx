@@ -20,14 +20,44 @@ import Footer from "@/components/Footer";
  */
 
 /*
- * Adresse canonique propre : sans elle, la page hérite de celle du layout
- * (l'accueil) et passe pour un doublon auprès des moteurs. Titre, description
- * et partage restent ceux du site.
+ * Métadonnées propres (validées par l'autrice) : sans elles, la page hérite
+ * du titre et de l'adresse canonique de l'accueil, et passe pour un doublon
+ * auprès des moteurs. Les balises de partage sont redéfinies en entier : un
+ * openGraph de page remplace celui du layout, il ne s'y ajoute pas.
  */
 
+const URL = "https://meverly.fr/before-i-knew-you";
+const TITLE = "Before I Knew You, romance M/M contemporaine";
+const DESCRIPTION =
+  "Ezra vit reclus derrière sa musique. Sasha rêve d'en vivre. Before I Knew You, premier roman de Meverly : une romance M/M slow burn sur la reconstruction, la confiance et les secondes chances.";
+
 export const metadata: Metadata = {
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: {
-    canonical: "https://meverly.fr/before-i-knew-you",
+    canonical: URL,
+  },
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: URL,
+    siteName: "Meverly",
+    title: `${TITLE} — Meverly`,
+    description: DESCRIPTION,
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1734,
+        height: 907,
+        alt: "Meverly — Before I Knew You",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${TITLE} — Meverly`,
+    description: DESCRIPTION,
+    images: ["/og-image.png"],
   },
 };
 

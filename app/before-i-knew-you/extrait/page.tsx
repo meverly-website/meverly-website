@@ -194,10 +194,18 @@ export default function ExtraitPage() {
             <span className="whitespace-nowrap">Musique · Reconstruction</span>
           </p>
 
-          <BuyActions withExtract={false} align="center" className="mt-14" />
+          {/*
+            Avant la sortie, la phrase ci-dessus dit déjà que le roman
+            paraîtra : pas de mention d'achat en double, et le retour au roman
+            devient l'action de fin de lecture. Après, l'achat passe devant.
+          */}
+
+          {IS_RELEASED && (
+            <BuyActions withExtract={false} align="center" className="mt-14" />
+          )}
 
           <div className="mt-14">
-            <Button variant="ghost" href="/before-i-knew-you">
+            <Button variant={IS_RELEASED ? "ghost" : "secondary"} href="/before-i-knew-you">
               Revenir au roman
             </Button>
           </div>

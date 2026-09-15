@@ -3,13 +3,20 @@ import Image from "next/image";
 /**
  * Les deux personnages, traités dans le contraste de la couverture :
  * Ezra en silhouette sombre et refermée, Sasha en ligne claire et ouverte.
+ *
+ * Plus de photographies : elles donnaient un visage aux personnages, que le
+ * roman laisse à la lecture. Chaque carte porte la main du personnage, tirée
+ * de l'illustration de la couverture et passée dans sa seule teinte — or
+ * pour Sasha, gris éteint pour Ezra ; le rouge reste au fil de la page.
+ * Images générées par scripts/build-assets.mjs.
+ *
+ * Le cadre est opaque : le fil rouge peut passer derrière.
  */
 
 type CharacterCardProps = {
   name: string;
   traits: string;
   description: string;
-  image: string;
   tone: "dark" | "light";
 };
 
@@ -17,13 +24,12 @@ export default function CharacterCard({
   name,
   traits,
   description,
-  image,
   tone,
 }: CharacterCardProps) {
   const dark = tone === "dark";
 
   return (
-    <article className="group">
+    <article>
 
       <div
         className={`
@@ -32,45 +38,22 @@ export default function CharacterCard({
           overflow-hidden
           rounded-edge
           border
-          ${dark ? "border-text/8" : "border-gold/30"}
+          bg-ink
+          ${dark ? "border-text/10" : "border-gold/30"}
         `}
       >
 
         <Image
-          src={image}
+          src={`/characters/hand-${name.toLowerCase()}.png`}
           alt=""
           fill
-          sizes="(max-width: 1024px) 92vw, 44vw"
-          className={`
-            object-cover
-            transition-[filter]
-            duration-700
-            ${
-              dark
-                ? "brightness-[0.62] saturate-[0.7] group-hover:brightness-[0.72]"
-                : "brightness-105 group-hover:brightness-110"
-            }
-          `}
-        />
-
-        {/* Le sombre se referme sur l'image, le clair la laisse respirer. */}
-
-        <div
-          aria-hidden="true"
-          className={`
-            absolute
-            inset-0
-            ${
-              dark
-                ? "bg-gradient-to-t from-ink via-ink/70 to-ink/25"
-                : "bg-gradient-to-t from-ink/80 via-ink/15 to-transparent"
-            }
-          `}
+          sizes="(max-width: 767px) 92vw, 44vw"
+          className="object-contain p-[6%]"
         />
 
       </div>
 
-      <div className={dark ? "mt-8" : "mt-8"}>
+      <div className="mt-8">
 
         <h3
           className={`

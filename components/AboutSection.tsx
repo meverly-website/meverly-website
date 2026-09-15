@@ -18,7 +18,7 @@ export default function AboutSection() {
   return (
     <section
       id="a-propos"
-      className="relative scroll-mt-24 pb-20 pt-16 md:pb-24 md:pt-20 xl:pb-36 xl:pt-32"
+      className="relative scroll-mt-24 pb-20 pt-10 md:pb-24 md:pt-14 xl:pb-36 xl:pt-24"
     >
 
       <Container>

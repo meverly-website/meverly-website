@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Button from "./Button";
-import { BUY_ANCHOR, INSTAGRAM_URL, IS_RELEASED } from "@/lib/site";
+import { BUY_ANCHOR, EXTRACT_HREF, INSTAGRAM_URL, IS_RELEASED } from "@/lib/site";
 
 /**
  * Navigation du site.
@@ -34,6 +35,13 @@ const MOBILE_LINK =
   "font-serif text-4xl font-light text-text transition-colors hover:text-gold";
 
 export default function StickyNav() {
+  const pathname = usePathname();
+  const cta = IS_RELEASED
+    ? { href: BUY_ANCHOR, label: "Acheter le roman", short: "Acheter" }
+    : pathname === EXTRACT_HREF
+      ? null
+      : { href: EXTRACT_HREF, label: "Lire un extrait", short: "Lire un extrait" };
+
   const [condensed, setCondensed] = useState(false);
   const [open, setOpen] = useState(false);
   const sentinel = useRef<HTMLDivElement>(null);
@@ -169,23 +177,25 @@ export default function StickyNav() {
           </nav>
 
           {/*
-            Contour or plutôt qu'or plein : le bouton d'achat de la navbar est
+            Contour or plutôt qu'or plein : le bouton de la navbar est
             permanent, il ne doit pas concurrencer le primary de la page —
-            un seul or plein par écran.
+            un seul or plein par écran. Jamais désactivé : avant la sortie, il
+            mène à l'extrait (sauf sur l'extrait lui-même), après, à l'achat.
           */}
 
-          <div className="hidden shrink-0 lg:block">
+          {cta && (
+            <div className="hidden shrink-0 lg:block">
 
-            <Button
-              variant="secondary"
-              href={BUY_ANCHOR}
-              disabled={!IS_RELEASED}
-              className="px-6 py-3 text-[0.65rem]"
-            >
-              {IS_RELEASED ? "Acheter" : "Bientôt"}
-            </Button>
+              <Button
+                variant="secondary"
+                href={cta.href}
+                className="px-6 py-3 text-[0.65rem]"
+              >
+                {cta.short}
+              </Button>
 
-          </div>
+            </div>
+          )}
 
           {/* ================= MOBILE ================= */}
 
@@ -267,19 +277,20 @@ export default function StickyNav() {
 
           </nav>
 
-          <div className="mt-auto flex flex-col gap-8 pb-4">
+          {cta && (
+            <div className="mt-auto flex flex-col gap-8 pb-4">
 
-            <Button
-              variant="primary"
-              href={BUY_ANCHOR}
-              disabled={!IS_RELEASED}
-              onClick={() => setOpen(false)}
-              className="w-full"
-            >
-              {IS_RELEASED ? "Acheter le roman" : "Bientôt disponible"}
-            </Button>
+              <Button
+                variant="primary"
+                href={cta.href}
+                onClick={() => setOpen(false)}
+                className="w-full"
+              >
+                {cta.label}
+              </Button>
 
-          </div>
+            </div>
+          )}
 
         </div>
 

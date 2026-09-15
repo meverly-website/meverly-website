@@ -4,7 +4,7 @@ import CoverShowcase from "./CoverShowcase";
 import RevealOnScroll from "./RevealOnScroll";
 import GenreLine from "./GenreLine";
 import SectionHeading from "./SectionHeading";
-import { BUY_ANCHOR, BUY_LABEL, IS_RELEASED } from "@/lib/site";
+import { BUY_ANCHOR, EXTRACT_HREF, IS_RELEASED, PRE_RELEASE_NOTE } from "@/lib/site";
 
 /*
  * overflow-x-clip : entre 1024 et ~1340 px de large, la couverture touche le
@@ -15,7 +15,7 @@ import { BUY_ANCHOR, BUY_LABEL, IS_RELEASED } from "@/lib/site";
 
 export default function BookSection() {
   return (
-    <section id="roman" className="relative scroll-mt-24 overflow-x-clip py-14 md:py-20 xl:py-28">
+    <section id="roman" className="relative scroll-mt-24 overflow-x-clip pb-14 pt-10 md:pb-20 md:pt-14 xl:pb-28 xl:pt-20">
 
       <Container>
 
@@ -54,21 +54,42 @@ export default function BookSection() {
 
             <GenreLine className="mt-8" />
 
+            {/*
+              La hiérarchie suit la sortie (IS_RELEASED) : avant, l'extrait
+              en or plein et l'achat en simple mention ; après, l'achat en or
+              plein et l'extrait en lien discret. « Découvrir le roman » reste
+              secondaire dans les deux cas.
+            */}
+
             <div className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-6">
 
-              <Button
-                variant="primary"
-                href={BUY_ANCHOR}
-                disabled={!IS_RELEASED}
-              >
-                {BUY_LABEL}
-              </Button>
+              {IS_RELEASED ? (
+                <Button variant="primary" href={BUY_ANCHOR}>
+                  Acheter le roman
+                </Button>
+              ) : (
+                <Button variant="primary" href={EXTRACT_HREF}>
+                  Lire un extrait
+                </Button>
+              )}
 
               <Button variant="secondary" href="/before-i-knew-you">
                 Découvrir le roman
               </Button>
 
             </div>
+
+            {IS_RELEASED ? (
+              <div className="mt-8">
+                <Button variant="ghost" href={EXTRACT_HREF}>
+                  Lire un extrait
+                </Button>
+              </div>
+            ) : (
+              <p className="mt-6 text-xs uppercase tracking-[0.25em] text-muted">
+                {PRE_RELEASE_NOTE}
+              </p>
+            )}
 
           </RevealOnScroll>
 

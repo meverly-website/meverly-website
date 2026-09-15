@@ -1,4 +1,11 @@
 import StarDivider from "@/components/StarDivider";
+
+/*
+ * La citation de clôture. Sa source est une attribution collée à la
+ * citation (tiret, titre de l'œuvre), comme sur l'accueil : en capitales
+ * dorées sous un filet, elle flottait comme une étiquette.
+ */
+
 export default function Quote() {
   return (
     <section className="px-6 py-20 md:py-28 xl:py-40">
@@ -9,51 +16,34 @@ export default function Quote() {
 
         <StarDivider className="mb-16" />
 
-        {/* Citation */}
+        <figure>
 
-        <blockquote
-          className="
-            text-center
-
-            font-[family-name:var(--font-cormorant)]
-
-            text-3xl
-            sm:text-4xl
-            lg:text-5xl
-
-            italic
-            leading-relaxed
-
-            text-[#CFC4B8]
-          "
-        >
-          « Parfois, aimer quelqu&apos;un,
-          c&apos;est simplement lui rappeler
-          qu&apos;il mérite encore d&apos;être heureux. »
-        </blockquote>
-
-        {/* Signature */}
-
-        <div className="mt-14 flex flex-col items-center">
-
-          <span className="mb-5 h-px w-16 bg-[#EFC17E]/40" />
-
-          <p
+          <blockquote
             className="
-              uppercase
+              text-center
 
-              tracking-[0.45em]
+              font-[family-name:var(--font-cormorant)]
 
-              text-xs
-              sm:text-sm
+              text-3xl
+              sm:text-4xl
+              lg:text-5xl
 
-              text-[#EFC17E]
+              italic
+              leading-relaxed
+
+              text-[#CFC4B8]
             "
           >
-            Before I Knew You
-          </p>
+            « Parfois, aimer quelqu&apos;un,
+            c&apos;est simplement lui rappeler
+            qu&apos;il mérite encore d&apos;être heureux. »
+          </blockquote>
 
-        </div>
+          <figcaption className="mt-6 text-center font-serif text-lg italic text-muted sm:text-xl md:mt-8">
+            —&nbsp;<cite>Before I Knew You</cite>
+          </figcaption>
+
+        </figure>
 
       </div>
 

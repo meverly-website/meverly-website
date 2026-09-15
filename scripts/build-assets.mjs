@@ -11,6 +11,8 @@
  *   public/hero-illustration.png — l'illustration détourée, pour le partage
  *   public/cover.png             — la couverture
  *   public/og-image.png          — l'image de partage, 1734 × 907
+ *   public/characters/hand-*.png — la main de Sasha et celle d'Ezra, pour
+ *                                  les cartes des personnages
  *
  * L'illustration est convertie en canal alpha (alpha = luminance) pour se
  * poser sans couture sur le fond du site, quel que soit son noir exact.
@@ -117,6 +119,65 @@ async function buildIllustration() {
   return { width: w, height: h };
 }
 
+/**
+ * Les deux mains, découpées dans l'illustration source, chacune passée dans
+ * sa seule teinte : or pour Sasha (ligne claire), gris éteint pour Ezra
+ * (silhouette sombre).
+ *
+ * Le fil rouge traverse le dessin et ne peut pas en être retiré sans trouer
+ * les doigts : il est gardé, mais recoloré dans la teinte de la main et
+ * atténué (`tame`), pour que le rouge reste au seul fil de la page. Les
+ * bords du recadrage sont fondus, la découpe ne se voit pas dans le cadre.
+ */
+const HANDS = {
+  sasha: { box: [150, 20, 700, 470], tint: [239, 193, 126], gain: 1, tame: 0.45 },
+  ezra: { box: [740, 400, 680, 360], tint: [207, 196, 184], gain: 0.72, tame: 0.65 },
+};
+
+async function buildHands() {
+  const { data, info } = await sharp(ILLUSTRATION_SRC)
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  const clamp = (value) => Math.min(1, Math.max(0, value));
+
+  for (const [name, { box, tint, gain, tame }] of Object.entries(HANDS)) {
+    const [left, top, w, h] = box;
+    const out = Buffer.alloc(w * h * 4);
+
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        const i = ((y + top) * info.width + (x + left)) * info.channels;
+        const o = (y * w + x) * 4;
+        const r = data[i], g = data[i + 1], b = data[i + 2];
+
+        // Part de rouge : r nettement au-dessus de g, et g ≈ b (l'or a g ≫ b).
+        const redness = clamp((r - Math.max(g, b) - 25) / 50) * clamp((40 - (g - b)) / 25);
+        const luma = Math.max(r, g, b) * (1 - tame * redness) * gain;
+
+        const ramp = clamp((luma - FLOOR) / RAMP);
+        const edge = Math.min(x, w - 1 - x, y, h - 1 - y) / (0.14 * Math.min(w, h));
+        const alpha = Math.round(
+          Math.min(255, luma) * ramp * ramp * (3 - 2 * ramp) * Math.min(1, edge) ** 1.5
+        );
+
+        if (alpha === 0) continue;
+
+        out[o] = tint[0];
+        out[o + 1] = tint[1];
+        out[o + 2] = tint[2];
+        out[o + 3] = alpha;
+      }
+    }
+
+    await sharp(out, { raw: { width: w, height: h, channels: 4 } })
+      .png({ compressionLevel: 9 })
+      .toFile(path.join(PUBLIC, "characters", `hand-${name}.png`));
+
+    console.log(`main ${name.padEnd(6)} ${w}×${h}`);
+  }
+}
+
 async function buildCover() {
   const { width, height } = await sharp(COVER_SRC).metadata();
 
@@ -200,5 +261,6 @@ async function buildOgImage() {
 }
 
 await buildIllustration();
+await buildHands();
 await buildCover();
 await buildOgImage();

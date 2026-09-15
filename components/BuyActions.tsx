@@ -1,19 +1,24 @@
 import Button from "./Button";
 import ExtractLink from "./ExtractLink";
-import { BUY_EBOOK_URL, BUY_PAPERBACK_URL } from "@/lib/site";
+import {
+  BUY_EBOOK_URL,
+  BUY_PAPERBACK_URL,
+  IS_RELEASED,
+  PRE_RELEASE_NOTE,
+} from "@/lib/site";
 
 /**
- * Les actions du roman : acheter (broché, e-book) et lire un extrait.
+ * Les actions du roman : lire un extrait, acheter (broché, e-book).
  *
- * Un seul niveau fort par écran : jamais trois pastilles or côte à côte.
- * L'achat forme un seul groupe, sous un intitulé, les deux éditions en
- * boutons secondaires de même poids — pas d'or plein : désactivé, il
- * attirerait l'œil vers une action impossible.
+ * Un seul or plein par écran, et jamais sur une action impossible. La
+ * hiérarchie suit IS_RELEASED :
  *
- * « Lire un extrait » est tertiaire par son poids visuel, pas par son
- * importance — pour une autrice qu'on découvre, c'est souvent le premier
- * clic, et tant que les éditions ne sont pas en vente, la seule action
- * possible. Il vient donc juste sous l'achat, en grand, avec de l'air.
+ * - avant la sortie, « Lire un extrait » est l'action principale ; l'achat
+ *   n'est qu'une mention discrète, sans bouton désactivé qui attirerait l'œil
+ *   vers ce qu'on ne peut pas faire ;
+ * - après la sortie, les éditions en vente passent devant, la première en or
+ *   plein, et l'extrait devient secondaire. Une édition encore absente n'a
+ *   pas de bouton : une ligne dit qu'elle arrive.
  */
 
 type BuyActionsProps = {
@@ -30,11 +35,42 @@ const ALIGN = {
   responsive: { text: "text-center lg:text-left", row: "justify-center lg:justify-start" },
 };
 
+const EDITIONS = [
+  { label: "Broché", href: BUY_PAPERBACK_URL },
+  { label: "E-book", href: BUY_EBOOK_URL },
+];
+
+const NOTE = "text-xs uppercase tracking-[0.25em] text-muted";
+
 export default function BuyActions({
   withExtract = true,
   align = "left",
   className = "",
 }: BuyActionsProps) {
+  const extract = withExtract && (
+    <div>
+
+      <ExtractLink />
+
+      <p className="mt-3 text-sm text-muted">
+        Le premier chapitre, en entier.
+      </p>
+
+    </div>
+  );
+
+  if (!IS_RELEASED) {
+    return (
+      <div className={`${ALIGN[align].text} ${className}`}>
+        {extract}
+        <p className={`${withExtract ? "mt-7" : ""} ${NOTE}`}>{PRE_RELEASE_NOTE}</p>
+      </div>
+    );
+  }
+
+  const onSale = EDITIONS.filter((edition) => edition.href);
+  const missing = EDITIONS.find((edition) => !edition.href);
+
   return (
     <div className={`${ALIGN[align].text} ${className}`}>
 
@@ -43,57 +79,26 @@ export default function BuyActions({
       </p>
 
       <div className={`mt-5 flex flex-wrap gap-4 ${ALIGN[align].row}`}>
-        <Edition href={BUY_PAPERBACK_URL}>Broché</Edition>
-        <Edition href={BUY_EBOOK_URL}>E-book</Edition>
+        {onSale.map((edition, index) => (
+          <Button
+            key={edition.label}
+            variant={index === 0 ? "primary" : "secondary"}
+            href={edition.href ?? undefined}
+            external
+          >
+            {edition.label}
+          </Button>
+        ))}
       </div>
 
-      <Availability />
-
-      {withExtract && (
-        <div className="mt-8">
-
-          <ExtractLink />
-
-          <p className="mt-3 text-sm text-muted">
-            Le premier chapitre, en entier.
-          </p>
-
-        </div>
+      {missing && (
+        <p className={`mt-4 ${NOTE}`}>
+          Édition {missing.label.toLowerCase()} bientôt disponible
+        </p>
       )}
 
+      {extract && <div className="mt-8">{extract}</div>}
+
     </div>
-  );
-}
-
-function Edition({
-  href,
-  children,
-}: {
-  href: string | null;
-  children: React.ReactNode;
-}) {
-  return (
-    <Button variant="secondary" href={href ?? "#"} external disabled={!href}>
-      {children}
-    </Button>
-  );
-}
-
-/* Ce qui n'est pas encore en vente est dit une fois, sous les boutons. */
-
-function Availability() {
-  const missing = [
-    !BUY_PAPERBACK_URL && "broché",
-    !BUY_EBOOK_URL && "e-book",
-  ].filter(Boolean);
-
-  if (missing.length === 0) return null;
-
-  return (
-    <p className="mt-4 text-xs uppercase tracking-[0.25em] text-muted">
-      {missing.length === 2
-        ? "Bientôt disponible"
-        : `Édition ${missing[0]} bientôt disponible`}
-    </p>
   );
 }

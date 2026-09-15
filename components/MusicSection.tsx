@@ -6,19 +6,21 @@ import SoundWave from "./SoundWave";
 import { SPOTIFY_URL } from "@/lib/site";
 
 /**
- * Univers musical.
+ * La musique du roman.
  *
- * Le lien Spotify reste un simple bouton sortant : pas de lecteur intégré.
+ * Le titre seul, sans surtitre « Univers musical » (retiré à la demande de
+ * l'autrice, comme dans la fiche technique). Le lien Spotify reste un simple
+ * bouton sortant : pas de lecteur intégré.
  */
 
 export default function MusicSection() {
   return (
-    <section id="musique" className="relative scroll-mt-24 py-16 md:py-24 xl:py-40">
+    <section id="musique" className="relative scroll-mt-24 pb-10 pt-16 md:pb-14 md:pt-24 xl:pb-24 xl:pt-40">
 
       <Container>
 
         <RevealOnScroll>
-          <SectionHeading eyebrow="Univers musical" title="Ce qu'ils écoutent" />
+          <SectionHeading title="Ce qu'ils écoutent" />
         </RevealOnScroll>
 
         <RevealOnScroll className="mx-auto mt-12 max-w-2xl text-center">

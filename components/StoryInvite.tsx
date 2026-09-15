@@ -9,7 +9,7 @@ import SectionHeading from "./SectionHeading";
 
 export default function StoryInvite() {
   return (
-    <section id="histoire" className="relative scroll-mt-24 py-16 md:py-20 xl:py-32">
+    <section id="histoire" className="relative scroll-mt-24 py-12 md:py-16 xl:py-20">
 
       <RevealOnScroll className="mx-auto max-w-3xl px-6 text-center">
 

@@ -15,8 +15,9 @@ import Footer from "@/components/Footer";
  * dupliquait un second, dans l'ancienne palette.
  *
  * Le fil de l'accueil se poursuit ici, section par section : il accompagne le
- * synopsis, se resserre à hauteur des personnages et s'éteint après la
- * citation. Une continuation, pas un second nouage.
+ * bloc de décision et le résumé, se faufile à hauteur des personnages et
+ * s'éteint à l'approche de la citation (après elle sur ordinateur). Une
+ * continuation, pas un second nouage.
  */
 
 /*

@@ -28,6 +28,12 @@ export default function CharactersSection() {
           <SectionHeading eyebrow="Les personnages" title="Avant de les rencontrer" />
         </RevealOnScroll>
 
+        {/*
+          Ezra d'abord à la lecture ; en deux colonnes, Sasha passe à gauche
+          et en haut, Ezra à droite et plus bas : la diagonale de la
+          couverture, où la main claire descend vers la main sombre.
+        */}
+
         <div
           className="
             mt-14
@@ -40,25 +46,23 @@ export default function CharactersSection() {
           "
         >
 
-          <RevealOnScroll slow className="md:mt-16 xl:mt-24">
+          <RevealOnScroll slow className="md:order-2 md:mt-16 xl:mt-24">
 
             <CharacterCard
               name="Ezra"
               traits="Réservé · Patient · Calme"
               description="Reclus depuis des années, il compose sous un pseudonyme, derrière l'écran qui le protège du monde."
-              image="/characters/ezra.jpg"
               tone="dark"
             />
 
           </RevealOnScroll>
 
-          <RevealOnScroll slow>
+          <RevealOnScroll slow className="md:order-1">
 
             <CharacterCard
               name="Sasha"
               traits="Lumineux · Énergique · Loyal"
               description="Un seul rêve, vivre de la musique — et l'incapacité d'abandonner ceux qu'il aime."
-              image="/characters/sasha.jpg"
               tone="light"
             />
 

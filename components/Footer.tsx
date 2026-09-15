@@ -16,7 +16,7 @@ export default function Footer() {
 
         <div className="flex flex-col gap-12 md:flex-row md:gap-16 md:items-start md:justify-between">
 
-          {/* Signature */}
+          {/* Signature : le nom seul, sans devise (retirée à la demande de l'autrice). */}
 
           <div>
 
@@ -26,10 +26,6 @@ export default function Footer() {
             >
               MEVERLY
             </Link>
-
-            <p className="mt-8 max-w-xs font-serif text-lg italic leading-relaxed text-muted">
-              Some stories find us when we need them most.
-            </p>
 
           </div>
 

@@ -7,6 +7,9 @@ import StarDivider from "@/components/StarDivider";
  *
  * Le genre (slow burn, romance M/M) est passé dans la fiche technique, en
  * haut de page : il ne reste ici que les thèmes, en deux colonnes.
+ *
+ * La grille porte son intitulé : elle suit le bloc replié des thèmes
+ * sensibles, et sans titre elle se lisait comme son contenu.
  */
 
 export default function Themes() {
@@ -24,12 +27,18 @@ export default function Themes() {
 
         {/* Séparateur */}
 
-        <StarDivider className="mb-16" />
+        <StarDivider className="mb-10" />
+
+        <h2 className="text-center text-[0.7rem] uppercase tracking-[0.45em] text-gold">
+          Les thèmes du roman
+        </h2>
 
         {/* Grille */}
 
         <div
           className="
+            mt-12
+            md:mt-14
             grid
             grid-cols-2
             gap-y-10

@@ -10,12 +10,13 @@ import { IS_RELEASED } from "@/lib/site";
  * il passe légèrement au-dessus, elles en niveau tertiaire.
  */
 
-const FACTS = [
-  "570 pages",
-  /* Même donnée que les liens d'achat : pas de disponibilité annoncée avant la sortie. */
-  IS_RELEASED ? "Broché & numérique" : "À paraître en broché & numérique",
-  "Roman en français",
-];
+/* Même donnée que les liens d'achat : pas de disponibilité annoncée avant la sortie. */
+const AVAILABILITY = IS_RELEASED ? "Broché & numérique" : "À paraître en broché & numérique";
+
+/* Le point médian précède la donnée qu'il introduit, jamais en fin de ligne. */
+function Separator({ className = "" }: { className?: string }) {
+  return <span aria-hidden="true" className={`mx-2.5 text-gold/50 lg:hidden ${className}`}>·</span>;
+}
 
 type BookFactsProps = {
   className?: string;
@@ -33,20 +34,23 @@ export default function BookFacts({ className = "" }: BookFactsProps) {
       />
 
       {/*
-        Empilée à côté de la couverture ; sur la page empilée (téléphone,
-        tablette), les données se suivent sur une ou deux lignes, séparées par
-        le point médian, pour que les actions restent hautes.
+        Empilée à côté de la couverture. Sur la page empilée, une disposition
+        fixe plutôt qu'un retour à la ligne libre, qui laissait un point médian
+        pendre en fin de ligne (« 570 pages · ») : sur une ligne à partir de
+        640 px ; en dessous, « 570 pages · Roman en français » puis la
+        disponibilité sur sa propre ligne.
       */}
 
       <ul className="flex list-none flex-wrap justify-center gap-y-1 text-sm leading-6 text-muted lg:block lg:space-y-1.5">
-        {FACTS.map((fact, index) => (
-          <li key={fact} className="whitespace-nowrap lg:whitespace-normal">
-            {fact}
-            {index < FACTS.length - 1 && (
-              <span aria-hidden="true" className="mx-2.5 text-gold/50 lg:hidden">·</span>
-            )}
-          </li>
-        ))}
+        <li className="order-1 whitespace-nowrap">570 pages</li>
+        <li className="order-3 basis-full whitespace-nowrap sm:order-2 sm:basis-auto">
+          <Separator className="hidden sm:inline" />
+          {AVAILABILITY}
+        </li>
+        <li className="order-2 whitespace-nowrap sm:order-3">
+          <Separator />
+          Roman en français
+        </li>
       </ul>
 
     </div>

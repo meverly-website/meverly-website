@@ -20,8 +20,13 @@ export default function Synopsis() {
 
         <div className="space-y-7 leading-8 text-muted sm:leading-9">
 
-          <p className="first-letter:float-left first-letter:mr-[0.1em] first-letter:mt-[0.08em] first-letter:font-serif first-letter:text-[3.6em] first-letter:leading-[0.8] first-letter:text-gold">
-            À vingt-cinq ans, Ezra vit reclus depuis des années. Marqué par les
+          {/*
+           * Espace insécable après « À » : une espace ordinaire, collée à la
+           * lettrine, était avalée au rendu (« Àvingt-cinq » au copier-coller
+           * et en synthèse vocale). Elle remplace une partie de la marge.
+           */}
+          <p className="first-letter:float-left first-letter:mr-[0.03em] first-letter:mt-[0.08em] first-letter:font-serif first-letter:text-[3.6em] first-letter:leading-[0.8] first-letter:text-gold">
+            À&nbsp;vingt-cinq ans, Ezra vit reclus depuis des années. Marqué par les
             violences homophobes qu&apos;il a subies et le rejet de sa famille, il
             s&apos;est réfugié dans la musique, composant sous un pseudonyme derrière
             l&apos;écran qui le protège du monde.

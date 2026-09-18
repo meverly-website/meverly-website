@@ -1,10 +1,11 @@
 import Button from "./Button";
+import BuyActions from "./BuyActions";
 import Container from "./Container";
 import CoverShowcase from "./CoverShowcase";
 import RevealOnScroll from "./RevealOnScroll";
 import GenreLine from "./GenreLine";
 import SectionHeading from "./SectionHeading";
-import { BUY_ANCHOR, EXTRACT_HREF, IS_RELEASED, PRE_RELEASE_NOTE } from "@/lib/site";
+import { EXTRACT_HREF, IS_RELEASED, PRE_RELEASE_NOTE } from "@/lib/site";
 
 /*
  * overflow-x-clip : entre 1024 et ~1340 px de large, la couverture touche le
@@ -56,39 +57,51 @@ export default function BookSection() {
 
             {/*
               La hiérarchie suit la sortie (IS_RELEASED) : avant, l'extrait
-              en or plein et l'achat en simple mention ; après, l'achat en or
-              plein et l'extrait en lien discret. « Découvrir le roman » reste
-              secondaire dans les deux cas.
+              en or plein et l'achat en simple mention ; après, l'achat passe
+              devant. Le groupe d'achat est celui de la page du roman
+              (BuyActions) : on achète depuis l'accueil, sans détour, et les
+              deux pages proposent toujours les mêmes éditions.
+              « Découvrir le roman » reste secondaire dans les deux cas.
             */}
 
-            <div className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-6">
-
-              {IS_RELEASED ? (
-                <Button variant="primary" href={BUY_ANCHOR}>
-                  Acheter le roman
-                </Button>
-              ) : (
-                <Button variant="primary" href={EXTRACT_HREF}>
-                  Lire un extrait
-                </Button>
-              )}
-
-              <Button variant="secondary" href="/before-i-knew-you">
-                Découvrir le roman
-              </Button>
-
-            </div>
-
             {IS_RELEASED ? (
-              <div className="mt-8">
-                <Button variant="ghost" href={EXTRACT_HREF}>
-                  Lire un extrait
-                </Button>
-              </div>
+              <>
+
+                <BuyActions withExtract={false} align="left" className="mt-12" />
+
+                <div className="mt-10 flex flex-wrap items-center gap-x-10 gap-y-6">
+
+                  <Button variant="secondary" href="/before-i-knew-you">
+                    Découvrir le roman
+                  </Button>
+
+                  <Button variant="ghost" href={EXTRACT_HREF}>
+                    Lire un extrait
+                  </Button>
+
+                </div>
+
+              </>
             ) : (
-              <p className="mt-6 text-xs uppercase tracking-[0.25em] text-muted">
-                {PRE_RELEASE_NOTE}
-              </p>
+              <>
+
+                <div className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-6">
+
+                  <Button variant="primary" href={EXTRACT_HREF}>
+                    Lire un extrait
+                  </Button>
+
+                  <Button variant="secondary" href="/before-i-knew-you">
+                    Découvrir le roman
+                  </Button>
+
+                </div>
+
+                <p className="mt-6 text-xs uppercase tracking-[0.25em] text-muted">
+                  {PRE_RELEASE_NOTE}
+                </p>
+
+              </>
             )}
 
           </RevealOnScroll>

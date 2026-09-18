@@ -7,7 +7,7 @@ import SensitiveThemes from "@/components/SensitiveThemes";
 import StickyNav from "@/components/StickyNav";
 import { BEFORE_I_KNEW_YOU } from "@/lib/books";
 import { readChapter, type Inline } from "@/lib/chapter";
-import { IS_RELEASED } from "@/lib/site";
+import { AVAILABILITY_SENTENCE, IS_RELEASED } from "@/lib/site";
 
 /**
  * « Lire un extrait » : le premier chapitre, en entier.
@@ -180,9 +180,7 @@ export default function ExtraitPage() {
           </p>
 
           <p className="mt-10 text-base leading-8 text-muted sm:text-lg">
-            {IS_RELEASED
-              ? "Before I Knew You est disponible en broché et en ebook."
-              : "Before I Knew You paraîtra en broché et en ebook."}
+            {AVAILABILITY_SENTENCE}
           </p>
 
           {/* Chaque mention reste d'un tenant ; seules les séparations passent à la ligne. */}

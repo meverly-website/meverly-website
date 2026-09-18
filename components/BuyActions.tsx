@@ -1,11 +1,6 @@
 import Button from "./Button";
 import ExtractLink from "./ExtractLink";
-import {
-  BUY_EBOOK_URL,
-  BUY_PAPERBACK_URL,
-  IS_RELEASED,
-  PRE_RELEASE_NOTE,
-} from "@/lib/site";
+import { EDITIONS, IS_RELEASED, PRE_RELEASE_NOTE } from "@/lib/site";
 
 /**
  * Les actions du roman : lire un extrait, acheter (broché, e-book).
@@ -34,11 +29,6 @@ const ALIGN = {
   center: { text: "text-center", row: "justify-center" },
   responsive: { text: "text-center lg:text-left", row: "justify-center lg:justify-start" },
 };
-
-const EDITIONS = [
-  { label: "Broché", href: BUY_PAPERBACK_URL },
-  { label: "E-book", href: BUY_EBOOK_URL },
-];
 
 const NOTE = "text-xs uppercase tracking-[0.25em] text-muted";
 
@@ -91,11 +81,7 @@ export default function BuyActions({
         ))}
       </div>
 
-      {missing && (
-        <p className={`mt-4 ${NOTE}`}>
-          Édition {missing.label.toLowerCase()} bientôt disponible
-        </p>
-      )}
+      {missing && <p className={`mt-4 ${NOTE}`}>{missing.soon}</p>}
 
       {extract && <div className="mt-8">{extract}</div>}
 

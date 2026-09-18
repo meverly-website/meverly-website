@@ -1,5 +1,5 @@
 import GenreLine from "./GenreLine";
-import { IS_RELEASED } from "@/lib/site";
+import { AVAILABILITY_FACT } from "@/lib/site";
 
 /**
  * Fiche technique du roman, dans l'esprit d'une fiche d'éditeur : une
@@ -9,9 +9,6 @@ import { IS_RELEASED } from "@/lib/site";
  * L'en-tête (le genre) est d'une autre nature que les données qui suivent :
  * il passe légèrement au-dessus, elles en niveau tertiaire.
  */
-
-/* Même donnée que les liens d'achat : pas de disponibilité annoncée avant la sortie. */
-const AVAILABILITY = IS_RELEASED ? "Broché & numérique" : "À paraître en broché & numérique";
 
 /* Le point médian précède la donnée qu'il introduit, jamais en fin de ligne. */
 function Separator({ className = "" }: { className?: string }) {
@@ -45,7 +42,7 @@ export default function BookFacts({ className = "" }: BookFactsProps) {
         <li className="order-1 whitespace-nowrap">570 pages</li>
         <li className="order-3 basis-full whitespace-nowrap sm:order-2 sm:basis-auto">
           <Separator className="hidden sm:inline" />
-          {AVAILABILITY}
+          {AVAILABILITY_FACT}
         </li>
         <li className="order-2 whitespace-nowrap sm:order-3">
           <Separator />

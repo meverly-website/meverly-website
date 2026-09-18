@@ -8,11 +8,37 @@
  * Tant qu'une URL reste `null`, cette édition n'a pas de bouton : une mention
  * dit qu'elle arrive. On ne met jamais de lien inventé ni de placeholder
  * mort. Les deux éditions s'activent indépendamment : renseigner une URL ici
- * suffit, rien d'autre à changer.
+ * suffit, rien d'autre à changer — boutons, hiérarchie et textes suivent.
  */
 export const BUY_PAPERBACK_URL: string | null = null;
 
-export const BUY_EBOOK_URL: string | null = null;
+export const BUY_EBOOK_URL: string | null =
+  "https://www.amazon.fr/dp/B0HK44TR8H";
+
+/**
+ * Les deux éditions, dans l'ordre d'affichage. `soon` est la mention affichée
+ * tant que l'édition n'est pas en vente, `fact` son nom dans la fiche
+ * technique.
+ */
+export const EDITIONS = [
+  {
+    label: "Broché",
+    href: BUY_PAPERBACK_URL,
+    soon: "Édition brochée bientôt disponible",
+    fact: "broché",
+    sentence: "l'édition brochée",
+  },
+  {
+    label: "E-book",
+    href: BUY_EBOOK_URL,
+    soon: "Édition numérique bientôt disponible",
+    fact: "numérique",
+    sentence: "l'édition numérique",
+  },
+] as const;
+
+const ON_SALE = EDITIONS.filter((edition) => edition.href);
+const AWAITED = EDITIONS.filter((edition) => !edition.href);
 
 /**
  * Le roman est paru dès qu'une des deux éditions est en vente. C'est le seul
@@ -22,10 +48,27 @@ export const BUY_EBOOK_URL: string | null = null;
  *   et l'achat une simple mention, sans bouton ;
  * - dès qu'une URL est renseignée, l'achat devient principal et l'extrait
  *   secondaire, partout (accueil, page du roman, navigation, fin d'extrait).
- *
- * Il pilote aussi les textes : « paraîtra » devient « est disponible ».
  */
-export const IS_RELEASED = Boolean(BUY_PAPERBACK_URL || BUY_EBOOK_URL);
+export const IS_RELEASED = ON_SALE.length > 0;
+
+/**
+ * La disponibilité, dite une fois pour toutes : en une ligne pour la fiche
+ * technique, en une phrase pour la fin de l'extrait. Une seule édition en
+ * vente ne fait jamais annoncer l'autre comme disponible.
+ */
+export const AVAILABILITY_FACT =
+  AWAITED.length === 0
+    ? "Broché & numérique"
+    : ON_SALE.length === 0
+      ? "À paraître en broché & numérique"
+      : `En ${ON_SALE[0].fact}, ${AWAITED[0].fact} à paraître`;
+
+export const AVAILABILITY_SENTENCE =
+  AWAITED.length === 0
+    ? "Before I Knew You est disponible en broché et en numérique."
+    : ON_SALE.length === 0
+      ? "Before I Knew You paraîtra en broché et en numérique."
+      : `Before I Knew You est disponible en ${ON_SALE[0].fact} ; ${AWAITED[0].sentence} paraîtra bientôt.`;
 
 /** Où l'on choisit son édition, sur la page du roman. */
 export const BUY_ANCHOR = "/before-i-knew-you#acheter";

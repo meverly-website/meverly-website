@@ -1,9 +1,9 @@
 import Button from "./Button";
 import ExtractLink from "./ExtractLink";
-import { EDITIONS, IS_RELEASED, PRE_RELEASE_NOTE } from "@/lib/site";
+import { FORMAT_SOON, IS_RELEASED, PRE_RELEASE_NOTE, STORES_ON_SALE } from "@/lib/site";
 
 /**
- * Les actions du roman : lire un extrait, acheter (broché, e-book).
+ * Les actions du roman : lire un extrait, acheter (une plateforme = un bouton).
  *
  * Un seul or plein par écran, et jamais sur une action impossible. La
  * hiérarchie suit IS_RELEASED :
@@ -11,9 +11,10 @@ import { EDITIONS, IS_RELEASED, PRE_RELEASE_NOTE } from "@/lib/site";
  * - avant la sortie, « Lire un extrait » est l'action principale ; l'achat
  *   n'est qu'une mention discrète, sans bouton désactivé qui attirerait l'œil
  *   vers ce qu'on ne peut pas faire ;
- * - après la sortie, les éditions en vente passent devant, la première en or
- *   plein, et l'extrait devient secondaire. Une édition encore absente n'a
- *   pas de bouton : une ligne dit qu'elle arrive.
+ * - après la sortie, les plateformes ouvertes passent devant, la première en
+ *   or plein, et l'extrait devient secondaire. Un bouton par adresse : la
+ *   fiche Amazon vend le broché et le numérique, elle n'en prend qu'un. Un
+ *   format encore absent n'a pas de bouton, une ligne dit qu'il arrive.
  */
 
 type BuyActionsProps = {
@@ -58,9 +59,6 @@ export default function BuyActions({
     );
   }
 
-  const onSale = EDITIONS.filter((edition) => edition.href);
-  const missing = EDITIONS.find((edition) => !edition.href);
-
   return (
     <div className={`${ALIGN[align].text} ${className}`}>
 
@@ -69,19 +67,19 @@ export default function BuyActions({
       </p>
 
       <div className={`mt-5 flex flex-wrap gap-4 ${ALIGN[align].row}`}>
-        {onSale.map((edition, index) => (
+        {STORES_ON_SALE.map((store, index) => (
           <Button
-            key={edition.label}
+            key={store.label}
             variant={index === 0 ? "primary" : "secondary"}
-            href={edition.href ?? undefined}
+            href={store.href ?? undefined}
             external
           >
-            {edition.label}
+            {store.label}
           </Button>
         ))}
       </div>
 
-      {missing && <p className={`mt-4 ${NOTE}`}>{missing.soon}</p>}
+      {FORMAT_SOON && <p className={`mt-4 ${NOTE}`}>{FORMAT_SOON}</p>}
 
       {extract && <div className="mt-8">{extract}</div>}
 

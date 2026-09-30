@@ -14,7 +14,8 @@
  */
 export const AMAZON_URL: string | null = "https://www.amazon.fr/dp/B0HK44TR8H";
 
-export const KOBO_URL: string | null = null;
+export const KOBO_URL: string | null =
+  "https://www.kobo.com/fr/fr/ebook/before-i-knew-you-5";
 
 /**
  * Les points de vente, dans l'ordre d'affichage. `formats` ne sert pas aux
